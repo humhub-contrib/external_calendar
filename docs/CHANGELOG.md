@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.4.1 (Unreleased)
----------------------
+1.4.1 (August 26, 2023)
+-----------------------
 - Fix #54: Initialize module content class
+- Fix #55: Removed deprecated `ModalConfirm` widget usage
 
 1.4.0 (June 22, 2023)
 ---------------------
