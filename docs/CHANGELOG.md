@@ -4,6 +4,7 @@ Changelog
 1.4.2 (Unreleased)
 ----------------------
 - Enh #57: Tests for `next` version
+- Fix #58: Fix visibility of the method `Controller::getAccessRules()`
 
 1.4.1 (August 26, 2023)
 -----------------------

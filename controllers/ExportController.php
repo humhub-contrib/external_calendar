@@ -33,7 +33,10 @@ class ExportController extends Controller
         $this->exportService = Yii::createObject(CalendarExportService::class);
     }
 
-    public function getAccessRules()
+    /**
+     * @inheritdoc
+     */
+    protected function getAccessRules()
     {
         return [
             ['login' => ['edit', 'search-space']]

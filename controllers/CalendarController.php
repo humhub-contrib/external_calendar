@@ -27,7 +27,10 @@ class CalendarController extends ContentContainerController
      */
     public $hideSidebar = true;
 
-    public function getAccessRules()
+    /**
+     * @inheritdoc
+     */
+    protected function getAccessRules()
     {
         return [[ControllerAccess::RULE_PERMISSION => [ManageCalendar::class]]];
     }

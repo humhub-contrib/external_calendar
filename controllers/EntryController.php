@@ -24,7 +24,10 @@ class EntryController extends ContentContainerController
      */
     public $hideSidebar = true;
 
-    public function getAccessRules()
+    /**
+     * @inheritdoc
+     */
+    protected function getAccessRules()
     {
         return[
             ['permission' => ManageEntry::class, 'actions' => ['update']]
