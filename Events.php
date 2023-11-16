@@ -178,7 +178,7 @@ class Events extends BaseObject
         try {
             $integrityController = $event->sender;
             $integrityController->showTestHeadline("External Calendar Module - Entries (" . ExternalCalendarEntry::find()->count() . " entries)");
-            foreach (ExternalCalendarEntry::find()->joinWith('calendar')->all() as $entry) {
+            foreach (ExternalCalendarEntry::find()->joinWith('calendar')->each() as $entry) {
                 if ($entry->calendar === null) {
                     if ($integrityController->showFix("Deleting external calendar entry id " . $entry->id . " without existing calendar!")) {
                         $entry->hardDelete();
@@ -201,4 +201,3 @@ class Events extends BaseObject
         }
     }
 }
-
