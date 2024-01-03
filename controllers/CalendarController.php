@@ -138,7 +138,7 @@ class CalendarController extends ContentContainerController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->hardDelete();
         $this->view->success(Yii::t('ExternalCalendarModule.results', 'Calendar successfully deleted!'));
         return $this->redirect($this->contentContainer->createUrl('index'));
     }
