@@ -345,7 +345,18 @@ class ICalSync extends Model
      */
     private function createEventModel(ICalEventIF $icalEvent)
     {
-        $eventModel = new ExternalCalendarEntry($this->calendarModel->content->container, $this->calendarModel->content->visibility);
+        /* @var ExternalCalendarEntry $eventModel */
+        $eventModel = ExternalCalendarEntry::find()
+            ->joinWith('content')
+            ->andWhere(['contentcontainer_id' => $this->calendarModel->content->container->contentcontainer_id])
+            ->andWhere(['uid' => $icalEvent->getUid()])
+            ->one();
+        if (!$eventModel) {
+            $eventModel = new ExternalCalendarEntry($this->calendarModel->content->container, $this->calendarModel->content->visibility);
+        } else {
+            $eventModel->content->visibility = $this->calendarModel->content->visibility;
+        }
+
         $eventModel->content->created_by = $this->calendarModel->content->created_by;
         $eventModel->calendar_id = $this->calendarModel->id;
         $eventModel->syncWithICal($icalEvent, $this->calendarModel->time_zone);
