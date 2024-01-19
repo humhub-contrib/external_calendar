@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.4.2 (January 1, 2023)
+1.4.2 (January 19, 2023)
 -----------------------
 - Enh #57: Tests for `next` version
 - Fix #58: Fix visibility of the method `Controller::getAccessRules()`
