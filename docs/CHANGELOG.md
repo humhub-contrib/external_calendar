@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.4.2 (Unreleased)
-----------------------
+1.4.2 (January 1, 2023)
+-----------------------
 - Enh #57: Tests for `next` version
 - Fix #58: Fix visibility of the method `Controller::getAccessRules()`
 - Fix #62: Fix memory usage on integrity check
