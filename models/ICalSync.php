@@ -3,14 +3,14 @@
 
 namespace humhub\modules\external_calendar\models;
 
+use DateTime;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
 use humhub\modules\external_calendar\helpers\RRuleHelper;
-use Recurr\Exception;
 use Recurr\Rule;
 use Yii;
 use yii\base\InvalidValueException;
 use yii\base\Model;
-use DateTime;
+use yii\db\Expression;
 
 class ICalSync extends Model
 {
@@ -350,6 +350,11 @@ class ICalSync extends Model
             ->joinWith('content')
             ->andWhere(['contentcontainer_id' => $this->calendarModel->content->container->contentcontainer_id])
             ->andWhere(['uid' => $icalEvent->getUid()])
+            ->andWhere(['OR',
+                ['rrule' => $icalEvent->getRrule()],
+                ['IS', 'recurrence_id', new Expression('NULL')],
+                ['recurrence_id' => $icalEvent->getRecurrenceId()]
+            ])
             ->one();
         if (!$eventModel) {
             $eventModel = new ExternalCalendarEntry($this->calendarModel->content->container, $this->calendarModel->content->visibility);
