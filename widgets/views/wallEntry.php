@@ -29,7 +29,7 @@ $descriptionParser->enableNewlines = true;
         <?php if (!empty($calendarEntry->location)) : ?>
             <p>
                 <?= Icon::get('map-marker ')->color($color)->size(Icon::SIZE_LG)->fixedWith(true)->style('margin-top:2px') ?>
-                <?= Html::encode($calendarEntry->location) ?>
+                <?= $calendarEntry->getLocation(true) ?>
             </p>
         <?php endif; ?>
 
