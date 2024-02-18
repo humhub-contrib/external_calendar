@@ -14,7 +14,7 @@ use humhub\modules\external_calendar\widgets\WallEntry;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
 use DateTimeZone;
 use humhub\libs\Html;
-use humhub\libs\Button;
+use humhub\widgets\Button;
 use humhub\modules\search\interfaces\Searchable;
 use ICal\Event;
 use humhub\modules\external_calendar\models\forms\ConfigForm;
