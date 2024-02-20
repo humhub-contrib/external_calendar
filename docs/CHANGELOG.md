@@ -1,6 +1,9 @@
 Changelog
 =========
 
+TBA
+- Enh #68: Make URL locations clickable
+
 1.4.2 (January 19, 2023)
 -----------------------
 - Enh #57: Tests for `next` version
