@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Unreleased
+------------------------
+- Enh #69: Add `requirements.php`
+
 1.4.2 (January 19, 2023)
 -----------------------
 - Enh #57: Tests for `next` version
