@@ -60,7 +60,6 @@ class Module extends ContentContainerModule
      */
     public function disable()
     {
-        set_time_limit(180); // Set max execution time 3 minutes.
         /** @var ExternalCalendarEntry $entry */
         foreach (ExternalCalendarEntry::find()->each() as $entry) {
             $entry->hardDelete();
@@ -113,7 +112,6 @@ class Module extends ContentContainerModule
      */
     public function disableContentContainer(ContentContainerActiveRecord $container)
     {
-        set_time_limit(180); // Set max execution time 3 minutes.
         parent::disableContentContainer($container);
         /** @var ExternalCalendar $item */
         foreach (ExternalCalendar::find()->contentContainer($container)->each() as $item) {
