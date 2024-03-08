@@ -17,6 +17,10 @@ class Module extends ContentContainerModule
     public $exportFileName = 'base.ics';
     public $exportFileMime = 'text/calendar';
     public $autoSaveExpansions = false;
+    /**
+     * @inheritdoc
+     */
+    public $resourcesPath = 'resources';
 
     /**
      * @inheritdoc
@@ -57,10 +61,11 @@ class Module extends ContentContainerModule
     public function disable()
     {
         set_time_limit(180); // Set max execution time 3 minutes.
-//        ini_set('max_execution_time', -1);
-//        foreach (ExternalCalendarEntry::find()->all() as $entry) {
-//            $entry->delete();
-//        }
+        /** @var ExternalCalendarEntry $entry */
+        foreach (ExternalCalendarEntry::find()->each() as $entry) {
+            $entry->hardDelete();
+        }
+        /** @var ExternalCalendar $entry */
         foreach (ExternalCalendar::find()->all() as $entry) {
             $entry->hardDelete();
         }
@@ -110,15 +115,11 @@ class Module extends ContentContainerModule
     {
         set_time_limit(180); // Set max execution time 3 minutes.
         parent::disableContentContainer($container);
-        foreach (ExternalCalendar::find()->contentContainer($container)->all() as $item) {
+        /** @var ExternalCalendar $item */
+        foreach (ExternalCalendar::find()->contentContainer($container)->each() as $item) {
             $item->hardDelete();
         }
     }
-
-    /**
-     * @inheritdoc
-     */
-    public $resourcesPath = 'resources';
 
     public function getConfigUrl()
     {
