@@ -3,6 +3,7 @@ Changelog
 
 Unreleased
 ------------------------
+- Enh #68: Make URL locations clickable
 - Enh #69: Add `requirements.php`
 - Fix #71: After module disabling, Content for ExternalCalendarEntry are not deleted
 

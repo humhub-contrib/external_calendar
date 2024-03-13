@@ -14,6 +14,7 @@ use humhub\modules\external_calendar\widgets\WallEntry;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
 use DateTimeZone;
 use humhub\libs\Html;
+use humhub\widgets\Button;
 use humhub\modules\search\interfaces\Searchable;
 use ICal\Event;
 use humhub\modules\external_calendar\models\forms\ConfigForm;
@@ -550,5 +551,24 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
         }
 
         return !$this->last_modified || CalendarUtils::formatDateTimeToAppTime($icalEvent->getLastModified()) > $this->getLastModifiedDateTime();
+    }
+
+     /**
+     * Get location of this external calendar entry
+     *
+     * @return string
+     */
+    public function getLocation(bool $asHtml = false)
+    {
+        if (!$asHtml) {
+            return $this->location;
+        }
+        if (
+            filter_var($this->location, FILTER_VALIDATE_URL) !== false
+            && strpos($this->location, 'https://') === 0 // restrict to secure URLs (and not HTTP, SSF, FTP, etc.)
+        ) {
+            return Button::asLink($this->location)->link($this->location)->options(['target' => '_blank']);
+        }
+        return Html::encode($this->location);
     }
 }
