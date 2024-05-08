@@ -113,9 +113,13 @@ class Module extends ContentContainerModule
     public function disableContentContainer(ContentContainerActiveRecord $container)
     {
         parent::disableContentContainer($container);
-        /** @var ExternalCalendar $item */
-        foreach (ExternalCalendar::find()->contentContainer($container)->each() as $item) {
-            $item->hardDelete();
+        /** @var ExternalCalendar $calendar */
+        foreach (ExternalCalendar::find()->contentContainer($container)->each() as $calendar) {
+            /** @var ExternalCalendarEntry $entry */
+            foreach (ExternalCalendarEntry::find()->where(['calendar_id' => $calendar->id])->each() as $entry) {
+                $entry->hardDelete();
+            }
+            $calendar->hardDelete();
         }
     }
 
