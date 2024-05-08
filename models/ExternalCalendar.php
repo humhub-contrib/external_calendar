@@ -5,16 +5,14 @@ namespace humhub\modules\external_calendar\models;
 use Colors\RandomColor;
 use humhub\libs\Html;
 use humhub\modules\content\components\ActiveQueryContent;
+use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\external_calendar\jobs\UpdateCalendarVisibility;
 use humhub\modules\external_calendar\models\forms\ConfigForm;
-use Yii;
-use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\external_calendar\permissions\ManageCalendar;
 use humhub\modules\search\interfaces\Searchable;
-use humhub\modules\content\models\Content;
 use ICal\ICal;
-use yii\base\InvalidCallException;
+use Yii;
 use yii\base\InvalidValueException;
 
 
@@ -39,55 +37,17 @@ use yii\base\InvalidValueException;
 class ExternalCalendar extends ContentActiveRecord implements Searchable
 {
     const ITEM_TYPE_KEY = 'external_calendar';
-
-    /**
-     * @inheritdoc
-     */
-    public $moduleId = 'external_calendar';
-
-    /**
-     * @inheritdoc
-     */
-    public $wallEntryClass = 'humhub\modules\external_calendar\widgets\WallEntryCalendar';
-
-    /**
-     * @inheritdoc
-     */
-    public $managePermission = ManageCalendar::class;
-
-    /**
-     * @var bool
-     */
-    public $allowFiles = false;
-
-    /**
-     * @var int form field
-     */
-    public $public;
-
-    /**
-     * @inheritdoc
-     */
-    public $streamChannel = null;
-
-    /**
-     * @inheritdoc
-     */
-    public $silentContentCreation = true;
-
     /**
      * Sync Modes
      */
     const SYNC_MODE_NONE = 0;
     const SYNC_MODE_HOURLY = 1;
     const SYNC_MODE_DAILY = 2;
-
     /**
      * Event Modes
      */
     const EVENT_MODE_CURRENT_MONTH = 0;
     const EVENT_MODE_ALL = 1;
-
     /**
      * @var array all given sync modes as array
      */
@@ -96,7 +56,6 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
         self::SYNC_MODE_HOURLY,
         self::SYNC_MODE_DAILY
     ];
-
     /**
      * @var array all given sync modes as array
      */
@@ -104,6 +63,34 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
         self::EVENT_MODE_CURRENT_MONTH,
         self::EVENT_MODE_ALL
     ];
+    /**
+     * @inheritdoc
+     */
+    public $moduleId = 'external_calendar';
+    /**
+     * @inheritdoc
+     */
+    public $wallEntryClass = 'humhub\modules\external_calendar\widgets\WallEntryCalendar';
+    /**
+     * @inheritdoc
+     */
+    public $managePermission = ManageCalendar::class;
+    /**
+     * @var bool
+     */
+    public $allowFiles = false;
+    /**
+     * @var int form field
+     */
+    public $public;
+    /**
+     * @inheritdoc
+     */
+    public $streamChannel = null;
+    /**
+     * @inheritdoc
+     */
+    public $silentContentCreation = true;
 
     /**
      * @inheritdoc
@@ -121,11 +108,11 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
 
         parent::init();
 
-        if(!$this->color) {
+        if (!$this->color) {
             $this->color = RandomColor::one(['luminosity' => 'light']);
         }
 
-        if($this->event_mode === null) {
+        if ($this->event_mode === null) {
             $this->event_mode = static::EVENT_MODE_ALL;
         }
     }
@@ -133,7 +120,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public function afterFind()
     {
         parent::afterFind();
-        if($this->public === null) {
+        if ($this->public === null) {
             $this->public = $this->content->visibility;
         }
     }
@@ -155,8 +142,8 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
             [['event_mode'], 'in', 'range' => self::$eventModes],
         ];
 
-        if(!$this->allowFiles) {
-           $result[] = [['url'], 'url', 'defaultScheme' => 'https', 'message' => Yii::t('ExternalCalendarModule.sync_result', "No valid ical url! Try an url with http / https.")];
+        if (!$this->allowFiles) {
+            $result[] = [['url'], 'url', 'defaultScheme' => 'https', 'message' => Yii::t('ExternalCalendarModule.sync_result', "No valid ical url! Try an url with http / https.")];
         }
 
         return $result;
@@ -194,7 +181,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
      */
     public function validateURL($attribute, $params)
     {
-        if(!filter_var($this->url, FILTER_VALIDATE_URL)) {
+        if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
             $this->addError($attribute, Yii::t('ExternalCalendarModule.sync_result', "Bad URL"));
             return false;
         }
@@ -246,7 +233,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
      */
     public function beforeDelete()
     {
-        foreach (ExternalCalendarEntry::findAll(['calendar_id' => $this->id]) as $item) {
+        foreach (ExternalCalendarEntry::find()->where(['calendar_id' => $this->id])->each() as $item) {
             $item->delete();
         }
 
@@ -286,7 +273,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
 
         parent::afterSave($insert, $changedAttributes);
 
-        if($visibilityChanged) {
+        if ($visibilityChanged) {
             Yii::$app->queue->push(new UpdateCalendarVisibility(['calendarId' => $this->id]));
         }
     }
@@ -353,17 +340,6 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
         }
     }
 
-    public function getEntries(bool $includeRecurrences = true): ActiveQueryContent
-    {
-        $query = $this->hasMany(ExternalCalendarEntry::class, ['calendar_id' => 'id']);
-
-        if(!$includeRecurrences) {
-            $query->andWhere('external_calendar_entry.parent_event_id IS NULL');
-        }
-
-        return $query->readable();
-    }
-
     /**
      * @return ExternalCalendarEntry[]
      */
@@ -371,6 +347,17 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     {
         return $this->getEntries(false)
             ->andWhere('external_calendar_entry.rrule IS NOT NULL')->all();
+    }
+
+    public function getEntries(bool $includeRecurrences = true): ActiveQueryContent
+    {
+        $query = $this->hasMany(ExternalCalendarEntry::class, ['calendar_id' => 'id']);
+
+        if (!$includeRecurrences) {
+            $query->andWhere('external_calendar_entry.parent_event_id IS NULL');
+        }
+
+        return $query->readable();
     }
 
     public function addAttributes(ICal $ical)
@@ -404,9 +391,9 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     /**
      * Syncronizes this external calendar
      *
-     * @throws InvalidValueException
-     * @throws \yii\base\Exception
      * @return static
+     * @throws \yii\base\Exception
+     * @throws InvalidValueException
      */
     public function sync($rangeStart = null, $rangeEnd = null)
     {
