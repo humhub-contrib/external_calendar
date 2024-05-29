@@ -1,7 +1,11 @@
 Changelog
 =========
 
-Unreleased
+1.5.0 (Unreleased)
+------------------------
+- Fix #77: Update module resources path
+
+1.4.3 (Unreleased)
 ------------------------
 - Enh #68: Make URL locations clickable
 - Enh #69: Add `requirements.php`
