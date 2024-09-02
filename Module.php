@@ -40,7 +40,7 @@ class Module extends ContentContainerModule
     {
         return [
             ExternalCalendar::class,
-            ExternalCalendarEntry::class
+            ExternalCalendarEntry::class,
         ];
     }
 
@@ -65,22 +65,6 @@ class Module extends ContentContainerModule
             $calendar->hardDelete();
         }
         parent::disable();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return Yii::t('ExternalCalendarModule.base', 'External Calendar');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDescription()
-    {
-        return Yii::t('ExternalCalendarModule.base', 'Extends the Calendar-Module to show external calendars with iCal');
     }
 
     /**

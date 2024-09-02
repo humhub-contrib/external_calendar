@@ -1,12 +1,13 @@
 Changelog
 =========
 
-Unreleased
+1.4.3 (Unreleased)
 ------------------------
 - Enh #68: Make URL locations clickable
 - Enh #69: Add `requirements.php`
 - Fix #71: After module disabling, Content for ExternalCalendarEntry are not deleted
 - Fix #76: Disabling the module in a container (Space or User)
+- Fix #78: Remove module name translation
 
 1.4.2 (January 19, 2023)
 -----------------------
