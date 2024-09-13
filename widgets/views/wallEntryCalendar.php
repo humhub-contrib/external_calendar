@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $calendar ExternalCalendar */
 /* @var $stream boolean */
 
-$color = $calendar->color ?: $this->theme->variable('info');
+$color = $calendar->color ?: 'var(--info)';
 
 $description = $calendar->description;
 
