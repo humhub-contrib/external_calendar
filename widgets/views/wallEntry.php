@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $calendarEntry \humhub\modules\external_calendar\models\ExternalCalendarEntry */
 /* @var $stream boolean */
 
-$color = $calendarEntry->calendar->color ?: $this->theme->variable('info');
+$color = $calendarEntry->calendar->color ?: 'var(--info)';
 
 $description = $calendarEntry->description;
 

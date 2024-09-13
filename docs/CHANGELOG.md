@@ -8,6 +8,7 @@ Changelog
 - Fix #71: After module disabling, Content for ExternalCalendarEntry are not deleted
 - Fix #76: Disabling the module in a container (Space or User)
 - Fix #78: Remove module name translation
+- Enh #79: Replace theme variables with CSS variables
 
 1.4.2 (January 19, 2023)
 -----------------------
