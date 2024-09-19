@@ -119,7 +119,7 @@ class CalendarExport extends ActiveRecord
 
     public function getExportUrl()
     {
-        return Url::to(['/external_calendar/export/export', 'token' => $this->token], true);
+        return Url::to(['/external-calendar/export/export', 'token' => $this->token], true);
     }
 
     /**

@@ -18,7 +18,7 @@ $editLabel = $model->isNewRecord ?  Yii::t('ExternalCalendarModule.base', 'New e
 <?php ModalDialog::begin(['header' => Yii::t('ExternalCalendarModule.base', '<strong>Calendar</strong> export'), 'size' => 'large']) ?>
 
     <?= Tabs::widget([
-        'viewPath' => '@external_calendar/views/export',
+        'viewPath' => '@external-calendar/views/export',
         'params' => ['model' => $model],
         'items' => [
             ['label' => Yii::t('ExternalCalendarModule.base', 'New export'), 'view' => 'tab-edit'],

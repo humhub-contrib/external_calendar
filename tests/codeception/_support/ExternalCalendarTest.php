@@ -29,7 +29,7 @@ class ExternalCalendarTest extends HumHubDbTestCase
         return 'file://' . str_replace('\\', '/', Yii::getAlias($file));
     }
 
-    protected function initCalendar($file = '@external_calendar/tests/codeception/data/test1.ics', $params = [], $asAdmin = true)
+    protected function initCalendar($file = '@external-calendar/tests/codeception/data/test1.ics', $params = [], $asAdmin = true)
     {
         if($asAdmin) {
             $this->becomeUser('Admin');

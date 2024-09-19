@@ -9,7 +9,7 @@ use humhub\modules\content\widgets\WallEntryLinks;
 use humhub\components\Application;
 
 return [
-    'id' => 'external_calendar',
+    'id' => 'external-calendar',
     'class' => Module::class,
     'namespace' => 'humhub\modules\external_calendar',
     'urlManagerRules' => [
@@ -28,4 +28,3 @@ return [
     ],
 ];
 ?>
-

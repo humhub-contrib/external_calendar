@@ -83,7 +83,7 @@ class ExternalCalendarEntryQuery extends AbstractCalendarQuery
     {
         parent::init();
         if($this->autoSaveExtensions === null) {
-            $this->autoSaveExtensions = Yii::$app->getModule('external_calendar')->autoSaveExpansions;
+            $this->autoSaveExtensions = Yii::$app->getModule('external-calendar')->autoSaveExpansions;
         }
     }
 

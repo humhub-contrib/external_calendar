@@ -1,5 +1,5 @@
 {
-  "id": "external_calendar",
+  "id": "external-calendar",
   "name": "External Calendar",
   "description": "Extends the Calendar-Module to show external Calendars with iCal",
   "keywords": [

@@ -253,11 +253,11 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
         }
 
         if($this->isRecurringInstance() && empty($this->id)) {
-            $viewUrl = $this->content->container->createUrl('/external_calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id, 'cal' => '1']);
-            $openUrl = $this->content->container->createUrl('/external_calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id]);
+            $viewUrl = $this->content->container->createUrl('/external-calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id, 'cal' => '1']);
+            $openUrl = $this->content->container->createUrl('/external-calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id]);
         } else {
-            $viewUrl = $this->content->container->createUrl('/external_calendar/entry/view', ['id' => $this->id, 'cal' => '1']);
-            $openUrl = $this->content->container->createUrl('/external_calendar/entry/view', ['id' => $this->id]);
+            $viewUrl = $this->content->container->createUrl('/external-calendar/entry/view', ['id' => $this->id, 'cal' => '1']);
+            $openUrl = $this->content->container->createUrl('/external-calendar/entry/view', ['id' => $this->id]);
         }
 
         return [
@@ -278,7 +278,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
     public function getUrl()
     {
-        return $this->content->container->createUrl('/external_calendar/entry/view', ['id' => $this->id]);
+        return $this->content->container->createUrl('/external-calendar/entry/view', ['id' => $this->id]);
     }
 
     /**

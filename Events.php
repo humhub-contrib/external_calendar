@@ -41,7 +41,7 @@ class Events extends BaseObject
             return;
         }
 
-        require Yii::getAlias('@external_calendar/vendor/autoload.php');
+        require Yii::getAlias('@external-calendar/vendor/autoload.php');
     }
 
     /**
@@ -55,7 +55,7 @@ class Events extends BaseObject
         try {
             $contentContainer = $event->contentContainer;
 
-            if (!$contentContainer || $contentContainer->moduleManager->isEnabled('external_calendar')) {
+            if (!$contentContainer || $contentContainer->moduleManager->isEnabled('external-calendar')) {
                 CalendarExtension::addItemTypes($event);
             }
         } catch (\Throwable $e) {
@@ -71,14 +71,14 @@ class Events extends BaseObject
         try {
             /* @var $container ContentContainerActiveRecord */
             $container = $event->sender->contentContainer;
-            if($container && $container->moduleManager->isEnabled('external_calendar')) {
+            if($container && $container->moduleManager->isEnabled('external-calendar')) {
                 $event->sender->addItem([
                     'label' => Yii::t('ExternalCalendarModule.base', 'External Calendars'),
                     'id' => 'tab-calendar-external',
-                    'url' => $container->createUrl('/external_calendar/calendar/index'),
+                    'url' => $container->createUrl('/external-calendar/calendar/index'),
                     'visible' => $container->can(ManageEntry::class),
                     'isActive' => (Yii::$app->controller->module
-                        && Yii::$app->controller->module->id === 'external_calendar'),
+                        && Yii::$app->controller->module->id === 'external-calendar'),
                 ]);
             }
         } catch (\Throwable $e) {
@@ -92,7 +92,7 @@ class Events extends BaseObject
             /* @var ContentContainerActiveRecord $contentContainer */
             $contentContainer = $event->contentContainer;
 
-            if (!$contentContainer || $contentContainer->moduleManager->isEnabled('external_calendar')) {
+            if (!$contentContainer || $contentContainer->moduleManager->isEnabled('external-calendar')) {
                 CalendarExtension::addItems($event);
             }
         } catch (\Throwable $e) {
@@ -124,10 +124,10 @@ class Events extends BaseObject
         try {
             $event->sender->addItem([
                 'label' => "external_calendar",
-                'url' => Url::to(['/external_calendar/admin']),
+                'url' => Url::to(['/external-calendar/admin']),
                 'group' => 'manage',
                 'icon' => '<i class="fa fa-certificate" style="color: #6fdbe8;"></i>',
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'external_calendar' && Yii::$app->controller->id == 'admin'),
+                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'external-calendar' && Yii::$app->controller->id == 'admin'),
                 'sortOrder' => 99999,
             ]);
         } catch (\Throwable $e) {

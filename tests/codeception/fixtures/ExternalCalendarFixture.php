@@ -14,6 +14,6 @@ use yii\test\ActiveFixture;
 class ExternalCalendarFixture extends ActiveFixture
 {
     public $modelClass = ExternalCalendar::class;
-    public $dataFile = '@external_calendar/tests/codeception/fixtures/data/externalCalendar.php';
+    public $dataFile = '@external-calendar/tests/codeception/fixtures/data/externalCalendar.php';
 
 }

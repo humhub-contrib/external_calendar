@@ -22,7 +22,7 @@ class PageUrlRule extends Component implements UrlRuleInterface
     /**
      * @var string default route to page home
      */
-    public $searchRoute = 'external_calendar/export/export';
+    public $searchRoute = 'external-calendar/export/export';
 
     /**
      * @var array map with space guid/url pairs

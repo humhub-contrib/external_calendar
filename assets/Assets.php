@@ -12,7 +12,7 @@ use yii\web\View;
  */
 class Assets extends AssetBundle
 {
-    public $sourcePath = '@external_calendar/resources';
+    public $sourcePath = '@external-calendar/resources';
 
     public $jsOptions = ['position' => View::POS_END];
 

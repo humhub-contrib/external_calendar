@@ -1,4 +1,4 @@
-humhub.module('external_calendar', function (module, require, $) {
+humhub.module('external-calendar', function (module, require, $) {
     var client = require('client');
 
     var removeCalendar = function(event) {

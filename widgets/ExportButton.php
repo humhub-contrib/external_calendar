@@ -28,7 +28,7 @@ class ExportButton extends Widget
 
         return ModalButton::defaultType()
             ->icon('download')
-            ->load(Yii::$app->user->getIdentity()->createUrl('/external_calendar/export/edit'))
+            ->load(Yii::$app->user->getIdentity()->createUrl('/external-calendar/export/edit'))
             ->tooltip(Yii::t('ExternalCalendarModule.base', 'Export'));
     }
 

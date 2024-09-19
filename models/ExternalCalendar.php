@@ -66,7 +66,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     /**
      * @inheritdoc
      */
-    public $moduleId = 'external_calendar';
+    public $moduleId = 'external-calendar';
     /**
      * @inheritdoc
      */
@@ -288,7 +288,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
 
     public function getUrl()
     {
-        return $this->content->container->createUrl('//external_calendar/calendar/view', ['id' => $this->id]);
+        return $this->content->container->createUrl('/external-calendar/calendar/view', ['id' => $this->id]);
     }
 
 

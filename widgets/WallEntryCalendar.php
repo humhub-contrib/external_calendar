@@ -14,7 +14,7 @@ class WallEntryCalendar extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-   public $editRoute = "/external_calendar/calendar/edit";
+   public $editRoute = '/external-calendar/calendar/edit';
 
     /**
      * @inheritdoc

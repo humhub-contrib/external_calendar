@@ -9,6 +9,7 @@ Changelog
 - Fix #76: Disabling the module in a container (Space or User)
 - Fix #78: Remove module name translation
 - Enh #79: Replace theme variables with CSS variables
+- Fix #80: Fix module ID
 
 1.4.2 (January 19, 2023)
 -----------------------
