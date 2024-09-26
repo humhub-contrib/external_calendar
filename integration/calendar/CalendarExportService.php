@@ -52,7 +52,7 @@ class CalendarExportService extends BaseObject
                 $items[] = $this->calendarService->getCalendarItems($from, $to, $export->getFilterArray(), $container, null, false);
             }
 
-            $cal = VCalendar::withEvents(array_merge(...$items));
+            $cal = VCalendar::withEvents(array_merge(...$items), "Europe/Berlin"));
 
             return $cal->serialize();
         } finally {
