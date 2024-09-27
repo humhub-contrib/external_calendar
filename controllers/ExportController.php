@@ -57,7 +57,7 @@ class ExportController extends Controller
         $ics = $this->exportService->createIcsByExportToken($token, $from, $to);
 
         /** @var Module $module */
-        $module = Yii::$app->getModule('external_calendar');
+        $module = Yii::$app->getModule('external-calendar');
         return Yii::$app->response->sendContentAsFile($ics, $module->exportFileName, ['mimeType' => $module->exportFileMime]);
     }
 

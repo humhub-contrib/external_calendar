@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.5.0 (Unreleased)
+------------------------
+- Fix #80: Fix module ID
+
 1.4.3 (Unreleased)
 ------------------------
 - Enh #68: Make URL locations clickable

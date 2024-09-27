@@ -35,9 +35,9 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testSimpleRecurrenceEventImport()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
         $this->assertEquals(1, ExternalCalendarEntry::find()->count());
         $this->assertCount(1, $externalCalendar->entries);
 
@@ -81,9 +81,9 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testRecurrentEvent1Until()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
         $oldEvents = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190930', new \DateTimeZone('Europe/Berlin')),
@@ -93,7 +93,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $this->assertCount(9, ExternalCalendarEntry::find()->all());
 
         // Stop the recurrence on 01-09-2019
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Until.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1Until.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         // Make sure all overlapping recurrence instances were deleted and other existing ones remained
@@ -143,9 +143,9 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testSplitRecurringEvent1()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
@@ -154,7 +154,7 @@ class RecurrentImportTest extends ExternalCalendarTest
 
         $this->assertCount(22, ExternalCalendarEntry::find()->all());
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1Split.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         // Make sure old overlapping recurrences are deleted
@@ -276,10 +276,10 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testSplitRecurringEvent2()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1Split.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         /** @var $events ExternalCalendarEntry[] * */
@@ -348,9 +348,9 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testEndSplittedRecurringEvent()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1Split.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1Split.ics');
 
         /** @var $events ExternalCalendarEntry[] * */
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -361,7 +361,7 @@ class RecurrentImportTest extends ExternalCalendarTest
 
         $this->assertCount(35, ExternalCalendarEntry::find()->all());
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1SplitLimited.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1SplitLimited.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         /** @var $events ExternalCalendarEntry[] * */
@@ -436,9 +436,9 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testDeleteRecurrence1()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1Split.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1Split.ics');
 
         // Make sure the sync is not skipped
         $recurrence1 = $externalCalendar->entries[0];
@@ -455,7 +455,7 @@ class RecurrentImportTest extends ExternalCalendarTest
 
         $this->assertCount(35, ExternalCalendarEntry::find()->all());
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $this->assertCount(1, ExternalCalendarEntry::find()->all());
@@ -469,7 +469,7 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testDeleteRecurrenceOutOfRange()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1Split.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1Split.ics');
         $this->assertCount(2, ExternalCalendarEntry::find()->all());
 
         // Change start/end and RRULE->until of first event to a date before sync range
@@ -502,7 +502,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $this->assertNotEmpty($events);
 
         // Sync with empty ical, this should remove all entries and recurrences
-        $externalCalendar->url = $this->getFileAlias('@external_calendar/tests/codeception/data/empty.ics');
+        $externalCalendar->url = $this->getFileAlias('@external-calendar/tests/codeception/data/empty.ics');
         $externalCalendar->save();
         $externalCalendar->refresh();
 
@@ -525,9 +525,9 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testRecurrenceWithAlteredEvent1Simple()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
@@ -543,7 +543,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $recurrentEvent = $externalCalendar->getRecurringEventRoots()[0];
         $this->assertEquals('20190808T000000', $recurrentEvent->recurrences[0]->recurrence_id);
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $recurrentEvent = $externalCalendar->getRecurringEventRoots()[0];
@@ -577,10 +577,10 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testRecurrenceWithAlteredEvent1NoExpansion()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $recurrentEvent = $externalCalendar->getRecurringEventRoots()[0];
@@ -616,10 +616,10 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testRecurrenceWithAlteredEvent1NonExpanded()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $recurrentEvent = $externalCalendar->getRecurringEventRoots()[0];
@@ -646,13 +646,13 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testAlteredEvent1Deletion()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -673,16 +673,16 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testRecurrenceWithAlteredEvent2()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190830', new \DateTimeZone('Europe/Berlin')),
             Space::findOne(1));
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent2.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent2.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -723,16 +723,16 @@ class RecurrentImportTest extends ExternalCalendarTest
      */
     public function testAlteredEvent2Deletion()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190830', new \DateTimeZone('Europe/Berlin')),
             Space::findOne(1));
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent2.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent2.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         ExternalCalendarEntryQuery::findForFilter(
@@ -740,7 +740,7 @@ class RecurrentImportTest extends ExternalCalendarTest
             DateTime::createFromFormat('!Ymd', '20190830', new \DateTimeZone('Europe/Berlin')),
             Space::findOne(1));
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $recurrenceRoot = $externalCalendar->getRecurringEventRoots()[0];
@@ -772,9 +772,9 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testRecurrentEventWithAlteredEvent2Edited()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent2.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent2.ics');
 
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
@@ -787,7 +787,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $this->assertEquals('2019-08-22 00:00:00', $events[3]->getStartDateTime()->format('Y-m-d H:i:s'));
         $this->assertEquals('2019-08-29 00:00:00', $events[4]->getStartDateTime()->format('Y-m-d H:i:s'));
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithAlteredEvent2Edited.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithAlteredEvent2Edited.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -818,9 +818,9 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testRecurrentEvent1WithExdate()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
 
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         $recurrentEvent = $externalCalendar->getRecurringEventRoots()[0];
 
@@ -832,7 +832,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $this->assertNotNull($recurrentEvent->getRecurrenceInstance('20190815'));
         $this->assertNotNull($recurrentEvent->getRecurrenceInstance('20190822'));
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1WithExdate.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1WithExdate.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $this->assertNull($recurrentEvent->getRecurrenceInstance('20190815'));
@@ -854,7 +854,7 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testTimezone1()
     {
-        $this->initCalendar('@external_calendar/tests/codeception/data/timezone.ics');
+        $this->initCalendar('@external-calendar/tests/codeception/data/timezone.ics');
 
         /** @var $events ExternalCalendarEntry[] */
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -879,7 +879,7 @@ class RecurrentImportTest extends ExternalCalendarTest
     public function testTimezone2()
     {
         Yii::$app->timeZone = 'Europe/Berlin';
-        $this->initCalendar('@external_calendar/tests/codeception/data/timezone.ics');
+        $this->initCalendar('@external-calendar/tests/codeception/data/timezone.ics');
 
         /** @var $events ExternalCalendarEntry[] */
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -903,8 +903,8 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testRecurrenceStartChange()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
@@ -915,7 +915,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $this->assertCount(5, ExternalCalendarEntry::find()->all());
 
         // Make sure all recurrence instances are deleted after start ganged
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1ChangedStart.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1ChangedStart.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $recurringEvent = $externalCalendar->getRecurringEventRoots()[0];
@@ -926,8 +926,8 @@ class RecurrentImportTest extends ExternalCalendarTest
 
     public function testRecurrenceEndChange()
     {
-        Yii::$app->getModule('external_calendar')->autoSaveExpansions = true;
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        Yii::$app->getModule('external-calendar')->autoSaveExpansions = true;
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
 
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
@@ -938,7 +938,7 @@ class RecurrentImportTest extends ExternalCalendarTest
         $this->assertCount(5, ExternalCalendarEntry::find()->all());
 
         // Make sure all recurrence instances are deleted after start ganged
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1ChangedEnd.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1ChangedEnd.ics');
         $externalCalendar->sync( $this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $recurringEvent = $externalCalendar->getRecurringEventRoots()[0];

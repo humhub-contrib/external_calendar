@@ -1,12 +1,9 @@
 <?php
 
 return [
-    'modules' => ['calendar', 'external_calendar'],
+    'modules' => ['calendar', 'external-calendar'],
     'fixtures' => [
         'default',
-        'external_calendar' => 'humhub\modules\external_calendar\tests\codeception\fixtures\ExternalCalendarEntryFixture'
+        'external-calendar' => 'humhub\modules\external_calendar\tests\codeception\fixtures\ExternalCalendarEntryFixture'
     ]
 ];
-
-
-

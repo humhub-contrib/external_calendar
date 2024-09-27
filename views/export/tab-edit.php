@@ -47,7 +47,7 @@ $saveButtonLabel = $model->isNewRecord ? Yii::t('ExternalCalendarModule.base', '
                     ], ['separator'=> '<br>']); ?>
 
                     <?= $form->field($model, 'spaceSelection')->widget(SpacePickerField::class,
-                        ['defaultResults' => CalendarExportSpaces::getCalendarMemberSpaces(), 'url' => Url::to(['/external_calendar/export/search-space'])])->label(false) ?>
+                        ['defaultResults' => CalendarExportSpaces::getCalendarMemberSpaces(), 'url' => Url::to(['/external-calendar/export/search-space'])])->label(false) ?>
                 </div>
                 <div class="col-sm-4">
                     <?= $form->field($model, 'filter_participating')->checkbox() ?>
@@ -59,7 +59,7 @@ $saveButtonLabel = $model->isNewRecord ? Yii::t('ExternalCalendarModule.base', '
     </div>
 
     <div class="modal-footer">
-        <?= ModalButton::submitModal(Url::to(['/external_calendar/export/edit', 'id' => $model->id]), $saveButtonLabel); ?>
+        <?= ModalButton::submitModal(Url::to(['/external-calendar/export/edit', 'id' => $model->id]), $saveButtonLabel); ?>
     </div>
 
 <?php ActiveForm::end() ?>

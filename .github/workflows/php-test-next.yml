@@ -9,7 +9,7 @@ jobs:
   tests:
     uses: humhub/actions/.github/workflows/module-tests-next.yml@main
     with:
-      module-id: external_calendar
+      module-id: external-calendar
       install-composer: true
       additional-module-id: calendar
       additional-module-composer: true

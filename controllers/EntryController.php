@@ -62,7 +62,7 @@ class EntryController extends ContentContainerController
     {
         return $this->renderAjax('modal', [
             'model' => $model,
-            'editUrl' => $this->contentContainer->createUrl('/external_calendar/entry/update', ['id' => $model->id, 'cal' => $cal]),
+            'editUrl' => $this->contentContainer->createUrl('/external-calendar/entry/update', ['id' => $model->id, 'cal' => $cal]),
             'canManageEntries' => $model->content->canEdit(),
             'contentContainer' => $this->contentContainer,
         ]);
@@ -123,7 +123,7 @@ class EntryController extends ContentContainerController
         return $this->renderAjax('update', [
             'model' => $model,
             'contentContainer' => $this->contentContainer,
-            'editUrl' => $this->contentContainer->createUrl('/external_calendar/entry/update', ['id' => $model->id, 'cal' => $cal]),
+            'editUrl' => $this->contentContainer->createUrl('/external-calendar/entry/update', ['id' => $model->id, 'cal' => $cal]),
         ]);
     }
 

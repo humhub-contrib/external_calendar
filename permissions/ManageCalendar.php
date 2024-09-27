@@ -17,7 +17,7 @@ class ManageCalendar extends BasePermission
     /**
      * @inheritdoc
      */
-    protected $moduleId = 'external_calendar';
+    protected $moduleId = 'external-calendar';
 
     /**
      * @inheritdoc

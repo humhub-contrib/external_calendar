@@ -4,9 +4,9 @@
 
 then go to `Administration -> Modules` and **Enable** the **External Calendar** module.
 
-**_Note:_** You need to enable the [original calendar module](https://github.com/humhub/humhub-modules-calendar) first. The external_calendar module only works if it is activated!
+**_Note:_** You need to enable the [original calendar module](https://github.com/humhub/humhub-modules-calendar) first. The external calendar module only works if it is activated!
 
-If you want to add external calendars, go to a specific space (or your own profile), activate the external_calendar module in the space settings (or profile settings) and start the configuration of the module here.
+If you want to add external calendars, go to a specific space (or your own profile), activate the external calendar module in the space settings (or profile settings) and start the configuration of the module here.
 **If there is an error, something went wrong with your sync.**
 
 ## Settings

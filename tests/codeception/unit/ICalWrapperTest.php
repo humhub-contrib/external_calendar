@@ -31,7 +31,7 @@ class ICalWrapperTest extends ExternalCalendarTest
      */
     public function testIncludingRecurringEvent()
     {
-        $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics'));
+        $cal = new ICalFile(Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1Split.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20191212', new \DateTimeZone('Europe/Berlin')));
@@ -50,7 +50,7 @@ class ICalWrapperTest extends ExternalCalendarTest
      */
     public function testRecurringEventAfterRange()
     {
-        $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics'));
+        $cal = new ICalFile(Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1Split.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190912', new \DateTimeZone('Europe/Berlin')));
@@ -69,7 +69,7 @@ class ICalWrapperTest extends ExternalCalendarTest
      */
     public function testRecurringEventStopsBeforeRange()
     {
-        $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics'));
+        $cal = new ICalFile(Yii::getAlias('@external-calendar/tests/codeception/data/recurrence1Split.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
@@ -88,7 +88,7 @@ class ICalWrapperTest extends ExternalCalendarTest
      */
     public function testIncludeStartingRecurrenceOutsideOfRange()
     {
-        $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/twoIndependentRecurrences.ics'));
+        $cal = new ICalFile(Yii::getAlias('@external-calendar/tests/codeception/data/twoIndependentRecurrences.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
@@ -108,7 +108,7 @@ class ICalWrapperTest extends ExternalCalendarTest
 
     public function testICalEventAllDay()
     {
-        $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/twoIndependentRecurrences.ics'));
+        $cal = new ICalFile(Yii::getAlias('@external-calendar/tests/codeception/data/twoIndependentRecurrences.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
@@ -118,7 +118,7 @@ class ICalWrapperTest extends ExternalCalendarTest
 
     public function testICalEventNonAllDay()
     {
-        $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/test1WithTime.ics'));
+        $cal = new ICalFile(Yii::getAlias('@external-calendar/tests/codeception/data/test1WithTime.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190816', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190817', new \DateTimeZone('Europe/Berlin')));

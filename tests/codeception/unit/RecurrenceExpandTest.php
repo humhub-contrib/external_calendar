@@ -24,7 +24,7 @@ class RecurrenceExpandTest extends ExternalCalendarTest
 {
     public function testExpandSingle()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
         $recurrenceEvent = $externalCalendar->getRecurringEventRoots()[0];
         $recurrence = ICalExpand::expandSingle($recurrenceEvent, '20190808');
         $this->assertNotNull($recurrence);
@@ -33,7 +33,7 @@ class RecurrenceExpandTest extends ExternalCalendarTest
 
     public function testExpandSingleExistingEvent()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
         $recurrenceEvent = $externalCalendar->getRecurringEventRoots()[0];
 
         $recurrence = ICalExpand::expandSingle($recurrenceEvent, '20190808');
@@ -45,7 +45,7 @@ class RecurrenceExpandTest extends ExternalCalendarTest
 
     public function testExpandExistingEvent()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/recurrence1.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/recurrence1.ics');
         $recurrenceEvent = $externalCalendar->getRecurringEventRoots()[0];
 
         $recurrence = ICalExpand::expandSingle($recurrenceEvent, '20190808');

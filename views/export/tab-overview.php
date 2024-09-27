@@ -51,11 +51,11 @@ $dataProvider = new ActiveDataProvider([
                         Yii::t('ExternalCalendarModule.export', 'Edit') =>
                             ['edit', 'linkOptions' => [
                                 'data-action-click' => 'ui.modal.load',
-                                'data-action-url' => Url::to(['/external_calendar/export/edit', 'id' => $key]),
+                                'data-action-url' => Url::to(['/external-calendar/export/edit', 'id' => $key]),
                             ]],
                         Yii::t('ExternalCalendarModule.export', 'Delete') => ['edit', 'linkOptions' => [
                             'data-action-click' => 'ui.modal.post',
-                            'data-action-url' => Url::to(['/external_calendar/export/delete', 'id' => $key]),
+                            'data-action-url' => Url::to(['/external-calendar/export/delete', 'id' => $key]),
                             'data-action-confirm' => true
                         ]],
                     ];
@@ -66,4 +66,3 @@ $dataProvider = new ActiveDataProvider([
     ]); ?>
     </div>
 </div>
-

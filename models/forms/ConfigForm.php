@@ -27,7 +27,7 @@ class ConfigForm extends Model
      */
     public function init()
     {
-        $settings = Yii::$app->getModule('external_calendar')->settings;
+        $settings = Yii::$app->getModule('external-calendar')->settings;
         $this->autopost_calendar = $settings->get('autopost_calendar', $this->autopost_calendar);
         $this->autopost_entries = $settings->get('autopost_entries', $this->autopost_entries);
     }
@@ -74,7 +74,7 @@ class ConfigForm extends Model
             return false;
         }
 
-        $settings = Yii::$app->getModule('external_calendar')->settings;
+        $settings = Yii::$app->getModule('external-calendar')->settings;
         $settings->set('autopost_calendar', $this->autopost_calendar);
         $settings->set('autopost_entries', $this->autopost_entries);
 

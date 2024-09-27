@@ -29,7 +29,7 @@ class ICalImportTest extends ExternalCalendarTest
 {
     public function testDuration()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/testDuration.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/testDuration.ics');
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
 
@@ -38,7 +38,7 @@ class ICalImportTest extends ExternalCalendarTest
     }
     public function testStartWithoutTimeNoEnd()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/startWithoutTimeNoEnd.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/startWithoutTimeNoEnd.ics');
         $event = $externalCalendar->entries[0];
         $this->assertTrue($event->isAllDay());
 
@@ -48,7 +48,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testStartWithTimeNoEnd()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/startWithTimeNoEnd.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/startWithTimeNoEnd.ics');
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
 
@@ -58,7 +58,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testStartEqEndNoTime()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/startEqEndNoTime.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/startEqEndNoTime.ics');
         $event = $externalCalendar->entries[0];
         $this->assertTrue($event->isAllDay());
 
@@ -68,7 +68,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testStartEqEndZeroTime()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/startEqEndWithZeroTime.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/startEqEndWithZeroTime.ics');
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
 
@@ -78,7 +78,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testStartEqEndWithTime()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/startEqEndWithTime.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/startEqEndWithTime.ics');
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
         $this->assertFalse($event->isAllDay());
@@ -117,7 +117,7 @@ class ICalImportTest extends ExternalCalendarTest
 
         $firstEvent = $externalCalendar->entries[0];
 
-        $externalCalendar->url = Yii::getAlias('@external_calendar/tests/codeception/data/test1Update.ics');
+        $externalCalendar->url = Yii::getAlias('@external-calendar/tests/codeception/data/test1Update.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $this->assertEquals(2, ExternalCalendarEntry::find()->count());
@@ -146,12 +146,12 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testImportAndDeleteEvent()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/test1Update2.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/test1Update2.ics');
 
         $this->assertEquals(2, ExternalCalendarEntry::find()->count());
         $this->assertCount(2, $externalCalendar->entries);
 
-        $externalCalendar->url =  Yii::getAlias('@external_calendar/tests/codeception/data/test1.ics');
+        $externalCalendar->url =  Yii::getAlias('@external-calendar/tests/codeception/data/test1.ics');
 
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
@@ -165,7 +165,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testImportAndDeleteEvent2()
     {
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/test2.ics');
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/test2.ics');
         $externalCalendar->sync( DateTime::createFromFormat('!Ymd', '20190101'), DateTime::createFromFormat('!Ymd', '2021101'));
 
         $this->assertEquals(1, ExternalCalendarEntry::find()->count());
@@ -182,14 +182,14 @@ class ICalImportTest extends ExternalCalendarTest
             'allowFiles' => true,
             'title' => 'test',
             'public' => Content::VISIBILITY_PUBLIC,
-            'url' => $this->getFileAlias('@external_calendar/tests/codeception/data/test1.ics')
+            'url' => $this->getFileAlias('@external-calendar/tests/codeception/data/test1.ics')
         ]);
 
         $externalCalendar->save();
 
         $this->assertVisibility($externalCalendar, Content::VISIBILITY_PUBLIC);
 
-        $externalCalendar->url =  Yii::getAlias('@external_calendar/tests/codeception/data/test1Update.ics');
+        $externalCalendar->url =  Yii::getAlias('@external-calendar/tests/codeception/data/test1Update.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $externalCalendar->refresh();
@@ -204,14 +204,14 @@ class ICalImportTest extends ExternalCalendarTest
             'allowFiles' => true,
             'title' => 'test',
             'public' => Content::VISIBILITY_PRIVATE,
-            'url' => Yii::getAlias('@external_calendar/tests/codeception/data/test1.ics')
+            'url' => Yii::getAlias('@external-calendar/tests/codeception/data/test1.ics')
         ]);
 
         $externalCalendar->save();
 
         $this->assertVisibility($externalCalendar, Content::VISIBILITY_PRIVATE);
 
-        $externalCalendar->url =  Yii::getAlias('@external_calendar/tests/codeception/data/test1Update.ics');
+        $externalCalendar->url =  Yii::getAlias('@external-calendar/tests/codeception/data/test1Update.ics');
         $externalCalendar->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
 
         $externalCalendar->refresh();
@@ -225,7 +225,7 @@ class ICalImportTest extends ExternalCalendarTest
     public function testImportChangeVisibility()
     {
         $this->becomeUser('Admin');
-        $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/test1.ics', [
+        $externalCalendar = $this->initCalendar('@external-calendar/tests/codeception/data/test1.ics', [
             'public' => Content::VISIBILITY_PRIVATE,
             'event_mode' => ExternalCalendar::EVENT_MODE_ALL,
         ])->sync($this->defaultSyncRangeStart, $this->defaultSyncRangeEnd);
@@ -241,7 +241,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testTimezone1()
     {
-        $this->initCalendar('@external_calendar/tests/codeception/data/timezone.ics');
+        $this->initCalendar('@external-calendar/tests/codeception/data/timezone.ics');
 
         /** @var $events ExternalCalendarEntry[] */
         $events = ExternalCalendarEntryQuery::findForFilter(
@@ -256,7 +256,7 @@ class ICalImportTest extends ExternalCalendarTest
 
     public function testTimezone2()
     {
-        $this->initCalendar('@external_calendar/tests/codeception/data/timezone.ics');
+        $this->initCalendar('@external-calendar/tests/codeception/data/timezone.ics');
 
         /** @var $events ExternalCalendarEntry[] */
         $events = ExternalCalendarEntryQuery::findForFilter(

@@ -101,13 +101,13 @@ class Module extends ContentContainerModule
 
     public function getConfigUrl()
     {
-        return Url::to(['/external_calendar/config/index']);
+        return Url::to(['/external-calendar/config/index']);
     }
 
     public function getContentContainerConfigUrl(ContentContainerActiveRecord $container)
     {
         if ($container->permissionManager->can(ManageCalendar::class)) {
-            return $container->createUrl('/external_calendar/calendar/index');
+            return $container->createUrl('/external-calendar/calendar/index');
         } else {
             return;
         }
