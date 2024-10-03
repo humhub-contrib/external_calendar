@@ -1,6 +1,5 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\controllers;
 
 use humhub\components\access\ControllerAccess;
@@ -39,7 +38,7 @@ class ExportController extends Controller
     protected function getAccessRules()
     {
         return [
-            ['login' => ['edit', 'search-space']]
+            ['login' => ['edit', 'search-space']],
         ];
     }
 

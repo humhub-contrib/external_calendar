@@ -1,6 +1,5 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\integration\calendar;
 
 use Yii;
@@ -45,7 +44,7 @@ class CalendarExportService extends BaseObject
 
             $items = [[]];
             foreach ($export->getContainers() as $container) {
-                if($container instanceof Space && !$container->isMember()) {
+                if ($container instanceof Space && !$container->isMember()) {
                     continue;
                 }
 

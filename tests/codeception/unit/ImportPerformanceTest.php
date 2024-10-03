@@ -28,7 +28,7 @@ class ImportPerformanceTest extends ExternalCalendarTest
 
     public function _before()
     {
-        $this->timer = new Timer;
+        $this->timer = new Timer();
         $this->timer->start();
     }
 
@@ -38,8 +38,9 @@ class ImportPerformanceTest extends ExternalCalendarTest
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20200801', new \DateTimeZone('Europe/Berlin')),
-            Space::findOne(1));
-        print_r('Expand '.$this->getDuration().' ('.count($events).")\n");
+            Space::findOne(1),
+        );
+        print_r('Expand ' . $this->getDuration() . ' (' . count($events) . ")\n");
     }
 
     public function testExpandRecurrence2OneYear()
@@ -48,8 +49,9 @@ class ImportPerformanceTest extends ExternalCalendarTest
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20220801', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20230801', new \DateTimeZone('Europe/Berlin')),
-            Space::findOne(1));
-        print_r('Expand '.$this->getDuration().' ('.count($events).")\n");
+            Space::findOne(1),
+        );
+        print_r('Expand ' . $this->getDuration() . ' (' . count($events) . ")\n");
     }
 
     private function getDuration()

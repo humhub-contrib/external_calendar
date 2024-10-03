@@ -1,4 +1,5 @@
 <?php
+
 namespace humhub\modules\external_calendar\tests\codeception\unit;
 
 use yii\base\Model;

@@ -13,12 +13,12 @@ use yii\base\Model;
 class ConfigForm extends Model
 {
     /**
-     * @var boolean determines whether external calendars should be posted to stream
+     * @var bool determines whether external calendars should be posted to stream
      */
     public $autopost_calendar = true;
 
     /**
-     * @var boolean determines whether external calendar entries should be posted to stream
+     * @var bool determines whether external calendar entries should be posted to stream
      */
     public $autopost_entries = true;
 
@@ -38,9 +38,9 @@ class ConfigForm extends Model
      */
     public static function instantiate()
     {
-        return new self;
+        return new self();
     }
-    
+
     /**
      * Declares the validation rules.
      */
@@ -59,18 +59,18 @@ class ConfigForm extends Model
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'autopost_calendar' => Yii::t('ExternalCalendarModule.model_config', 'Post new calendar on stream'),
             'autopost_entries' => Yii::t('ExternalCalendarModule.model_config', 'Post new entries on stream'),
-        );
+        ];
     }
-    
+
     /**
      * Saves the given form settings.
      */
     public function save()
     {
-        if(!$this->validate()) {
+        if (!$this->validate()) {
             return false;
         }
 

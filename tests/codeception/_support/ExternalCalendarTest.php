@@ -1,8 +1,6 @@
 <?php
 
-
 namespace external_calendar;
-
 
 use DateTime;
 use humhub\modules\space\models\Space;
@@ -31,7 +29,7 @@ class ExternalCalendarTest extends HumHubDbTestCase
 
     protected function initCalendar($file = '@external_calendar/tests/codeception/data/test1.ics', $params = [], $asAdmin = true)
     {
-        if($asAdmin) {
+        if ($asAdmin) {
             $this->becomeUser('Admin');
             Yii::$app->user->getIdentity()->time_zone = 'Europe/Berlin';
         }
@@ -40,7 +38,7 @@ class ExternalCalendarTest extends HumHubDbTestCase
             'allowFiles' => true,
             'title' => 'test',
             'event_mode' => ExternalCalendar::EVENT_MODE_ALL,
-            'url' => $this->getFileAlias($file)
+            'url' => $this->getFileAlias($file),
         ], $params);
 
         $externalCalendar = new ExternalCalendar(Space::findOne(1), $params);

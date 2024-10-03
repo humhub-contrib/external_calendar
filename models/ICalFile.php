@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 use DateInterval;
 use ICal\ICal;
@@ -21,7 +19,7 @@ class ICalFile extends ICal implements ICalIF
      */
     public $alteredRecurrences;
 
-    public function __construct($files = false, array $options = array())
+    public function __construct($files = false, array $options = [])
     {
         $this->defaultTimeZone = Yii::$app->timeZone;
         $this->skipRecurrence = true;
@@ -35,10 +33,10 @@ class ICalFile extends ICal implements ICalIF
         $events = $this->sortEventsWithOrder($this->events(), SORT_ASC);
 
         if (empty($events)) {
-            return array();
+            return [];
         }
 
-        $extendedEvents = array();
+        $extendedEvents = [];
 
         if (!is_null($rangeStart)) {
             try {
@@ -92,7 +90,7 @@ class ICalFile extends ICal implements ICalIF
         }
 
         if (empty($extendedEvents)) {
-            return array();
+            return [];
         }
 
         return $extendedEvents;
@@ -108,8 +106,8 @@ class ICalFile extends ICal implements ICalIF
     public function events()
     {
         $array = $this->cal;
-        $array = isset($array['VEVENT']) ? $array['VEVENT'] : array();
-        $events = array();
+        $array = isset($array['VEVENT']) ? $array['VEVENT'] : [];
+        $events = [];
 
         if (!empty($array)) {
             foreach ($array as $event) {
@@ -214,7 +212,8 @@ class ICalFile extends ICal implements ICalIF
     private function isWithinRange($eventStart, $eventEnd, $rangeStart, $rangeEnd)
     {
         return (($eventStart >= $rangeStart && $eventStart < $rangeEnd)         // Event start date contained in the range
-            || ($eventEnd !== null
+            || (
+                $eventEnd !== null
                 && (
                     ($eventEnd > $rangeStart && $eventEnd <= $rangeEnd)     // Event end date contained in the range
                     || ($eventStart < $rangeStart && $eventEnd > $rangeEnd) // Event starts before and finishes after range
@@ -248,7 +247,7 @@ class ICalFile extends ICal implements ICalIF
      */
     private function checkForRecurrence(ICalEventIF $anEvent)
     {
-       $this->checkForAlteredRecurrence($anEvent);
+        $this->checkForAlteredRecurrence($anEvent);
 
         if (!empty($anEvent->getRrule()) && empty($anEvent->getRecurrenceId())) {
             $this->recurrenceRoots[] = $anEvent;

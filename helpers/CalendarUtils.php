@@ -13,14 +13,13 @@ use DateTimeZone;
  */
 class CalendarUtils
 {
-
     private static $userTimezone;
 
-    const DB_DATE_FORMAT = 'Y-m-d H:i:s';
-    const ICAL_TIME_FORMAT        = 'Ymd\THis';
-    const ICAL_DATE_FORMAT        = 'Ymd';
+    public const DB_DATE_FORMAT = 'Y-m-d H:i:s';
+    public const ICAL_TIME_FORMAT        = 'Ymd\THis';
+    public const ICAL_DATE_FORMAT        = 'Ymd';
 
-    const REGEX_DBFORMAT_DATETIME = '/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/';
+    public const REGEX_DBFORMAT_DATETIME = '/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/';
 
     /**
      *
@@ -37,8 +36,8 @@ class CalendarUtils
             if ($dateInterval->days > 0 && $dateInterval->h == 0 && $dateInterval->i == 0 && $dateInterval->s == 0) {
                 return true;
             }
-        } else if ($dateInterval->h == 23 && $dateInterval->i == 59) {
-                return true;
+        } elseif ($dateInterval->h == 23 && $dateInterval->i == 59) {
+            return true;
         }
 
         return false;
@@ -53,7 +52,7 @@ class CalendarUtils
     {
         $date = ($recurrentId instanceof \DateTimeInterface) ? $recurrentId : new DateTime($recurrentId, new DateTimeZone('UTC'));
 
-        if($targetTZ) {
+        if ($targetTZ) {
             $date->setTimezone(new DateTimeZone($targetTZ));
         }
 
@@ -65,16 +64,16 @@ class CalendarUtils
      */
     public static function getUserTimeZone()
     {
-        if(!static::$userTimezone) {
+        if (!static::$userTimezone) {
             $tz =  Yii::$app->user->isGuest
                 ? Yii::$app->timeZone
                 : Yii::$app->user->getTimeZone();
 
-            if(!$tz) {
+            if (!$tz) {
                 $tz = Yii::$app->timeZone;
             }
 
-            if($tz) {
+            if ($tz) {
                 static::$userTimezone = new DateTimeZone($tz);
             }
         }
@@ -96,11 +95,11 @@ class CalendarUtils
 
     public static function toDBDateFormat($date)
     {
-        if(!$date) {
+        if (!$date) {
             return null;
         }
 
-        if(is_string($date)) {
+        if (is_string($date)) {
             $date = new DateTime($date);
         }
 

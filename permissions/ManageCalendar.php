@@ -26,7 +26,7 @@ class ManageCalendar extends BasePermission
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
         Space::USERGROUP_MODERATOR,
-        User::USERGROUP_SELF
+        User::USERGROUP_SELF,
     ];
 
     /**

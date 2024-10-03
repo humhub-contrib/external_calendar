@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 use DateTime;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
@@ -83,7 +81,7 @@ class ICalFileEvent extends Event implements ICalEventIF
     public function isAllDay()
     {
         // If one of dtstart or dtend has actual time value this can't be an all day event
-        if($this->getStartDateTime()->format('H:i:s') !== '00:00:00' || $this->getEndDateTime()->format('H:i:s') !== '00:00:00') {
+        if ($this->getStartDateTime()->format('H:i:s') !== '00:00:00' || $this->getEndDateTime()->format('H:i:s') !== '00:00:00') {
             return false;
         }
 
@@ -116,7 +114,7 @@ class ICalFileEvent extends Event implements ICalEventIF
     public function getExdateArray()
     {
         $exdateStr = $this->getExdate();
-        return empty($exdateStr) ? [] : explode( ',', $exdateStr);
+        return empty($exdateStr) ? [] : explode(',', $exdateStr);
     }
 
     /**
@@ -132,11 +130,11 @@ class ICalFileEvent extends Event implements ICalEventIF
     {
         $result = null;
         // We need this since the ICal parser does not ignore timezone values for DATE only values
-        if((isset($dtArr[0]['VALUE']) && $dtArr[0]['VALUE'] === 'DATE') || strlen($dtArr[1]) === 8)  {
-            $result = DateTime::createFromFormat(CalendarUtils::ICAL_DATE_FORMAT, $dtArr[1])->setTime(0,0,0);
+        if ((isset($dtArr[0]['VALUE']) && $dtArr[0]['VALUE'] === 'DATE') || strlen($dtArr[1]) === 8) {
+            $result = DateTime::createFromFormat(CalendarUtils::ICAL_DATE_FORMAT, $dtArr[1])->setTime(0, 0, 0);
         }
 
-        if(!$result) {
+        if (!$result) {
             $result = (new DateTime())->setTimestamp($dtArr[2]);
         }
 
@@ -162,7 +160,7 @@ class ICalFileEvent extends Event implements ICalEventIF
         $duration_array = $this->duration_array;
         if (!empty($duration_array)) {
             $this->endDateTime->add($duration_array[2]);
-        } else if ($this->isDateOnlyFormat($this->dtstart)) {
+        } elseif ($this->isDateOnlyFormat($this->dtstart)) {
             // https://tools.ietf.org/html/rfc5545#page-54
             $this->endDateTime->modify('+1 day');
         }
@@ -177,7 +175,7 @@ class ICalFileEvent extends Event implements ICalEventIF
 
     private function isDateTimeFormat($icalDate)
     {
-        if(is_array($icalDate)) {
+        if (is_array($icalDate)) {
             $icalDate = $icalDate[2];
         }
 

@@ -7,7 +7,6 @@
 
 namespace humhub\modules\external_calendar\jobs;
 
-
 use humhub\modules\external_calendar\Events;
 use humhub\modules\queue\ActiveJob;
 use humhub\modules\external_calendar\models\ExternalCalendar;

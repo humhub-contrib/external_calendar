@@ -18,6 +18,7 @@ use humhub\modules\content\models\Content;
 use humhub\modules\external_calendar\models\ExternalCalendar;
 use humhub\modules\external_calendar\models\ExternalCalendarEntry;
 use humhub\modules\user\models\User;
+
 /**
  * Created by PhpStorm.
  * User: buddha
@@ -33,8 +34,8 @@ class ICalImportTest extends ExternalCalendarTest
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
 
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-05-14 00:00:00'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-05-14 00:15:00'), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-05-14 00:00:00'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-05-14 00:15:00'), $event->getEndDateTime());
     }
     public function testStartWithoutTimeNoEnd()
     {
@@ -42,8 +43,8 @@ class ICalImportTest extends ExternalCalendarTest
         $event = $externalCalendar->entries[0];
         $this->assertTrue($event->isAllDay());
 
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 23:59:59'), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 23:59:59'), $event->getEndDateTime());
     }
 
     public function testStartWithTimeNoEnd()
@@ -52,8 +53,8 @@ class ICalImportTest extends ExternalCalendarTest
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
 
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getEndDateTime());
     }
 
     public function testStartEqEndNoTime()
@@ -62,8 +63,8 @@ class ICalImportTest extends ExternalCalendarTest
         $event = $externalCalendar->entries[0];
         $this->assertTrue($event->isAllDay());
 
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 23:59:59'), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 23:59:59'), $event->getEndDateTime());
     }
 
     public function testStartEqEndZeroTime()
@@ -72,8 +73,8 @@ class ICalImportTest extends ExternalCalendarTest
         $event = $externalCalendar->entries[0];
         $this->assertFalse($event->isAllDay());
 
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 00:00:00'), $event->getEndDateTime());
     }
 
     public function testStartEqEndWithTime()
@@ -83,8 +84,8 @@ class ICalImportTest extends ExternalCalendarTest
         $this->assertFalse($event->isAllDay());
         $this->assertFalse($event->isAllDay());
 
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 16:00:00'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 16:00:00'), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 16:00:00'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat(CalendarUtils::DB_DATE_FORMAT, '2019-10-30 16:00:00'), $event->getEndDateTime());
     }
 
     public function testSimpleEventImport()
@@ -99,8 +100,8 @@ class ICalImportTest extends ExternalCalendarTest
 
         $event = $externalCalendar->entries[0];
 
-        $this->assertEquals( DateTime::createFromFormat('!Ymd', '20190514'), $event->getStartDateTime());
-        $this->assertEquals( DateTime::createFromFormat('!Ymd', '20190514')->setTime(23,59,59), $event->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190514'), $event->getStartDateTime());
+        $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190514')->setTime(23, 59, 59), $event->getEndDateTime());
 
         $this->assertEquals('2019-05-03 16:49:37', $event->content->created_at);
         $this->assertEquals('2019-05-03 16:49:37', $event->content->stream_sort_date);
@@ -131,7 +132,7 @@ class ICalImportTest extends ExternalCalendarTest
         $this->assertEquals('2019-06-03 16:49:37', $firstEvent->last_modified);
         $this->assertEquals(true, $firstEvent->isAllDay());
         $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190515'), $firstEvent->getStartDateTime());
-        $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190515')->setTime(23,59,59), $firstEvent->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190515')->setTime(23, 59, 59), $firstEvent->getEndDateTime());
 
         $newEvent = $externalCalendar->entries[1];
         $this->assertEquals('xxxxxxxxxxxxxx2@google.com', $newEvent->uid);
@@ -140,7 +141,7 @@ class ICalImportTest extends ExternalCalendarTest
         $this->assertEquals('2019-06-13 16:49:37', $newEvent->last_modified);
         $this->assertEquals(true, $newEvent->isAllDay());
         $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190517'), $newEvent->getStartDateTime());
-        $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190517')->setTime(23,59,59), $newEvent->getEndDateTime());
+        $this->assertEquals(DateTime::createFromFormat('!Ymd', '20190517')->setTime(23, 59, 59), $newEvent->getEndDateTime());
 
     }
 
@@ -166,7 +167,7 @@ class ICalImportTest extends ExternalCalendarTest
     public function testImportAndDeleteEvent2()
     {
         $externalCalendar = $this->initCalendar('@external_calendar/tests/codeception/data/test2.ics');
-        $externalCalendar->sync( DateTime::createFromFormat('!Ymd', '20190101'), DateTime::createFromFormat('!Ymd', '2021101'));
+        $externalCalendar->sync(DateTime::createFromFormat('!Ymd', '20190101'), DateTime::createFromFormat('!Ymd', '2021101'));
 
         $this->assertEquals(1, ExternalCalendarEntry::find()->count());
         $this->assertEquals('xxxxasdf', $externalCalendar->entries[0]->uid);
@@ -182,7 +183,7 @@ class ICalImportTest extends ExternalCalendarTest
             'allowFiles' => true,
             'title' => 'test',
             'public' => Content::VISIBILITY_PUBLIC,
-            'url' => $this->getFileAlias('@external_calendar/tests/codeception/data/test1.ics')
+            'url' => $this->getFileAlias('@external_calendar/tests/codeception/data/test1.ics'),
         ]);
 
         $externalCalendar->save();
@@ -204,7 +205,7 @@ class ICalImportTest extends ExternalCalendarTest
             'allowFiles' => true,
             'title' => 'test',
             'public' => Content::VISIBILITY_PRIVATE,
-            'url' => Yii::getAlias('@external_calendar/tests/codeception/data/test1.ics')
+            'url' => Yii::getAlias('@external_calendar/tests/codeception/data/test1.ics'),
         ]);
 
         $externalCalendar->save();
@@ -247,7 +248,8 @@ class ICalImportTest extends ExternalCalendarTest
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190821', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190822', new \DateTimeZone('Europe/Berlin'))->modify('-1 Minute'),
-            Space::findOne(1));
+            Space::findOne(1),
+        );
 
         $this->assertCount(1, $events);
         $this->assertEquals('Test2', $events[0]->title);
@@ -262,7 +264,8 @@ class ICalImportTest extends ExternalCalendarTest
         $events = ExternalCalendarEntryQuery::findForFilter(
             DateTime::createFromFormat('!Ymd', '20190822', new \DateTimeZone('Europe/Berlin')),
             DateTime::createFromFormat('!Ymd', '20190823', new \DateTimeZone('Europe/Berlin')),
-            Space::findOne(1));
+            Space::findOne(1),
+        );
 
         $this->assertCount(1, $events);
         $this->assertEquals('Test All Day', $events[0]->title);
