@@ -42,9 +42,9 @@ class RRuleHelperTest extends ExternalCalendarTest
 
     public function testCompareRrulesUntilNoFlag()
     {
-       $rruleOld = 'RRULE:FREQ=WEEKLY;BYDAY=TH';
-       $rruleNew = 'FREQ=WEEKLY;UNTIL=20191002;BYDAY=TH';
-       $this->assertFalse(RRuleHelper::compare($rruleOld, $rruleNew));
+        $rruleOld = 'RRULE:FREQ=WEEKLY;BYDAY=TH';
+        $rruleNew = 'FREQ=WEEKLY;UNTIL=20191002;BYDAY=TH';
+        $this->assertFalse(RRuleHelper::compare($rruleOld, $rruleNew));
     }
 
     public function testCompareRrulesUntilWithFlag()

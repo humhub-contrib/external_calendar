@@ -7,7 +7,6 @@
 
 namespace humhub\modules\external_calendar\jobs;
 
-
 use humhub\modules\queue\ActiveJob;
 use humhub\modules\external_calendar\models\ExternalCalendar;
 
@@ -24,7 +23,7 @@ class UpdateCalendarVisibility extends ActiveJob
 
         $calendar = ExternalCalendar::find()->where(['external_calendar.id' => $this->calendarId])->one();
 
-        if(!$calendar) {
+        if (!$calendar) {
             return true;
         }
 

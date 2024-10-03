@@ -15,11 +15,10 @@ use ICal\ICal;
 use Yii;
 use yii\base\InvalidValueException;
 
-
 /**
  * This is the model class for table "external_calendar".
  *
- * @property integer $id
+ * @property int $id
  * @property string $title
  * @property string $url
  * @property string $time_zone The timeZone these entries was saved, note the dates itself are always saved in app timeZone
@@ -27,8 +26,8 @@ use yii\base\InvalidValueException;
  * @property string $version    The ical-version, the calendar is stored
  * @property string $cal_name    The original calendar-name
  * @property string $cal_scale    The original calendar scale format, e.g. Gregorian
- * @property integer $sync_mode    Set if the Content should be autosynced
- * @property integer $event_mode    Set how old and new Events should be handled
+ * @property int $sync_mode    Set if the Content should be autosynced
+ * @property int $event_mode    Set how old and new Events should be handled
  * @property ExternalCalendarEntry[] $entries
  * @property string $description
  *
@@ -36,32 +35,32 @@ use yii\base\InvalidValueException;
  */
 class ExternalCalendar extends ContentActiveRecord implements Searchable
 {
-    const ITEM_TYPE_KEY = 'external_calendar';
+    public const ITEM_TYPE_KEY = 'external_calendar';
     /**
      * Sync Modes
      */
-    const SYNC_MODE_NONE = 0;
-    const SYNC_MODE_HOURLY = 1;
-    const SYNC_MODE_DAILY = 2;
+    public const SYNC_MODE_NONE = 0;
+    public const SYNC_MODE_HOURLY = 1;
+    public const SYNC_MODE_DAILY = 2;
     /**
      * Event Modes
      */
-    const EVENT_MODE_CURRENT_MONTH = 0;
-    const EVENT_MODE_ALL = 1;
+    public const EVENT_MODE_CURRENT_MONTH = 0;
+    public const EVENT_MODE_ALL = 1;
     /**
      * @var array all given sync modes as array
      */
     public static $syncModes = [
         self::SYNC_MODE_NONE,
         self::SYNC_MODE_HOURLY,
-        self::SYNC_MODE_DAILY
+        self::SYNC_MODE_DAILY,
     ];
     /**
      * @var array all given sync modes as array
      */
     public static $eventModes = [
         self::EVENT_MODE_CURRENT_MONTH,
-        self::EVENT_MODE_ALL
+        self::EVENT_MODE_ALL,
     ];
     /**
      * @inheritdoc

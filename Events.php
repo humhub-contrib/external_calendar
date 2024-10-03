@@ -71,7 +71,7 @@ class Events extends BaseObject
         try {
             /* @var $container ContentContainerActiveRecord */
             $container = $event->sender->contentContainer;
-            if($container && $container->moduleManager->isEnabled('external_calendar')) {
+            if ($container && $container->moduleManager->isEnabled('external_calendar')) {
                 $event->sender->addItem([
                     'label' => Yii::t('ExternalCalendarModule.base', 'External Calendars'),
                     'id' => 'tab-calendar-external',
@@ -108,7 +108,7 @@ class Events extends BaseObject
         try {
             /* @var $controls CalendarControls */
             $controls = $event->sender;
-            $controls->addWidget(ExportButton::class, ['container' => $controls->container],  ['sortOrder' => 50]);
+            $controls->addWidget(ExportButton::class, ['container' => $controls->container], ['sortOrder' => 50]);
         } catch (\Throwable $e) {
             Yii::error($e);
         }
@@ -159,7 +159,7 @@ class Events extends BaseObject
     public static function onCronDailyRun($event)
     {
         try {
-            Yii::$app->queue->push( new SyncDaily());
+            Yii::$app->queue->push(new SyncDaily());
         } catch (\Throwable $e) {
             Yii::error($e);
         }

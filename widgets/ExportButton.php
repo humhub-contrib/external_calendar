@@ -7,7 +7,6 @@
 
 namespace humhub\modules\external_calendar\widgets;
 
-
 use humhub\widgets\ModalButton;
 use Yii;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -22,7 +21,7 @@ class ExportButton extends Widget
 
     public function run()
     {
-        if(Yii::$app->user->isGuest) {
+        if (Yii::$app->user->isGuest) {
             return;
         }
 

@@ -2,7 +2,6 @@
 
 namespace humhub\modules\external_calendar\controllers;
 
-
 use Yii;
 use humhub\modules\admin\components\Controller;
 use humhub\modules\external_calendar\models\forms\ConfigForm;
@@ -14,7 +13,6 @@ use humhub\modules\external_calendar\models\forms\ConfigForm;
  */
 class ConfigController extends Controller
 {
-
     /**
      * @inheritdoc
      */

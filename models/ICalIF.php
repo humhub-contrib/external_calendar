@@ -1,12 +1,9 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 interface ICalIF
 {
-
     /**
      * @return string
      */

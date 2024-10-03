@@ -13,7 +13,7 @@ return [
     'class' => Module::class,
     'namespace' => 'humhub\modules\external_calendar',
     'urlManagerRules' => [
-        ['class' => 'humhub\modules\external_calendar\components\PageUrlRule']
+        ['class' => 'humhub\modules\external_calendar\components\PageUrlRule'],
     ],
     'events' => [
         ['class' => Application::class, 'event' => Application::EVENT_BEFORE_REQUEST, 'callback' => [Events::class, 'onBeforeRequest']],

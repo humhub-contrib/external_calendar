@@ -1,6 +1,5 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
 
 use DateTime;
@@ -64,7 +63,7 @@ class ICalSync extends Model
         return (new static([
             'calendarModel' => $calendarModel,
             'rangeStart' => $rangeStart,
-            'rangeEnd' => $rangeEnd
+            'rangeEnd' => $rangeEnd,
         ]))->syncICal();
     }
 
@@ -83,7 +82,7 @@ class ICalSync extends Model
         $this->setupSearchRange();
         $this->syncICalAttributes();
 
-        if(!$this->skipEvents) {
+        if (!$this->skipEvents) {
             $this->syncICalEvents();
         }
 
@@ -213,12 +212,12 @@ class ICalSync extends Model
         return $this->calendarModel->getEntries(false)->andFilterWhere(['or',
             ['and',
                 ['>=', 'start_datetime', $this->rangeStart->format('Y-m-d H:i:s')],
-                ['<=', 'start_datetime', $this->rangeEnd->format('Y-m-d H:i:s')]
+                ['<=', 'start_datetime', $this->rangeEnd->format('Y-m-d H:i:s')],
             ],
             ['and',
                 ['>=', 'end_datetime', $this->rangeStart->format('Y-m-d H:i:s')],
-                ['<=', 'end_datetime', $this->rangeEnd->format('Y-m-d H:i:s')]
-            ]
+                ['<=', 'end_datetime', $this->rangeEnd->format('Y-m-d H:i:s')],
+            ],
         ])->andWhere('external_calendar_entry.rrule IS NULL')->all();
     }
 
@@ -353,7 +352,7 @@ class ICalSync extends Model
             ->andWhere(['OR',
                 ['rrule' => $icalEvent->getRrule()],
                 ['IS', 'recurrence_id', new Expression('NULL')],
-                ['recurrence_id' => $icalEvent->getRecurrenceId()]
+                ['recurrence_id' => $icalEvent->getRecurrenceId()],
             ])
             ->one();
         if (!$eventModel) {
@@ -373,7 +372,7 @@ class ICalSync extends Model
 
             $eventModel->content->updateAttributes([
                 'created_at' => $created_at,
-                'stream_sort_date' => $created_at
+                'stream_sort_date' => $created_at,
             ]);
         }
 

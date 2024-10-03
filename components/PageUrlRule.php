@@ -18,7 +18,6 @@ use yii\web\UrlRuleInterface;
  */
 class PageUrlRule extends Component implements UrlRuleInterface
 {
-
     /**
      * @var string default route to page home
      */
@@ -35,7 +34,7 @@ class PageUrlRule extends Component implements UrlRuleInterface
     public function createUrl($manager, $route, $params)
     {
         if ($route === $this->searchRoute  && isset($params['token'])) {
-            $url = "ical/" . urlencode($params['token']). '/base.ics';
+            $url = "ical/" . urlencode($params['token']) . '/base.ics';
 
             unset($params['token']);
 

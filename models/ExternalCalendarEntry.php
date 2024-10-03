@@ -2,7 +2,6 @@
 
 namespace humhub\modules\external_calendar\models;
 
-
 use Recurr\Rule;
 use Yii;
 use DateTime;
@@ -25,9 +24,9 @@ use yii\db\StaleObjectException as StaleObjectExceptionAlias;
  * This is the model class for table "external_calendar_entry".
  *
  * The followings are the available columns in table 'external_calendar_entry':
- * @property integer $id
+ * @property int $id
  * @property string $uid
- * @property integer $calendar_id
+ * @property int $calendar_id
  * @property string $title
  * @property string $description
  * @property string $location
@@ -36,12 +35,12 @@ use yii\db\StaleObjectException as StaleObjectExceptionAlias;
  * @property string $start_datetime
  * @property string $end_datetime It is the moment immediately after the event has ended. For example, if the last full day of an event is Thursday, the exclusive end of the event will be 00:00:00 on Friday!
  * @property string $time_zone
- * @property integer $all_day
+ * @property int $all_day
  * @property string $rrule
- * @property integer $parent_event_id
+ * @property int $parent_event_id
  * @property string $recurrence_id
  * @property string $recurrence_until
- * @property integer $is_altered
+ * @property int $is_altered
  * @property  string exdate
  *
  * @property-read  ExternalCalendarEntry $recurrences
@@ -137,8 +136,8 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
     public function validateDate($attribute)
     {
-        if(!empty($this->$attribute) && !CalendarUtils::isInDbFormat($this->$attribute)) {
-            $this->addError($attribute, "Invalid Date format used for $attribute: ".$this->$attribute);
+        if (!empty($this->$attribute) && !CalendarUtils::isInDbFormat($this->$attribute)) {
+            $this->addError($attribute, "Invalid Date format used for $attribute: " . $this->$attribute);
         }
     }
 
@@ -208,7 +207,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
         $end = new DateTime($this->end_datetime, new DateTimeZone(Yii::$app->timeZone));
 
-        if($this->all_day && ($this->end_datetime === $this->start_datetime)) {
+        if ($this->all_day && ($this->end_datetime === $this->start_datetime)) {
             $end->modify('+1 day');
         }
 
@@ -228,7 +227,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             $this->streamChannel = 'default';
 
             // Only create activities etc for upcoming events
-            if($this->getStartDateTime() >= new DateTime('now')) {
+            if ($this->getStartDateTime() >= new DateTime('now')) {
                 $this->silentContentCreation = false;
             }
         }
@@ -252,7 +251,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             $end = $end->modify('+1 second');
         }
 
-        if($this->isRecurringInstance() && empty($this->id)) {
+        if ($this->isRecurringInstance() && empty($this->id)) {
             $viewUrl = $this->content->container->createUrl('/external_calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id, 'cal' => '1']);
             $openUrl = $this->content->container->createUrl('/external_calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id]);
         } else {
@@ -272,7 +271,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             'viewUrl' => $viewUrl,
             'viewMode' => 'redirect',
             'openUrl' => $openUrl,
-            'badge' =>  Label::asColor($this->calendar->color, $this->getContentName())->icon('fa-calendar-o')->right()
+            'badge' =>  Label::asColor($this->calendar->color, $this->getContentName())->icon('fa-calendar-o')->right(),
         ];
     }
 
@@ -291,7 +290,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
     public function getStartDateTime()
     {
-        return new DateTime($this->start_datetime,  CalendarUtils::getSystemTimeZone());
+        return new DateTime($this->start_datetime, CalendarUtils::getSystemTimeZone());
     }
 
     public function getEndDateTime()
@@ -301,7 +300,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
     public function getLastModifiedDateTime()
     {
-        return new DateTime($this->last_modified,CalendarUtils::getSystemTimeZone());
+        return new DateTime($this->last_modified, CalendarUtils::getSystemTimeZone());
     }
 
     public function getFormattedTime($format = 'long')
@@ -310,7 +309,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
     }
 
     /**
-     * @return boolean weather or not this item spans exactly over a whole day
+     * @return bool weather or not this item spans exactly over a whole day
      */
     public function isAllDay()
     {
@@ -318,7 +317,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             return true;
         }
 
-        return (boolean)$this->all_day;
+        return (bool)$this->all_day;
     }
 
     public function isRecurringRoot()
@@ -369,8 +368,8 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             ->andWhere(['calendar_id' => $this->calendar_id])
             ->andWhere(['uid' => $this->uid]);
 
-        if(is_array($recurrenceIds)) {
-            array_walk($recurrenceIds, function(&$item) {
+        if (is_array($recurrenceIds)) {
+            array_walk($recurrenceIds, function (&$item) {
                 $item = CalendarUtils::cleanRecurrentId($item);
             });
             $query->andWhere(['IN', 'recurrence_id', $recurrenceIds]);
@@ -401,7 +400,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
         if (is_array($filter) || is_string($filter)) {
             $instances = $this->getRecurrences($filter)->all();
-        } else if ($filter instanceof \DateTimeInterface) {
+        } elseif ($filter instanceof \DateTimeInterface) {
             $instances = $this->getRecurrences()->andFilterWhere(['>', 'start_datetime', $filter->format('Y-m-d H:i:s')])->all();
         } else {
             $instances = $this->recurrences;
@@ -492,7 +491,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
         $this->all_day = (int) $icalEvent->isAllDay();
 
         if ($save && !$this->save()) {
-            Yii::error('Could not save ical event '.$icalEvent->getUid());
+            Yii::error('Could not save ical event ' . $icalEvent->getUid());
             Yii::error($this->getErrors());
         }
 
@@ -518,7 +517,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
         $instance->time_zone = $this->time_zone;
         $instance->recurrence_id = CalendarUtils::cleanRecurrentId($recurrenceId);
 
-        if($save) {
+        if ($save) {
             $instance->save();
         } else {
             // We at least have to validate in order to trigger date validation/transformation
@@ -546,18 +545,18 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
     public function wasModifiedSince(ICalEventIF $icalEvent)
     {
-        if(!$icalEvent->getLastModified()) {
+        if (!$icalEvent->getLastModified()) {
             return false;
         }
 
         return !$this->last_modified || CalendarUtils::formatDateTimeToAppTime($icalEvent->getLastModified()) > $this->getLastModifiedDateTime();
     }
 
-     /**
-     * Get location of this external calendar entry
-     *
-     * @return string
-     */
+    /**
+    * Get location of this external calendar entry
+    *
+    * @return string
+    */
     public function getLocation(bool $asHtml = false)
     {
         if (!$asHtml) {

@@ -2,7 +2,6 @@
 
 namespace humhub\modules\external_calendar\models;
 
-
 use Yii;
 use DateTime;
 use humhub\libs\TimezoneHelper;
@@ -16,7 +15,6 @@ use yii\base\Component;
  */
 class CalendarDateFormatter extends Component
 {
-
     /**
      * @var CalendarItem
      */
@@ -24,7 +22,7 @@ class CalendarDateFormatter extends Component
 
     public function getFormattedTime($format = 'long')
     {
-        if($this->calendarItem->isAllDay()) {
+        if ($this->calendarItem->isAllDay()) {
             return $this->getFormattedAllDay($format);
         } else {
             return $this->getFormattedNonAlLDay($format);
@@ -33,13 +31,13 @@ class CalendarDateFormatter extends Component
 
     public function getFormattedStartDate($format = 'long', $timeZone = null)
     {
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->formatter->timeZone = $timeZone;
         }
 
         $result = Yii::$app->formatter->asDate($this->calendarItem->getStartDateTime(), $format);
 
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->i18n->autosetLocale();
         }
 
@@ -48,13 +46,13 @@ class CalendarDateFormatter extends Component
 
     public function getFormattedStartTime($format = 'short', $timeZone = null)
     {
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->formatter->timeZone = $timeZone;
         }
 
         $result = Yii::$app->formatter->asTime($this->calendarItem->getStartDateTime(), $format);
 
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->i18n->autosetLocale();
         }
 
@@ -63,13 +61,13 @@ class CalendarDateFormatter extends Component
 
     public function getFormattedEndDate($format = 'long', $timeZone = null)
     {
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->formatter->timeZone = $timeZone;
         }
 
         $result = Yii::$app->formatter->asDate($this->calendarItem->getEndDateTime(), $format);
 
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->i18n->autosetLocale();
         }
 
@@ -78,44 +76,44 @@ class CalendarDateFormatter extends Component
 
     public function getFormattedEndTime($format = 'short', $timeZone = null)
     {
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->formatter->timeZone = $timeZone;
         }
 
         $result = Yii::$app->formatter->asTime($this->calendarItem->getEndDateTime(), $format);
 
-        if($timeZone) {
+        if ($timeZone) {
             Yii::$app->i18n->autosetLocale();
         }
 
         return $result;
     }
 
-    protected  function getFormattedNonAllDay($format = 'long')
+    protected function getFormattedNonAllDay($format = 'long')
     {
         $result = $this->getFormattedStartDate($format);
-        if($this->getDurationDays() > 1) {
-            $result .= ', '.$this->getFormattedStartTime().  ' - ';
-            $result .= $this->getFormattedEndDate($format).', '.$this->getFormattedEndTime();
+        if ($this->getDurationDays() > 1) {
+            $result .= ', ' . $this->getFormattedStartTime() . ' - ';
+            $result .= $this->getFormattedEndDate($format) . ', ' . $this->getFormattedEndTime();
         } else {
-            $result .= ' ('.$this->getFormattedStartTime().' - '.$this->getFormattedEndTime().')';
+            $result .= ' (' . $this->getFormattedStartTime() . ' - ' . $this->getFormattedEndTime() . ')';
         }
 
         return $result;
     }
 
-    protected  function getFormattedAllDay($format = 'long')
+    protected function getFormattedAllDay($format = 'long')
     {
         $userTimeZone = Yii::$app->formatter->timeZone;
         $resultTimeZone = empty($this->calendarItem->getTimezone()) ? Yii::$app->timeZone : $this->calendarItem->getTimezone();
         $result = $result = $this->getFormattedStartDate($format, $resultTimeZone);
 
-        if($this->getDurationDays() > 1) {
+        if ($this->getDurationDays() > 1) {
             $result .= ' - ' . $this->getFormattedEndDate($format, $resultTimeZone);
         }
 
-        if($resultTimeZone !== $userTimeZone) {
-            $result .= ' ('.  self::getTimezoneLabel($resultTimeZone) .')';
+        if ($resultTimeZone !== $userTimeZone) {
+            $result .= ' (' . self::getTimezoneLabel($resultTimeZone) . ')';
         }
 
         return $result;
@@ -143,7 +141,7 @@ class CalendarDateFormatter extends Component
     public function getOffsetDays()
     {
         $s = new DateTime($this->calendarItem->getStartDateTime());
-        return $s->diff(new DateTime)->days;
+        return $s->diff(new DateTime())->days;
     }
 
     public static function getTimezoneLabel($timeZone)
@@ -156,7 +154,7 @@ class CalendarDateFormatter extends Component
     {
         static $timeZoneItems = null;
 
-        if(empty($timeZoneItems)) {
+        if (empty($timeZoneItems)) {
             $timeZoneItems = TimezoneHelper::generateList();
         }
 

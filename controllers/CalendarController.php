@@ -21,7 +21,6 @@ use humhub\widgets\ModalClose;
  */
 class CalendarController extends ContentContainerController
 {
-
     /**
      * @inheritdoc
      */
@@ -43,7 +42,7 @@ class CalendarController extends ContentContainerController
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => ExternalCalendar::find()->contentContainer($this->contentContainer)
+            'query' => ExternalCalendar::find()->contentContainer($this->contentContainer),
         ]);
 
         return $this->render('index', [
@@ -54,7 +53,7 @@ class CalendarController extends ContentContainerController
 
     /**
      * Displays a single ExternalCalendar model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws HttpException
      * @throws \yii\base\Exception
@@ -71,7 +70,7 @@ class CalendarController extends ContentContainerController
 
     /**
      * Ajax-method called via button to sync external calendars.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws \Exception
      */
@@ -109,7 +108,7 @@ class CalendarController extends ContentContainerController
         try {
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 (new ICalSync(['calendarModel' => $model, 'skipEvents' => true]))->syncICal();
-                if(!$model->hasErrors()) {
+                if (!$model->hasErrors()) {
                     $this->view->success(Yii::t('ExternalCalendarModule.results', 'Calendar successfully created!'));
                     return $this->redirect($this->contentContainer->createUrl('view', ['id' => $model->id]));
                 }
@@ -121,14 +120,14 @@ class CalendarController extends ContentContainerController
 
         return $this->render('edit', [
             'model' => $model,
-            'contentContainer' => $this->contentContainer
+            'contentContainer' => $this->contentContainer,
         ]);
     }
 
     /**
      * Deletes an existing ExternalCalendar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws HttpException
      * @throws \Exception
@@ -147,7 +146,7 @@ class CalendarController extends ContentContainerController
     /**
      * Finds the ExternalCalendar model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return ExternalCalendar the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      * @throws \yii\base\Exception

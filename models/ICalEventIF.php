@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 interface ICalEventIF
 {

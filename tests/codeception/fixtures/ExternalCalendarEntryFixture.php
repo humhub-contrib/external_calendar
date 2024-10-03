@@ -18,7 +18,7 @@ class ExternalCalendarEntryFixture extends ActiveFixture
     public $dataFile = '@external_calendar/tests/codeception/fixtures/data/externalCalendarEntry.php';
 
     public $depends = [
-        ExternalCalendarFixture::class
+        ExternalCalendarFixture::class,
     ];
 
 }

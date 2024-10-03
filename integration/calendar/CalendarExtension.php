@@ -49,7 +49,7 @@ class CalendarExtension extends BaseObject
 
         foreach ($entries as $entry) {
             // Note we only allow visible calendars, there are may entries which visibility is not updated yet (see jobs/UpdateCalendarVisibility).
-            if(!isset($calendarsMap[$entry->calendar_id])) {
+            if (!isset($calendarsMap[$entry->calendar_id])) {
                 continue;
             }
 

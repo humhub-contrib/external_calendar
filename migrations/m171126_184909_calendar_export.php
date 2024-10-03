@@ -15,7 +15,7 @@ class m171126_184909_calendar_export extends Migration
             'filter_mine' => $this->boolean()->defaultValue(0),
             'filter_only_public' => $this->boolean()->defaultValue(0),
             'include_profile' => $this->boolean()->defaultValue(1),
-            'space_selection' => $this->integer()
+            'space_selection' => $this->integer(),
         ], '');
 
         $this->createTable('external_calendar_export_spaces', [
@@ -43,7 +43,7 @@ class m171126_184909_calendar_export extends Migration
         }
 
 
-//        $this->addForeignKey('fk-calendar-entry-calendar', 'external_calendar_entry', 'calendar_id', 'external_calendar', 'id', 'CASCADE','CASCADE');
+        //        $this->addForeignKey('fk-calendar-entry-calendar', 'external_calendar_entry', 'calendar_id', 'external_calendar', 'id', 'CASCADE','CASCADE');
     }
 
     public function down()

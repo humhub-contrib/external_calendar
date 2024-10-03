@@ -36,7 +36,7 @@ class m171126_184908_initial extends Migration
             'time_zone' => 'varchar(60) DEFAULT NULL',
         ], '');
 
-//        $this->addForeignKey('fk-calendar-entry-calendar', 'external_calendar_entry', 'calendar_id', 'external_calendar', 'id', 'CASCADE','CASCADE');
+        //        $this->addForeignKey('fk-calendar-entry-calendar', 'external_calendar_entry', 'calendar_id', 'external_calendar', 'id', 'CASCADE','CASCADE');
     }
 
     public function down()

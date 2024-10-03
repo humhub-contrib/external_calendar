@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 use humhub\modules\external_calendar\helpers\CalendarUtils;
 use Yii;
@@ -12,7 +10,6 @@ use DateTimeZone;
 use humhub\modules\calendar\interfaces\CalendarItemWrapper;
 use humhub\modules\calendar\interfaces\VCalendar;
 use Sabre\VObject\Component\VEvent;
-
 
 class ICalExpand extends Model
 {
@@ -37,13 +34,13 @@ class ICalExpand extends Model
     {
         parent::init();
 
-        if(!$this->targetTimezone) {
+        if (!$this->targetTimezone) {
             $this->targetTimezone = CalendarUtils::getUserTimeZone();
-        } else if(is_string($this->targetTimezone)) {
+        } elseif (is_string($this->targetTimezone)) {
             $this->targetTimezone = new DateTimeZone($this->targetTimezone);
         }
 
-        if($this->event) {
+        if ($this->event) {
             $this->eventTimeZone = new DateTimeZone($this->event->time_zone);
         }
     }
@@ -54,17 +51,17 @@ class ICalExpand extends Model
         return $instance->expandEvent($start, $end, $endResult);
     }
 
-    public static function expandSingle(ExternalCalendarEntry $event, $recurrenceId,  $save = true)
+    public static function expandSingle(ExternalCalendarEntry $event, $recurrenceId, $save = true)
     {
         $tz = new \DateTimeZone($event->time_zone);
-        $start = new DateTime($recurrenceId,$tz);
+        $start = new DateTime($recurrenceId, $tz);
         $end = (new DateTime($recurrenceId, $tz))->modify("+1 minute");
 
         $instance = new static(['event' => $event, 'saveInstnace' => $save]);
         $result = $instance->expandEvent($start, $end);
 
         foreach ($result as $recurrence) {
-            if($recurrence->recurrence_id === CalendarUtils::cleanRecurrentId($start)) {
+            if ($recurrence->recurrence_id === CalendarUtils::cleanRecurrentId($start)) {
                 return $recurrence;
             }
         }
@@ -79,11 +76,11 @@ class ICalExpand extends Model
      */
     public function expandEvent(DateTime $start, DateTime $end, array &$endResult = [])
     {
-        if(empty($this->event->rrule)) {
+        if (empty($this->event->rrule)) {
             return [$this->event];
         }
 
-        if(!$end) {
+        if (!$end) {
             $end = (new DateTime('now', $this->targetTimezone))->add(new \DateInterval('P2Y'));
         }
 
@@ -108,9 +105,9 @@ class ICalExpand extends Model
      * @param VEvent[] $recurrences
      * @param $endResult
      */
-    private function syncRecurrences( array $recurrences, &$endResult)
+    private function syncRecurrences(array $recurrences, &$endResult)
     {
-        foreach($recurrences as $vEvent) {
+        foreach ($recurrences as $vEvent) {
             try {
                 $model = null;
                 $vEventStart = $vEvent->DTSTART->getDateTime();
@@ -128,10 +125,12 @@ class ICalExpand extends Model
                 }
 
                 if (!$model) {
-                    $model = $this->event->createRecurrence($vEventStart,
+                    $model = $this->event->createRecurrence(
+                        $vEventStart,
                         $vEvent->DTEND->getDateTime(),
                         $this->getRecurrenceId($vEvent),
-                        $this->saveInstnace);
+                        $this->saveInstnace,
+                    );
                 }
 
                 $endResult[] = $model;
