@@ -13,13 +13,13 @@ use yii\data\ArrayDataProvider;
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 /* @var $model \humhub\modules\external_calendar\models\ExternalCalendar */
 
-$this->title = Yii::t('ExternalCalendarModule.views_calendar', 'External Calendars');
-$publicText = Yii::t('ExternalCalendarModule.views_calendar', 'Public');
-$privateText = Yii::t('ExternalCalendarModule.views_calendar', 'Private');
+$this->title = Yii::t('ExternalCalendarModule.view', 'External Calendars');
+$publicText = Yii::t('ExternalCalendarModule.view', 'Public');
+$privateText = Yii::t('ExternalCalendarModule.view', 'Private');
 
 $helpText = ($contentContainer instanceof Space)
-    ? Yii::t('ExternalCalendarModule.config', 'This view lists all calenders configured for this space')
-    : Yii::t('ExternalCalendarModule.config', 'This view lists all calenders configured in your profile');
+    ? Yii::t('ExternalCalendarModule.base', 'This view lists all calenders configured for this space')
+    : Yii::t('ExternalCalendarModule.base', 'This view lists all calenders configured in your profile');
 ?>
 <div class="panel panel-default">
 
@@ -29,11 +29,11 @@ $helpText = ($contentContainer instanceof Space)
 
     <div class="panel-body">
         <div class="clearfix">
-            <?= Button::success(Yii::t('ExternalCalendarModule.views_calendar', 'Add Calendar'))
+            <?= Button::success(Yii::t('ExternalCalendarModule.view', 'Add Calendar'))
                 ->icon('fa-plus')->link($contentContainer->createUrl('edit'))->right()->sm() ?>
 
             <h4>
-                <?= Yii::t('ExternalCalendarModule.config', 'External Calendars Overview'); ?>
+                <?= Yii::t('ExternalCalendarModule.base', 'External Calendars Overview'); ?>
             </h4>
 
             <div class="help-block">

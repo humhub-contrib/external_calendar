@@ -142,7 +142,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
         ];
 
         if (!$this->allowFiles) {
-            $result[] = [['url'], 'url', 'defaultScheme' => 'https', 'message' => Yii::t('ExternalCalendarModule.sync_result', "No valid ical url! Try an url with http / https.")];
+            $result[] = [['url'], 'url', 'defaultScheme' => 'https', 'message' => Yii::t('ExternalCalendarModule.view', "No valid ical url! Try an url with http / https.")];
         }
 
         return $result;
@@ -181,7 +181,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public function validateURL($attribute, $params)
     {
         if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
-            $this->addError($attribute, Yii::t('ExternalCalendarModule.sync_result', "Bad URL"));
+            $this->addError($attribute, Yii::t('ExternalCalendarModule.view', "Bad URL"));
             return false;
         }
 
@@ -190,7 +190,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
                 'defaultTimeZone' => Yii::$app->timeZone,
             ]);
         } catch (\Exception $e) {
-            $this->addError($attribute, Yii::t('ExternalCalendarModule.sync_result', "Error while fetching ical"));
+            $this->addError($attribute, Yii::t('ExternalCalendarModule.view', "Error while fetching ical"));
             Yii::error($e);
             return false;
         }
@@ -203,17 +203,17 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('ExternalCalendarModule.model_calendar', 'ID'),
-            'title' => Yii::t('ExternalCalendarModule.model_calendar', 'Title'),
-            'url' => Yii::t('ExternalCalendarModule.model_calendar', 'Url'),
-            'public' => Yii::t('ExternalCalendarModule.model_calendar', 'Public'),
-            'time_zone' => Yii::t('ExternalCalendarModule.model_calendar', 'Timezone'),
-            'color' => Yii::t('ExternalCalendarModule.model_calendar', 'Color'),
-            'version' => Yii::t('ExternalCalendarModule.model_calendar', 'iCal Version'),
-            'cal_name' => Yii::t('ExternalCalendarModule.model_calendar', 'Original Calendar Name'),
-            'cal_scale' => Yii::t('ExternalCalendarModule.model_calendar', 'Original Calendar Scale'),
-            'sync_mode' => Yii::t('ExternalCalendarModule.model_calendar', 'Automatic synchronization'),
-            'event_mode' => Yii::t('ExternalCalendarModule.model_calendar', 'Synchronization interval'),
+            'id' => Yii::t('ExternalCalendarModule.view', 'ID'),
+            'title' => Yii::t('ExternalCalendarModule.view', 'Title'),
+            'url' => Yii::t('ExternalCalendarModule.view', 'Url'),
+            'public' => Yii::t('ExternalCalendarModule.view', 'Public'),
+            'time_zone' => Yii::t('ExternalCalendarModule.view', 'Timezone'),
+            'color' => Yii::t('ExternalCalendarModule.view', 'Color'),
+            'version' => Yii::t('ExternalCalendarModule.view', 'iCal Version'),
+            'cal_name' => Yii::t('ExternalCalendarModule.view', 'Original Calendar Name'),
+            'cal_scale' => Yii::t('ExternalCalendarModule.view', 'Original Calendar Scale'),
+            'sync_mode' => Yii::t('ExternalCalendarModule.view', 'Automatic synchronization'),
+            'event_mode' => Yii::t('ExternalCalendarModule.view', 'Synchronization interval'),
         ];
     }
 
@@ -294,9 +294,9 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public static function getSyncModeItems()
     {
         return [
-            self::SYNC_MODE_NONE => Yii::t('ExternalCalendarModule.model_calendar', 'No auto synchronization'),
-            self::SYNC_MODE_HOURLY => Yii::t('ExternalCalendarModule.model_calendar', 'Hourly'),
-            self::SYNC_MODE_DAILY => Yii::t('ExternalCalendarModule.model_calendar', 'Daily'),
+            self::SYNC_MODE_NONE => Yii::t('ExternalCalendarModule.view', 'No auto synchronization'),
+            self::SYNC_MODE_HOURLY => Yii::t('ExternalCalendarModule.view', 'Hourly'),
+            self::SYNC_MODE_DAILY => Yii::t('ExternalCalendarModule.view', 'Daily'),
         ];
     }
 
@@ -304,13 +304,13 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     {
         switch ($this->sync_mode) {
             case (self::SYNC_MODE_NONE):
-                return Yii::t('ExternalCalendarModule.model_calendar', 'No auto synchronization');
+                return Yii::t('ExternalCalendarModule.view', 'No auto synchronization');
                 break;
             case (self::SYNC_MODE_HOURLY):
-                return Yii::t('ExternalCalendarModule.model_calendar', 'Hourly');
+                return Yii::t('ExternalCalendarModule.view', 'Hourly');
                 break;
             case (self::SYNC_MODE_DAILY):
-                return Yii::t('ExternalCalendarModule.model_calendar', 'Daily');
+                return Yii::t('ExternalCalendarModule.view', 'Daily');
                 break;
             default:
                 return;
@@ -320,8 +320,8 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public static function getEventModeItems()
     {
         return [
-            self::EVENT_MODE_CURRENT_MONTH => Yii::t('ExternalCalendarModule.model_calendar', 'Only sync events from current month'),
-            self::EVENT_MODE_ALL => Yii::t('ExternalCalendarModule.model_calendar', 'Synchronize all events'),
+            self::EVENT_MODE_CURRENT_MONTH => Yii::t('ExternalCalendarModule.view', 'Only sync events from current month'),
+            self::EVENT_MODE_ALL => Yii::t('ExternalCalendarModule.view', 'Synchronize all events'),
         ];
     }
 
@@ -329,10 +329,10 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     {
         switch ($this->event_mode) {
             case (self::EVENT_MODE_CURRENT_MONTH):
-                return Yii::t('ExternalCalendarModule.model_calendar', 'Only synchronize events from current month');
+                return Yii::t('ExternalCalendarModule.view', 'Only synchronize events from current month');
                 break;
             case (self::EVENT_MODE_ALL):
-                return Yii::t('ExternalCalendarModule.model_calendar', 'Synchronize all events');
+                return Yii::t('ExternalCalendarModule.view', 'Synchronize all events');
                 break;
             default:
                 return;

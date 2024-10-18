@@ -162,17 +162,17 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'ID'),
-            'uid' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'UID'),
-            'calendar_id' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'Calendar'),
-            'title' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'Title'),
-            'description' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'Description'),
-            'location' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'Location'),
-            'last_modified' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'Last Modified'),
-            'dtstamp' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'DT Stamp'),
-            'start_datetime' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'Start Datetime'),
-            'end_datetime' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'End Datetime'),
-            'all_day' => Yii::t('ExternalCalendarModule.model_calendar_entry', 'All Day'),
+            'id' => Yii::t('ExternalCalendarModule.view', 'ID'),
+            'uid' => Yii::t('ExternalCalendarModule.view', 'UID'),
+            'calendar_id' => Yii::t('ExternalCalendarModule.view', 'Calendar'),
+            'title' => Yii::t('ExternalCalendarModule.view', 'Title'),
+            'description' => Yii::t('ExternalCalendarModule.view', 'Description'),
+            'location' => Yii::t('ExternalCalendarModule.view', 'Location'),
+            'last_modified' => Yii::t('ExternalCalendarModule.view', 'Last Modified'),
+            'dtstamp' => Yii::t('ExternalCalendarModule.view', 'DT Stamp'),
+            'start_datetime' => Yii::t('ExternalCalendarModule.view', 'Start Datetime'),
+            'end_datetime' => Yii::t('ExternalCalendarModule.view', 'End Datetime'),
+            'all_day' => Yii::t('ExternalCalendarModule.view', 'All Day'),
         ];
     }
 

@@ -81,16 +81,16 @@ class CalendarController extends ContentContainerController
         try {
             $calendarModel = $this->findModel($id);
             $calendarModel->sync();
-            return ModalClose::widget(['success' => Yii::t('ExternalCalendarModule.sync_result', 'Sync successfull!')]);
+            return ModalClose::widget(['success' => Yii::t('ExternalCalendarModule.view', 'Sync successfull!')]);
         } catch (InvalidValueException $e) {
             Yii::error($e);
-            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.sync_result', $e->getMessage())]);
+            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', $e->getMessage())]);
         } catch (NotFoundHttpException $e) {
             Yii::error($e);
-            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.sync_result', 'Calendar not found!')]);
+            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', 'Calendar not found!')]);
         } catch (\Exception $e) {
             Yii::error($e);
-            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.sync_result', 'An unknown error occured while synchronizing your calendar!')]);
+            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', 'An unknown error occured while synchronizing your calendar!')]);
         }
     }
 
@@ -109,13 +109,13 @@ class CalendarController extends ContentContainerController
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 (new ICalSync(['calendarModel' => $model, 'skipEvents' => true]))->syncICal();
                 if (!$model->hasErrors()) {
-                    $this->view->success(Yii::t('ExternalCalendarModule.results', 'Calendar successfully created!'));
+                    $this->view->success(Yii::t('ExternalCalendarModule.view', 'Calendar successfully created!'));
                     return $this->redirect($this->contentContainer->createUrl('view', ['id' => $model->id]));
                 }
             }
         } catch (\Exception $e) {
             Yii::warning($e);
-            $this->view->error(Yii::t('ExternalCalendarModule.results', 'Error while creating iCal File. Please check, if Url is correct and Internet connection of server is enabled.'));
+            $this->view->error(Yii::t('ExternalCalendarModule.view', 'Error while creating iCal File. Please check, if Url is correct and Internet connection of server is enabled.'));
         }
 
         return $this->render('edit', [
@@ -138,7 +138,7 @@ class CalendarController extends ContentContainerController
     public function actionDelete($id)
     {
         $this->findModel($id)->hardDelete();
-        $this->view->success(Yii::t('ExternalCalendarModule.results', 'Calendar successfully deleted!'));
+        $this->view->success(Yii::t('ExternalCalendarModule.view', 'Calendar successfully deleted!'));
         return $this->redirect($this->contentContainer->createUrl('index'));
     }
 
