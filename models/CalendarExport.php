@@ -57,7 +57,7 @@ class CalendarExport extends ActiveRecord
     public function validateSpaces()
     {
         if ($this->space_selection == static::SPACES_SELECTION && empty($this->spaceSelection)) {
-            $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.export', 'Please select at least one space.'));
+            $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.base', 'Please select at least one space.'));
             return;
         }
 
@@ -68,7 +68,7 @@ class CalendarExport extends ActiveRecord
         foreach ($this->spaceSelection as $guid) {
             $space = Space::findOne(['guid' => $guid]);
             if (!$space || !$space->isMember()) {
-                $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.export', 'Invalid space selection'));
+                $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.base', 'Invalid space selection'));
             }
         }
     }
@@ -152,11 +152,11 @@ class CalendarExport extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' =>  Yii::t('ExternalCalendarModule.export', 'Calendar export name'),
-            'include_profile' =>  Yii::t('ExternalCalendarModule.export', 'Profile'),
-            'filter_participating' => Yii::t('ExternalCalendarModule.export', 'Only include events I\'am participating'),
-            'filter_mine' => Yii::t('ExternalCalendarModule.export', 'Only include events I\'ve created'),
-            'filter_only_public' => Yii::t('ExternalCalendarModule.export', 'Only include public events'),
+            'name' =>  Yii::t('ExternalCalendarModule.base', 'Calendar export name'),
+            'include_profile' =>  Yii::t('ExternalCalendarModule.base', 'Profile'),
+            'filter_participating' => Yii::t('ExternalCalendarModule.base', 'Only include events I\'am participating'),
+            'filter_mine' => Yii::t('ExternalCalendarModule.base', 'Only include events I\'ve created'),
+            'filter_only_public' => Yii::t('ExternalCalendarModule.base', 'Only include public events'),
         ];
     }
 }

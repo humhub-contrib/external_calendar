@@ -44,12 +44,12 @@ class ManageEntry extends BasePermission
 
     public function getTitle()
     {
-        return Yii::t('ExternalCalendarModule.permissions', 'Manage external entries');
+        return Yii::t('ExternalCalendarModule.base', 'Manage external entries');
     }
 
     public function getDescription()
     {
-        return Yii::t('ExternalCalendarModule.permissions', 'Allows the user to edit/delete existing external calendar entries');
+        return Yii::t('ExternalCalendarModule.base', 'Allows the user to edit/delete existing external calendar entries');
     }
 
 

@@ -33,7 +33,7 @@ class ICalFileEvent extends Event implements ICalEventIF
     public function getTitle()
     {
         return empty($this->getSummary())
-            ? Yii::t('ExternalCalendarModule.model_calendar_entry', '(No Title)')
+            ? Yii::t('ExternalCalendarModule.view', '(No Title)')
             : $this->summary;
     }
 

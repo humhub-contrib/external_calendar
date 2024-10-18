@@ -35,7 +35,7 @@ $descriptionParser->enableNewlines = true;
 
         <?php if (!empty($description) || !empty($calendarEntry->location)) : ?>
             <div data-ui-show-more
-                 data-read-more-text="<?= Yii::t('ExternalCalendarModule.widgets', "Read full description...") ?>"
+                 data-read-more-text="<?= Yii::t('ExternalCalendarModule.view', "Read full description...") ?>"
                  style="overflow:hidden">
 
                 <p><?= $descriptionParser->parse($description) ?></p>

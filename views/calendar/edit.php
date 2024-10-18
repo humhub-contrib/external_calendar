@@ -10,8 +10,8 @@ use humhub\modules\calendar\widgets\ContainerConfigMenu;
 /* @var $contentContainer \humhub\modules\content\models\ContentContainer */
 
 $title = $model->isNewRecord
-    ? Yii::t('ExternalCalendarModule.views_calendar', 'Add external Calendar')
-    : Yii::t('ExternalCalendarModule.config', 'Edit Calendar  {title}', ['title' => Html::encode($this->title) ])
+    ? Yii::t('ExternalCalendarModule.view', 'Add external Calendar')
+    : Yii::t('ExternalCalendarModule.base', 'Edit Calendar  {title}', ['title' => Html::encode($this->title) ])
 ?>
 
 <div class="panel panel-default">

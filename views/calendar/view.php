@@ -27,11 +27,11 @@ $this->title = $model->title;
 
         <div class="clearfix">
             <h4>
-                <?= Yii::t('ExternalCalendarModule.config', 'Calendar  {title}', ['title' => Html::encode($this->title) ]); ?>
+                <?= Yii::t('ExternalCalendarModule.base', 'Calendar  {title}', ['title' => Html::encode($this->title) ]); ?>
             </h4>
 
             <div class="help-block">
-                <?= Yii::t('ExternalCalendarModule.config', 'In this view you can review and manually synchronize the calendar {title}.', ['title' => Html::encode($this->title) ]) ?>
+                <?= Yii::t('ExternalCalendarModule.base', 'In this view you can review and manually synchronize the calendar {title}.', ['title' => Html::encode($this->title) ]) ?>
             </div>
         </div>
 
@@ -54,7 +54,7 @@ $this->title = $model->title;
                 ]
             ); ?>
 
-            <?= ModalButton::primary(Yii::t('ExternalCalendarModule.views_calendar', 'Sync Calendar'))->load($contentContainer->createUrl('sync', ['id' => $model->id]))->loader(true)->icon('fa-refresh')->right(); ?>
+            <?= ModalButton::primary(Yii::t('ExternalCalendarModule.view', 'Sync Calendar'))->load($contentContainer->createUrl('sync', ['id' => $model->id]))->loader(true)->icon('fa-refresh')->right(); ?>
         </div>
 
         </br>
@@ -69,11 +69,11 @@ $this->title = $model->title;
 //                    'sync_mode',
 //                    'event_mode',
                     [
-                        'label' => Yii::t('ExternalCalendarModule.model_calendar', 'Synchronization Mode'),
+                        'label' => Yii::t('ExternalCalendarModule.view', 'Synchronization Mode'),
                         'value' => $model->getSyncMode(),
                     ],
                     [
-                        'label' => Yii::t('ExternalCalendarModule.model_calendar', 'Event Mode'),
+                        'label' => Yii::t('ExternalCalendarModule.view', 'Event Mode'),
                         'value' => $model->getEventMode(),
                     ],
                     'time_zone',

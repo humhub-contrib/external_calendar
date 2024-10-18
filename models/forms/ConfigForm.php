@@ -60,8 +60,8 @@ class ConfigForm extends Model
     public function attributeLabels()
     {
         return [
-            'autopost_calendar' => Yii::t('ExternalCalendarModule.model_config', 'Post new calendar on stream'),
-            'autopost_entries' => Yii::t('ExternalCalendarModule.model_config', 'Post new entries on stream'),
+            'autopost_calendar' => Yii::t('ExternalCalendarModule.view', 'Post new calendar on stream'),
+            'autopost_entries' => Yii::t('ExternalCalendarModule.view', 'Post new entries on stream'),
         ];
     }
 

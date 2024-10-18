@@ -76,7 +76,7 @@ class ICalSync extends Model
         $this->ical = $this->fetchICal($this->calendarModel->url);
 
         if (!$this->ical) {
-            throw new InvalidValueException(Yii::t('ExternalCalendarModule.sync_result', 'Error while creating ical... Check if link is reachable.'));
+            throw new InvalidValueException(Yii::t('ExternalCalendarModule.view', 'Error while creating ical... Check if link is reachable.'));
         }
 
         $this->setupSearchRange();

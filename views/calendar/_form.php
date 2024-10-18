@@ -24,7 +24,7 @@ if (!isset($model->color) && isset($contentContainer->color)) {
     <?= $form->errorSummary($model) ?>
 
     <div id="event-color-field" class="form-group space-color-chooser-edit" style="margin-top: 5px;">
-        <?= $form->field($model, 'color')->widget(ColorPicker::class, ['container' => 'event-color-field'])->label(Yii::t('ExternalCalendarModule.views_calendar', 'Title and Color')); ?>
+        <?= $form->field($model, 'color')->widget(ColorPicker::class, ['container' => 'event-color-field'])->label(Yii::t('ExternalCalendarModule.view', 'Title and Color')); ?>
 
         <?= $form->field($model, 'title', ['template' => '
                                     {label}
@@ -35,11 +35,11 @@ if (!isset($model->color) && isset($contentContainer->color)) {
                                         {input}
                                     </div>
                                     {error}{hint}'
-        ])->textInput(['placeholder' => Yii::t('ExternalCalendarModule.model_calendar', 'Title')])->label(false) ?>
+        ])->textInput(['placeholder' => Yii::t('ExternalCalendarModule.view', 'Title')])->label(false) ?>
 
     </div>
 
-    <?= $form->field($model, 'url')->textarea(['rows' => 6, 'placeholder' => Yii::t('ExternalCalendarModule.model_calendar', 'e.g. https://calendar.google.com/calendar/ical/...')]) ?>
+    <?= $form->field($model, 'url')->textarea(['rows' => 6, 'placeholder' => Yii::t('ExternalCalendarModule.view', 'e.g. https://calendar.google.com/calendar/ical/...')]) ?>
 
 
     <?= $form->field($model, 'public')->widget(ContentVisibilitySelect::class) ?>

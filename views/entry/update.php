@@ -9,7 +9,7 @@ use humhub\widgets\ModalButton;
 /* @var $editUrl string */
 /* @var $contentContainer \humhub\modules\content\models\ContentContainer */
 
-$header = Yii::t('ExternalCalendarModule.views_entry', 'Update {modelClass}: ', [
+$header = Yii::t('ExternalCalendarModule.view', 'Update {modelClass}: ', [
         'modelClass' => Yii::t('ExternalCalendarModule.base', 'External Calendar Entry')
     ]) . $model->title;
 $model->calendar->color = empty($model->calendar->color) ? $this->theme->variable('info') : $model->calendar->color;

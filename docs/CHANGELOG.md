@@ -10,6 +10,7 @@ Changelog
 - Fix #78: Remove module name translation
 - Enh #79: Replace theme variables with CSS variables
 - Enh #81: Use PHP CS Fixer
+- Enh #82: Reduce translation message categories
 
 1.4.2 (January 19, 2023)
 -----------------------

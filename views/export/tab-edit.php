@@ -25,12 +25,12 @@ $saveButtonLabel = $model->isNewRecord ? Yii::t('ExternalCalendarModule.base', '
             <div class="row">
                 <div class="col-sm-4">
                     <strong>
-                        <?= Yii::t('ExternalCalendarModule.export', 'Include events from:'); ?>
+                        <?= Yii::t('ExternalCalendarModule.base', 'Include events from:'); ?>
                     </strong>
                 </div>
                 <div class="col-sm-4">
                     <strong>
-                        <?= Yii::t('ExternalCalendarModule.export', 'Additional filters:'); ?>
+                        <?= Yii::t('ExternalCalendarModule.base', 'Additional filters:'); ?>
                     </strong>
                 </div>
             </div>
@@ -41,9 +41,9 @@ $saveButtonLabel = $model->isNewRecord ? Yii::t('ExternalCalendarModule.base', '
                 <div class="col-sm-4 ">
                     <?= $form->field($model, 'include_profile')->checkbox() ?>
                     <?= $form->field($model, 'space_selection')->radioList([
-                        CalendarExport::SPACES_NONE => Yii::t('ExternalCalendarModule.export', 'No spaces'),
-                        CalendarExport::SPACES_ALL => Yii::t('ExternalCalendarModule.export', 'All my spaces'),
-                        CalendarExport::SPACES_SELECTION => Yii::t('ExternalCalendarModule.export', 'Only following spaces:'),
+                        CalendarExport::SPACES_NONE => Yii::t('ExternalCalendarModule.base', 'No spaces'),
+                        CalendarExport::SPACES_ALL => Yii::t('ExternalCalendarModule.base', 'All my spaces'),
+                        CalendarExport::SPACES_SELECTION => Yii::t('ExternalCalendarModule.base', 'Only following spaces:'),
                     ], ['separator'=> '<br>']); ?>
 
                     <?= $form->field($model, 'spaceSelection')->widget(SpacePickerField::class,
