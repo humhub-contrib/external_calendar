@@ -11,6 +11,7 @@ Changelog
 - Enh #79: Replace theme variables with CSS variables
 - Enh #81: Use PHP CS Fixer
 - Enh #82: Reduce translation message categories
+- Enh #83: Add Space::USERGROUP_GUEST to fixed permissions
 
 1.4.2 (January 19, 2023)
 -----------------------
