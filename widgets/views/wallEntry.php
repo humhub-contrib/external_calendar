@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $calendarEntry \humhub\modules\external_calendar\models\ExternalCalendarEntry */
 /* @var $stream boolean */
 
-$color = $calendarEntry->calendar->color ?: $this->theme->variable('info');
+$color = $calendarEntry->calendar->color ?: 'var(--info)';
 
 $description = $calendarEntry->description;
 
@@ -35,7 +35,7 @@ $descriptionParser->enableNewlines = true;
 
         <?php if (!empty($description) || !empty($calendarEntry->location)) : ?>
             <div data-ui-show-more
-                 data-read-more-text="<?= Yii::t('ExternalCalendarModule.widgets', "Read full description...") ?>"
+                 data-read-more-text="<?= Yii::t('ExternalCalendarModule.view', "Read full description...") ?>"
                  style="overflow:hidden">
 
                 <p><?= $descriptionParser->parse($description) ?></p>

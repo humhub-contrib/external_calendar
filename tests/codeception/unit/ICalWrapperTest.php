@@ -34,12 +34,14 @@ class ICalWrapperTest extends ExternalCalendarTest
         $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20191212', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20191212', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertCount(2, $events);
 
         $recurringEvents = $cal->getRecurringEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20191212', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20191212', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertCount(2, $recurringEvents);
     }
 
@@ -53,7 +55,8 @@ class ICalWrapperTest extends ExternalCalendarTest
         $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190801', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20190912', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20190912', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertCount(1, $events);
         $this->assertEquals('7g0ngjre9a849s5d2sqc6k568o@google.com', $events[0]->uid);
 
@@ -72,7 +75,8 @@ class ICalWrapperTest extends ExternalCalendarTest
         $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/recurrence1Split.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertCount(1, $events);
         $this->assertEquals('chhm8cr474q34b9mc9j6ab9k71hmab9p68r36bb3ccpjgp9i6di6achi60@google.com', $events[0]->uid);
 
@@ -91,7 +95,8 @@ class ICalWrapperTest extends ExternalCalendarTest
         $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/twoIndependentRecurrences.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertCount(1, $events);
         $this->assertEquals('chhm8cr474q34b9mc9j6ab9k71hmab9p68r36bb3ccpjgp9i6di6achi60x@google.com', $events[0]->uid);
 
@@ -99,7 +104,8 @@ class ICalWrapperTest extends ExternalCalendarTest
 
         $recurringEvents = $cal->getRecurringEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertCount(2, $recurringEvents);
         $this->assertEquals('7g0ngjre9a849s5d2sqc6k568ox@google.com', $recurringEvents[0]->uid);
         $this->assertEquals('chhm8cr474q34b9mc9j6ab9k71hmab9p68r36bb3ccpjgp9i6di6achi60x@google.com', $recurringEvents[1]->uid);
@@ -111,7 +117,8 @@ class ICalWrapperTest extends ExternalCalendarTest
         $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/twoIndependentRecurrences.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20191003', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20191005', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertEquals('chhm8cr474q34b9mc9j6ab9k71hmab9p68r36bb3ccpjgp9i6di6achi60x@google.com', $events[0]->getUid());
         $this->assertTrue($events[0]->isAllDay());
     }
@@ -121,7 +128,8 @@ class ICalWrapperTest extends ExternalCalendarTest
         $cal = new ICalFile(Yii::getAlias('@external_calendar/tests/codeception/data/test1WithTime.ics'));
         $events = $cal->getEventsFromRange(
             DateTime::createFromFormat('!Ymd', '20190816', new \DateTimeZone('Europe/Berlin')),
-            DateTime::createFromFormat('!Ymd', '20190817', new \DateTimeZone('Europe/Berlin')));
+            DateTime::createFromFormat('!Ymd', '20190817', new \DateTimeZone('Europe/Berlin')),
+        );
         $this->assertEquals('xxxxxxxxxxxxxx@google.com', $events[0]->getUid());
 
         // Y-m-d H:i:s

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 use humhub\components\ActiveRecord;
 use humhub\modules\space\models\Membership;
@@ -23,13 +21,14 @@ class CalendarExportSpaces extends ActiveRecord
     public static function getCalendarMemberSpaces($keyword = null)
     {
         $calendarMemberSpaceQuery = Membership::getUserSpaceQuery(Yii::$app->user->identity);
-        $calendarMemberSpaceQuery->leftJoin('contentcontainer_module',
+        $calendarMemberSpaceQuery->leftJoin(
+            'contentcontainer_module',
             'contentcontainer_module.module_id = :calendar AND contentcontainer_module.contentcontainer_id = space.contentcontainer_id',
-            [':calendar' => 'calendar']
+            [':calendar' => 'calendar'],
         );
         $calendarMemberSpaceQuery->andWhere('contentcontainer_module.module_id IS NOT NULL');
 
-        if($keyword) {
+        if ($keyword) {
             $calendarMemberSpaceQuery->andWhere(['LIKE', 'space.name', $keyword]);
         }
 

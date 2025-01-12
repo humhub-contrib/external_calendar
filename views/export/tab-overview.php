@@ -27,16 +27,16 @@ $dataProvider = new ActiveDataProvider([
 
             [
                 'attribute' => 'name',
-                'label' => Yii::t('ExternalCalendarModule.export', 'Name'),
+                'label' => Yii::t('ExternalCalendarModule.base', 'Name'),
             ],
             [
                 'class' => '\yii\grid\DataColumn',
                 'format' => 'raw',
-                'label' =>  Yii::t('ExternalCalendarModule.export', 'Url'),
+                'label' =>  Yii::t('ExternalCalendarModule.base', 'Url'),
                 'value' => function($model) {
                     /* @var $model CalendarExport */
                     $id = 'external_calendar_url_'.$model->id;
-                    $copyLink = Link::withAction(Yii::t('ExternalCalendarModule.export', 'Copy to clipboard'), 'copyToClipboard', null, '#'.$id)->icon('fa-clipboard')->style('color:#777');
+                    $copyLink = Link::withAction(Yii::t('ExternalCalendarModule.base', 'Copy to clipboard'), 'copyToClipboard', null, '#'.$id)->icon('fa-clipboard')->style('color:#777');
                     $copyLink = '<p class="help-block pull-right">'.$copyLink.'</p>';
                     return Html::textarea(null, $model->getExportUrl(), ['id' => $id, 'disabled' => true, 'class' => 'form-control', 'rows' => 3]).$copyLink;
                 }
@@ -47,13 +47,13 @@ $dataProvider = new ActiveDataProvider([
                 'modelIdAttribute' => 'token',
                 'actions' => function ($model, $key) {
                     return [
-                        Yii::t('ExternalCalendarModule.export', 'Download') => ['export', 'linkOptions' => ['data-pjax-prevent' => 1]],
-                        Yii::t('ExternalCalendarModule.export', 'Edit') =>
+                        Yii::t('ExternalCalendarModule.base', 'Download') => ['export', 'linkOptions' => ['data-pjax-prevent' => 1]],
+                        Yii::t('ExternalCalendarModule.base', 'Edit') =>
                             ['edit', 'linkOptions' => [
                                 'data-action-click' => 'ui.modal.load',
                                 'data-action-url' => Url::to(['/external_calendar/export/edit', 'id' => $key]),
                             ]],
-                        Yii::t('ExternalCalendarModule.export', 'Delete') => ['edit', 'linkOptions' => [
+                        Yii::t('ExternalCalendarModule.base', 'Delete') => ['edit', 'linkOptions' => [
                             'data-action-click' => 'ui.modal.post',
                             'data-action-url' => Url::to(['/external_calendar/export/delete', 'id' => $key]),
                             'data-action-confirm' => true

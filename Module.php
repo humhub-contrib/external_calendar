@@ -66,22 +66,6 @@ class Module extends ContentContainerModule
     /**
      * @inheritdoc
      */
-    public function getName()
-    {
-        return Yii::t('ExternalCalendarModule.base', 'External Calendar');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDescription()
-    {
-        return Yii::t('ExternalCalendarModule.base', 'Extends the Calendar-Module to show external calendars with iCal');
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getContentContainerName(ContentContainerActiveRecord $container)
     {
         return Yii::t('ExternalCalendarModule.base', 'External Calendar');

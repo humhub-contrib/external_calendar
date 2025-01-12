@@ -14,17 +14,17 @@ class WallEntryCalendar extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-   public $editRoute = "/external_calendar/calendar/edit";
+    public $editRoute = "/external_calendar/calendar/edit";
 
     /**
      * @inheritdoc
      */
-   public $editMode = self::EDIT_MODE_NEW_WINDOW;
+    public $editMode = self::EDIT_MODE_NEW_WINDOW;
 
     /**
      * @var ExternalCalendar
      */
-   public $model;
+    public $model;
 
     /**
      * @return string returns the content type specific part of this wall entry (e.g. post content)
@@ -34,7 +34,7 @@ class WallEntryCalendar extends WallStreamModuleEntryWidget
         Assets::register($this->getView());
 
         return $this->render('wallEntryCalendar', [
-            'calendar' => $this->model
+            'calendar' => $this->model,
         ]);
     }
 

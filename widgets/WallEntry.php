@@ -47,7 +47,7 @@ class WallEntry extends WallStreamModuleEntryWidget
 
         return $this->render('wallEntry', [
             'calendarEntry' => $entry,
-            'contentContainer' => $entry->content->container
+            'contentContainer' => $entry->content->container,
         ]);
     }
 

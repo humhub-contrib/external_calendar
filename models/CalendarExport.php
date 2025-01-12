@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\external_calendar\models;
-
 
 use humhub\modules\calendar\interfaces\AbstractCalendarQuery;
 use humhub\modules\space\models\Membership;
@@ -18,17 +16,17 @@ use yii\helpers\Url;
  * @property int $user_id
  * @property string $name
  * @property string $token
- * @property boolean $filter_participating
- * @property boolean $filter_mine
- * @property boolean $filter_only_public
- * @property boolean $include_profile
+ * @property bool $filter_participating
+ * @property bool $filter_mine
+ * @property bool $filter_only_public
+ * @property bool $include_profile
  * @property int $space_selection
  */
 class CalendarExport extends ActiveRecord
 {
-    const SPACES_NONE = 0;
-    const SPACES_ALL = 1;
-    const SPACES_SELECTION = 2;
+    public const SPACES_NONE = 0;
+    public const SPACES_ALL = 1;
+    public const SPACES_SELECTION = 2;
 
     public $spaceSelection = [];
 
@@ -58,19 +56,19 @@ class CalendarExport extends ActiveRecord
 
     public function validateSpaces()
     {
-        if($this->space_selection == static::SPACES_SELECTION && empty($this->spaceSelection)) {
-            $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.export','Please select at least one space.'));
+        if ($this->space_selection == static::SPACES_SELECTION && empty($this->spaceSelection)) {
+            $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.base', 'Please select at least one space.'));
             return;
         }
 
-        if(empty($this->spaceSelection)) {
+        if (empty($this->spaceSelection)) {
             return;
         }
 
         foreach ($this->spaceSelection as $guid) {
             $space = Space::findOne(['guid' => $guid]);
-            if(!$space || !$space->isMember()) {
-                $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.export','Invalid space selection'));
+            if (!$space || !$space->isMember()) {
+                $this->addError('spaceSelection', Yii::t('ExternalCalendarModule.base', 'Invalid space selection'));
             }
         }
     }
@@ -79,7 +77,7 @@ class CalendarExport extends ActiveRecord
     {
         CalendarExportSpaces::deleteAll(['calendar_export_id' => $this->id]);
 
-        if($this->space_selection == static::SPACES_SELECTION && !empty($this->spaceSelection)) {
+        if ($this->space_selection == static::SPACES_SELECTION && !empty($this->spaceSelection)) {
             foreach ($this->spaceSelection as $guid) {
                 $space = Space::findOne(['guid' => $guid]);
                 (new CalendarExportSpaces(['calendar_export_id' => $this->id, 'space_id' => $space->id]))->save();
@@ -90,11 +88,11 @@ class CalendarExport extends ActiveRecord
     public function getFilterArray()
     {
         $result = [];
-        if($this->filter_participating) {
+        if ($this->filter_participating) {
             $result[] = AbstractCalendarQuery::FILTER_PARTICIPATE;
         }
 
-        if($this->filter_mine) {
+        if ($this->filter_mine) {
             $result[] = AbstractCalendarQuery::FILTER_MINE;
         }
 
@@ -104,13 +102,13 @@ class CalendarExport extends ActiveRecord
     public function getContainers()
     {
         $result = [];
-        if($this->include_profile) {
+        if ($this->include_profile) {
             $result[] = $this->user;
         }
 
-        if($this->space_selection === static::SPACES_ALL) {
+        if ($this->space_selection === static::SPACES_ALL) {
             $result = array_merge($result, Membership::getUserSpaceQuery($this->user)->all());
-        } else if($this->space_selection === static::SPACES_SELECTION) {
+        } elseif ($this->space_selection === static::SPACES_SELECTION) {
             $result =  array_merge($result, $this->spaces);
         }
 
@@ -129,7 +127,7 @@ class CalendarExport extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if(empty($this->token)) {
+        if (empty($this->token)) {
             $this->token = CalendarEntry::createUUid('calendar');
         }
 
@@ -154,11 +152,11 @@ class CalendarExport extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' =>  Yii::t('ExternalCalendarModule.export', 'Calendar export name'),
-            'include_profile' =>  Yii::t('ExternalCalendarModule.export', 'Profile'),
-            'filter_participating' => Yii::t('ExternalCalendarModule.export', 'Only include events I\'am participating'),
-            'filter_mine' => Yii::t('ExternalCalendarModule.export', 'Only include events I\'ve created'),
-            'filter_only_public' => Yii::t('ExternalCalendarModule.export', 'Only include public events')
+            'name' =>  Yii::t('ExternalCalendarModule.base', 'Calendar export name'),
+            'include_profile' =>  Yii::t('ExternalCalendarModule.base', 'Profile'),
+            'filter_participating' => Yii::t('ExternalCalendarModule.base', 'Only include events I\'am participating'),
+            'filter_mine' => Yii::t('ExternalCalendarModule.base', 'Only include events I\'ve created'),
+            'filter_only_public' => Yii::t('ExternalCalendarModule.base', 'Only include public events'),
         ];
     }
 }

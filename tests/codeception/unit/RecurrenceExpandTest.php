@@ -13,7 +13,6 @@ use external_calendar\ExternalCalendarTest;
 use humhub\modules\external_calendar\models\ICalExpand;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
 
-
 /**
  * Created by PhpStorm.
  * User: buddha
@@ -51,7 +50,7 @@ class RecurrenceExpandTest extends ExternalCalendarTest
         $recurrence = ICalExpand::expandSingle($recurrenceEvent, '20190808');
         $this->assertNotNull($recurrence->id);
 
-        $recurrenceLoad = ICalExpand::expand($recurrenceEvent, DateTime::createFromFormat(CalendarUtils::ICAL_DATE_FORMAT, '20190808'),DateTime::createFromFormat(CalendarUtils::ICAL_DATE_FORMAT, '20190908'));
+        $recurrenceLoad = ICalExpand::expand($recurrenceEvent, DateTime::createFromFormat(CalendarUtils::ICAL_DATE_FORMAT, '20190808'), DateTime::createFromFormat(CalendarUtils::ICAL_DATE_FORMAT, '20190908'));
         $this->assertEquals($recurrenceLoad[0]->id, $recurrence->id);
     }
 

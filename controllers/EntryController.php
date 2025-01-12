@@ -18,7 +18,6 @@ use yii\web\NotFoundHttpException;
  */
 class EntryController extends ContentContainerController
 {
-
     /**
      * @inheritdoc
      */
@@ -30,13 +29,13 @@ class EntryController extends ContentContainerController
     protected function getAccessRules()
     {
         return[
-            ['permission' => ManageEntry::class, 'actions' => ['update']]
+            ['permission' => ManageEntry::class, 'actions' => ['update']],
         ];
     }
 
     /**
      * Displays a single ExternalCalendarEntry model.
-     * @param integer $id
+     * @param int $id
      * @param null $cal
      * @return mixed
      * @throws HttpException
@@ -81,13 +80,13 @@ class EntryController extends ContentContainerController
         $recurrenceRoot = $this->getCalendarEntry($parent_id);
         $recurrence = $recurrenceRoot->getRecurrenceInstance($recurrence_id);
 
-        if($recurrence) {
+        if ($recurrence) {
             return $this->renderEntry($recurrence, $cal);
         }
 
         $recurrence = ICalExpand::expandSingle($recurrenceRoot, $recurrence_id);
 
-        if(!$recurrence) {
+        if (!$recurrence) {
             throw new NotFoundHttpException();
         }
 
@@ -97,7 +96,7 @@ class EntryController extends ContentContainerController
     /**
      * Updates an existing ExternalCalendarEntry model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @param null $cal
      * @return mixed
      * @throws HttpException
@@ -139,7 +138,7 @@ class EntryController extends ContentContainerController
     {
         $entry = ExternalCalendarEntry::find()->contentContainer($this->contentContainer)->readable()->where(['external_calendar_entry.id' => $id])->one();
 
-        if(!$entry) {
+        if (!$entry) {
             throw new NotFoundHttpException();
         }
 

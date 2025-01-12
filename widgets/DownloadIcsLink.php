@@ -12,14 +12,12 @@ use humhub\libs\Html;
 use humhub\modules\external_calendar\models\ExternalCalendarEntry;
 use Yii;
 
-
 /**
  * Class DownloadIcsLink
  * @package humhub\modules\external_calendar\widgets
  */
 class DownloadIcsLink extends Widget
 {
-
     /**
      * @var ExternalCalendarEntry
      */

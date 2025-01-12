@@ -18,7 +18,7 @@ use humhub\widgets\Button;
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h1><?= Yii::t('ExternalCalendarModule.views_admin', 'Calendar Extension Configuration') ?></h1>
+        <h1><?= Yii::t('ExternalCalendarModule.view', 'Calendar Extension Configuration') ?></h1>
     </div>
 
     <div class="panel-body">
@@ -29,8 +29,8 @@ use humhub\widgets\Button;
 
             <hr>
 
-            <?= Html::submitButton(Yii::t('ExternalCalendarModule.views_admin', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
-            <?= Button::defaultType(Yii::t('ExternalCalendarModule.views_admin', 'Back to modules'))->link(Url::to(['/admin/module']))->loader(false); ?>
+            <?= Html::submitButton(Yii::t('ExternalCalendarModule.view', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
+            <?= Button::defaultType(Yii::t('ExternalCalendarModule.view', 'Back to modules'))->link(Url::to(['/admin/module']))->loader(false); ?>
 
         <?php ActiveForm::end(); ?>
     </div>
