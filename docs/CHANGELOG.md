@@ -1,8 +1,9 @@
 Changelog
 =========
 
-1.4.3 (Unreleased)
+1.5.0 (January 12, 2025)
 ------------------------
+- Fix #77: Update module resources path
 - Enh #68: Make URL locations clickable
 - Enh #69: Add `requirements.php`
 - Fix #71: After module disabling, Content for ExternalCalendarEntry are not deleted
@@ -12,7 +13,7 @@ Changelog
 - Enh #81: Use PHP CS Fixer
 - Enh #82: Reduce translation message categories
 
-1.4.2 (January 19, 2023)
+1.4.2 (January 19, 2024)
 -----------------------
 - Enh #57: Tests for `next` version
 - Fix #58: Fix visibility of the method `Controller::getAccessRules()`

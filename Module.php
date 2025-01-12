@@ -17,10 +17,6 @@ class Module extends ContentContainerModule
     public $exportFileName = 'base.ics';
     public $exportFileMime = 'text/calendar';
     public $autoSaveExpansions = false;
-    /**
-     * @inheritdoc
-     */
-    public $resourcesPath = 'resources';
 
     /**
      * @inheritdoc
