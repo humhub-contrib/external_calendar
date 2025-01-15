@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.5.1 (Unreleased)
+1.5.1 (January 15, 2025)
 ------------------------
 - Fix #89: Delete old events on sync by cron
+- Enh #83: Add Space::USERGROUP_GUEST to fixed permissions
 
 1.5.0 (January 12, 2025)
 ------------------------
@@ -16,7 +17,6 @@ Changelog
 - Enh #79: Replace theme variables with CSS variables
 - Enh #81: Use PHP CS Fixer
 - Enh #82: Reduce translation message categories
-- Enh #83: Add Space::USERGROUP_GUEST to fixed permissions
 
 1.4.2 (January 19, 2024)
 -----------------------
