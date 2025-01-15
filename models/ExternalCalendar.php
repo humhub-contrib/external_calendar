@@ -345,6 +345,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public function getRecurringEventRoots()
     {
         return $this->getEntries(false)
+            ->readable()
             ->andWhere('external_calendar_entry.rrule IS NOT NULL')->all();
     }
 
@@ -356,7 +357,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
             $query->andWhere('external_calendar_entry.parent_event_id IS NULL');
         }
 
-        return $query->readable();
+        return $query;
     }
 
     public function addAttributes(ICal $ical)

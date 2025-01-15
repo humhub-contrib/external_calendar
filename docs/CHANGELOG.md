@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.5.1 (Unreleased)
+------------------------
+- Fix #89: Delete old events on sync by cron
+
 1.5.0 (January 12, 2025)
 ------------------------
 - Fix #77: Update module resources path
