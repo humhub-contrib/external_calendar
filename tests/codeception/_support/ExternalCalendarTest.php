@@ -54,7 +54,7 @@ class ExternalCalendarTest extends HumHubDbTestCase
     {
         $this->assertEquals($visibility, $calendar->content->visibility);
 
-        foreach ($calendar->getEntries()->all() as $entry) {
+        foreach ($calendar->getEntries()->readable()->all() as $entry) {
             $this->assertEquals($visibility, $entry->content->visibility);
         }
     }
