@@ -34,10 +34,10 @@ class ManageEntry extends BasePermission
      */
     protected $fixedGroups = [
         Space::USERGROUP_USER,
+        Space::USERGROUP_GUEST,
         User::USERGROUP_FRIEND,
         User::USERGROUP_GUEST,
         User::USERGROUP_USER,
-        User::USERGROUP_FRIEND,
     ];
 
 
