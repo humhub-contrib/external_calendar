@@ -26,6 +26,7 @@ use humhub\widgets\Button;
 
             <?= $form->field($model, 'autopost_calendar')->checkbox(); ?>
             <?= $form->field($model, 'autopost_entries')->checkbox(); ?>
+            <?= $form->field($model, 'legacy_mode')->checkbox(); ?>
 
             <hr>
 

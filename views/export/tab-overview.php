@@ -16,7 +16,9 @@ $dataProvider = new ActiveDataProvider([
 
 ?>
 <div class="modal-body">
-
+    <div class="help-block">
+        <?= Yii::t('ExternalCalendarModule.base', 'As part of recent updates, the "External Calendar" module has been revised, and the calendar export functionality has been migrated to the "Calendar" module. While the legacy export method will remain temporarily available during the transition phase, it will be deprecated soon. We recommend switching to the new export feature provided by the "Calendar" module as soon as possible.') ?>
+    </div>
     <div class="external-calendar-overview">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -48,11 +50,6 @@ $dataProvider = new ActiveDataProvider([
                 'actions' => function ($model, $key) {
                     return [
                         Yii::t('ExternalCalendarModule.base', 'Download') => ['export', 'linkOptions' => ['data-pjax-prevent' => 1]],
-                        Yii::t('ExternalCalendarModule.base', 'Edit') =>
-                            ['edit', 'linkOptions' => [
-                                'data-action-click' => 'ui.modal.load',
-                                'data-action-url' => Url::to(['/external_calendar/export/edit', 'id' => $key]),
-                            ]],
                         Yii::t('ExternalCalendarModule.base', 'Delete') => ['edit', 'linkOptions' => [
                             'data-action-click' => 'ui.modal.post',
                             'data-action-url' => Url::to(['/external_calendar/export/delete', 'id' => $key]),

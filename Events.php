@@ -6,6 +6,7 @@ use humhub\modules\calendar\widgets\CalendarControls;
 use humhub\modules\calendar\widgets\ContainerConfigMenu;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\helpers\ContentContainerHelper;
+use humhub\modules\external_calendar\models\forms\ConfigForm;
 use humhub\modules\external_calendar\permissions\ManageEntry;
 use humhub\modules\external_calendar\widgets\ExportButton;
 use Yii;
@@ -105,12 +106,14 @@ class Events extends BaseObject
      */
     public static function onCalendarControlsInit($event)
     {
-        try {
-            /* @var $controls CalendarControls */
-            $controls = $event->sender;
-            $controls->addWidget(ExportButton::class, ['container' => $controls->container], ['sortOrder' => 50]);
-        } catch (\Throwable $e) {
-            Yii::error($e);
+        if (ConfigForm::instantiate()->legacy_mode) {
+            try {
+                /* @var $controls CalendarControls */
+                $controls = $event->sender;
+                $controls->addWidget(ExportButton::class, ['container' => $controls->container], ['sortOrder' => 50]);
+            } catch (\Throwable $e) {
+                Yii::error($e);
+            }
         }
     }
 

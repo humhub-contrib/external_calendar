@@ -60,23 +60,9 @@ class ExportController extends Controller
         return Yii::$app->response->sendContentAsFile($ics, $module->exportFileName, ['mimeType' => $module->exportFileMime]);
     }
 
-    public function actionEdit($id = null)
+    public function actionEdit()
     {
-        if (empty($id)) {
-            $model = new CalendarExport(['user_id' => Yii::$app->user->id]);
-        } else {
-            $model = CalendarExport::findOne(['id' => $id, 'user_id' => Yii::$app->user->id]);
-        }
-
-        if (!$model) {
-            throw new HttpException(404);
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->renderAjax('config', ['model' => new CalendarExport(), 'showOverview' => true]);
-        }
-
-        return $this->renderAjax('config', ['model' => $model, 'showOverview' => false]);
+        return $this->renderAjax('config');
     }
 
     public function actionDelete($id)
@@ -91,17 +77,7 @@ class ExportController extends Controller
 
         $model->delete();
 
-        return $this->renderAjax('config', ['model' => new CalendarExport(['user_id' => Yii::$app->user->id]), 'showOverview' => true]);
-    }
-
-    public function actionSearchSpace($keyword)
-    {
-        $result = [];
-        foreach (CalendarExportSpaces::getCalendarMemberSpaces($keyword) as $space) {
-            $result[] = Chooser::getSpaceResult($space);
-        }
-
-        return $this->asJson($result);
+        return $this->renderAjax('config');
     }
 
 }
