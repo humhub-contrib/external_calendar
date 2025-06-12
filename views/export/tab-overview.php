@@ -16,7 +16,7 @@ $dataProvider = new ActiveDataProvider([
 
 ?>
 <div class="modal-body">
-    <div class="help-block">
+    <div class="alert alert-danger">
         <?= Yii::t('ExternalCalendarModule.base', 'As part of recent updates, the "External Calendar" module has been revised, and the calendar export functionality has been migrated to the "Calendar" module. While the legacy export method will remain temporarily available during the transition phase, it will be deprecated soon. We recommend switching to the new export feature provided by the "Calendar" module as soon as possible.') ?>
     </div>
     <div class="external-calendar-overview">
