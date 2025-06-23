@@ -41,7 +41,7 @@ class ConfigForm extends Model
         $settings = Yii::$app->getModule('external_calendar')->settings;
         $this->autopost_calendar = $settings->get('autopost_calendar', $this->autopost_calendar);
         $this->autopost_entries = $settings->get('autopost_entries', $this->autopost_entries);
-        $this->legacy_mode = $settings->get('legacy_mode',  CalendarExport::find()->where(['user_id' => Yii::$app->user->id])->exists());
+        $this->legacy_mode = $settings->get('legacy_mode', CalendarExport::find()->where(['user_id' => Yii::$app->user->id])->exists());
     }
 
     /**
