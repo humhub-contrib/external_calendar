@@ -1,9 +1,9 @@
 Changelog
 =========
 
-1.5.2 (Unreleased)
-------------------------
-- Enh #92: Reduce export functionality
+1.5.2 (June 23, 2025)
+---------------------
+- Enh #92: Marked export functionality as deprecated - use native Calendar module instead
 
 1.5.1 (January 15, 2025)
 ------------------------
