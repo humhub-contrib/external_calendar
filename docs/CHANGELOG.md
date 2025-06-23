@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.5.2 (Unreleased)
+------------------------
+- Enh #92: Reduce export functionality
+
 1.5.1 (January 15, 2025)
 ------------------------
 - Fix #89: Delete old events on sync by cron

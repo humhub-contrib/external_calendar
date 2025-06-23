@@ -2,6 +2,7 @@
 
 namespace humhub\modules\external_calendar\models\forms;
 
+use humhub\modules\external_calendar\models\CalendarExport;
 use Yii;
 use yii\base\Model;
 
@@ -23,6 +24,16 @@ class ConfigForm extends Model
     public $autopost_entries = true;
 
     /**
+     * @var bool
+     *
+     * As part of recent updates, the "External Calendar" module has been revised,
+     * and the calendar export functionality has been migrated to the "Calendar" module.
+     * While the legacy export method will remain temporarily available during the transition phase,
+     * it will be deprecated soon.
+     */
+    public $legacy_mode = false;
+
+    /**
      * @inheritdocs
      */
     public function init()
@@ -30,6 +41,7 @@ class ConfigForm extends Model
         $settings = Yii::$app->getModule('external_calendar')->settings;
         $this->autopost_calendar = $settings->get('autopost_calendar', $this->autopost_calendar);
         $this->autopost_entries = $settings->get('autopost_entries', $this->autopost_entries);
+        $this->legacy_mode = $settings->get('legacy_mode',  CalendarExport::find()->where(['user_id' => Yii::$app->user->id])->exists());
     }
 
     /**
@@ -48,7 +60,7 @@ class ConfigForm extends Model
     {
         return [
             [['autopost_calendar', 'autopost_entries'], 'required'],
-            [['autopost_calendar', 'autopost_entries'], 'boolean'],
+            [['autopost_calendar', 'autopost_entries', 'legacy_mode'], 'boolean'],
         ];
     }
 
@@ -62,6 +74,15 @@ class ConfigForm extends Model
         return [
             'autopost_calendar' => Yii::t('ExternalCalendarModule.view', 'Post new calendar on stream'),
             'autopost_entries' => Yii::t('ExternalCalendarModule.view', 'Post new entries on stream'),
+            'legacy_mode' => Yii::t('ExternalCalendarModule.view', 'Legacy Mode'),
+        ];
+    }
+
+
+    public function attributeHints()
+    {
+        return [
+            'legacy_mode' => Yii::t('ExternalCalendarModule.view', '(soon to be deprecated)'),
         ];
     }
 
@@ -77,6 +98,7 @@ class ConfigForm extends Model
         $settings = Yii::$app->getModule('external_calendar')->settings;
         $settings->set('autopost_calendar', $this->autopost_calendar);
         $settings->set('autopost_entries', $this->autopost_entries);
+        $settings->set('legacy_mode', $this->legacy_mode);
 
         return true;
 
