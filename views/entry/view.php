@@ -6,7 +6,7 @@ use humhub\modules\stream\assets\StreamAsset;
 
 /* @var $model ExternalCalendarEntry */
 ?>
-<?php StreamAsset::register($this); ?>
+<?php StreamAsset::register($this) ?>
 
 <div data-action-component="stream.SimpleStream">
     <?= StreamEntryWidget::renderStreamEntry($model) ?>

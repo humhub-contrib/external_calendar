@@ -5,34 +5,32 @@
  * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
  * @license https://www.humhub.com/licences
  */
-/* @var $this yii\web\View */
-/* @var $model \humhub\modules\external_calendar\models\forms\ConfigForm */
 
-use humhub\modules\ui\form\widgets\ActiveForm;
-use \yii\helpers\Html;
-use yii\helpers\Url;
-use humhub\widgets\Button;
+use humhub\modules\external_calendar\models\forms\ConfigForm;
+use humhub\widgets\bootstrap\Button;
+use humhub\widgets\form\ActiveForm;
 
+/* @var $model ConfigForm */
 ?>
-
 <div class="panel panel-default">
-
     <div class="panel-heading">
         <h1><?= Yii::t('ExternalCalendarModule.view', 'Calendar Extension Configuration') ?></h1>
     </div>
-
     <div class="panel-body">
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin() ?>
 
-            <?= $form->field($model, 'autopost_calendar')->checkbox(); ?>
-            <?= $form->field($model, 'autopost_entries')->checkbox(); ?>
-            <?= $form->field($model, 'legacy_mode')->checkbox(); ?>
+            <?= $form->field($model, 'autopost_calendar')->checkbox() ?>
+            <?= $form->field($model, 'autopost_entries')->checkbox() ?>
+            <?= $form->field($model, 'legacy_mode')->checkbox() ?>
 
             <hr>
 
-            <?= Html::submitButton(Yii::t('ExternalCalendarModule.view', 'Save'), ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
-            <?= Button::defaultType(Yii::t('ExternalCalendarModule.view', 'Back to modules'))->link(Url::to(['/admin/module']))->loader(false); ?>
+            <?= Button::save()->submit() ?>
+            <?= Button::light(Yii::t('ExternalCalendarModule.view', 'Back to modules'))
+                ->link(['/admin/module'])
+                ->right()
+                ->loader(false) ?>
 
-        <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end() ?>
     </div>
 </div>

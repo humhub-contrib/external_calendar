@@ -1,46 +1,33 @@
 <?php
 
-use cebe\markdown\GithubMarkdown;
+use humhub\helpers\Html;
+use humhub\modules\external_calendar\helpers\CalendarUtils;
 use humhub\modules\external_calendar\models\ExternalCalendar;
-use yii\helpers\Html;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $calendar ExternalCalendar */
-/* @var $stream boolean */
 
 $color = $calendar->color ?: 'var(--info)';
-
-$description = $calendar->description;
-
-if ($description) {
-    $config = \HTMLPurifier_Config::createDefault();
-    $description = \yii\helpers\HtmlPurifier::process($calendar->description, $config);
-}
-
-$descriptionParser = new GithubMarkdown();
-$descriptionParser->enableNewlines = true;
+$description = CalendarUtils::renderDescription($calendar->description);
 ?>
-<div class="media event">
-    <div class="y" style="padding-left:10px; border-left: 3px solid <?= Html::encode($color) ?>">
-        <div class="media-body clearfix">
-            <a href="<?= $calendar->getUrl(); ?>" class="pull-left" style="margin-right: 10px">
-                <i class="fa fa-calendar colorDefault" style="font-size: 35px;"></i>
+<div class="ps-2" style="border-left: 3px solid <?= Html::encode($color) ?>">
+    <div class="clearfix">
+        <a href="<?= $calendar->getUrl() ?>" class="float-start me-2">
+            <?= Icon::get('calendar')->style('font-size:35px')->class('text-light') ?>
+        </a>
+        <h4>
+            <a href="<?= $calendar->getUrl() ?>">
+                <?= Yii::t('ExternalCalendarModule.view', 'External Calendar: ') ?>
+                <b><?= Html::encode($calendar->title) ?></b>
             </a>
-            <h4 class="media-heading">
-                <a href="<?= $calendar->getUrl(); ?>">
-                    <?= Yii::t('ExternalCalendarModule.view', "External Calendar: "); ?>
-                    <b><?= Html::encode($calendar->title); ?></b>
-                </a>
-            </h4>
-            <h5>
-                <?= Yii::t('ExternalCalendarModule.view', 'A new Calendar has been added.'); ?>
-            </h5>
-        </div>
-        <?php if (!empty($description)) : ?>
-            <div data-ui-show-more
-                 data-read-more-text="<?= Yii::t('ExternalCalendarModule.view', "Read full description...") ?>"
-                 style="overflow:hidden">
-                <?= $descriptionParser->parse($description) ?>
-            </div>
-        <?php endif; ?>
+        </h4>
+        <h5>
+            <?= Yii::t('ExternalCalendarModule.view', 'A new Calendar has been added.') ?>
+        </h5>
     </div>
+    <?php if ($description !== '') : ?>
+        <div data-ui-show-more data-read-more-text="<?= Yii::t('ExternalCalendarModule.view', 'Read full description...') ?>">
+            <?= $description ?>
+        </div>
+    <?php endif ?>
 </div>

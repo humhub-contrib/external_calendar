@@ -2,9 +2,12 @@
 
 namespace humhub\modules\external_calendar\helpers;
 
-use Yii;
+use cebe\markdown\GithubMarkdown;
 use DateTime;
 use DateTimeZone;
+use HTMLPurifier_Config;
+use Yii;
+use yii\helpers\HtmlPurifier;
 
 /**
  * Description of CalendarUtils
@@ -104,5 +107,21 @@ class CalendarUtils
         }
 
         return $date->setTimezone(new DateTimeZone(Yii::$app->timeZone))->format(static::DB_DATE_FORMAT);
+    }
+
+    public static function renderDescription(?string $description): string
+    {
+        $description = trim($description ?? '');
+
+        if ($description !== '') {
+            $description = HtmlPurifier::process($description, HTMLPurifier_Config::createDefault());
+            if ($description !== '') {
+                $parser = new GithubMarkdown();
+                $parser->enableNewlines = true;
+                $description = $parser->parse($description);
+            }
+        }
+
+        return $description;
     }
 }

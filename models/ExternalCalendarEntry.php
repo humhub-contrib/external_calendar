@@ -2,22 +2,19 @@
 
 namespace humhub\modules\external_calendar\models;
 
-use Recurr\Rule;
-use Yii;
 use DateTime;
-use humhub\libs\DbDateValidator;
-use humhub\widgets\Label;
+use DateTimeZone;
+use humhub\helpers\Html;
 use humhub\modules\content\components\ContentActiveRecord;
+use humhub\modules\content\interfaces\Searchable;
 use humhub\modules\external_calendar\permissions\ManageEntry;
 use humhub\modules\external_calendar\widgets\WallEntry;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
-use DateTimeZone;
-use humhub\libs\Html;
-use humhub\widgets\Button;
-use humhub\modules\search\interfaces\Searchable;
-use ICal\Event;
 use humhub\modules\external_calendar\models\forms\ConfigForm;
-use humhub\modules\external_calendar\models\ICS;
+use humhub\widgets\bootstrap\Badge;
+use humhub\widgets\bootstrap\Link;
+use Recurr\Rule;
+use Yii;
 use yii\db\StaleObjectException as StaleObjectExceptionAlias;
 
 /**
@@ -115,7 +112,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
      */
     public function getIcon()
     {
-        return 'fa-calendar';
+        return 'calendar';
     }
 
     /**
@@ -271,7 +268,10 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             'viewUrl' => $viewUrl,
             'viewMode' => 'redirect',
             'openUrl' => $openUrl,
-            'badge' =>  Label::asColor($this->calendar->color, $this->getContentName())->icon('fa-calendar-o')->right(),
+            'badge' =>  Badge::none($this->getContentName())
+                ->icon('calendar-o')
+                ->cssBgColor($this->calendar->color)
+                ->right(),
         ];
     }
 
@@ -566,7 +566,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             filter_var($this->location, FILTER_VALIDATE_URL) !== false
             && strpos($this->location, 'https://') === 0 // restrict to secure URLs (and not HTTP, SSF, FTP, etc.)
         ) {
-            return Button::asLink($this->location)->link($this->location)->options(['target' => '_blank']);
+            return Link::asLink($this->location, $this->location)->blank();
         }
         return Html::encode($this->location);
     }

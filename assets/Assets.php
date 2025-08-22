@@ -20,10 +20,6 @@ class Assets extends AssetBundle
         'forceCopy' => false,
     ];
 
-    public $css = [
-        'css/humhub.external_calendar.css',
-    ];
-
     public $js = [
         'js/humhub.external_calendar.js',
     ];

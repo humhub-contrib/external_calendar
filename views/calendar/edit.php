@@ -1,33 +1,31 @@
 <?php
 
-use humhub\widgets\Button;
-use yii\helpers\Html;
+use humhub\helpers\Html;
+use humhub\modules\content\models\ContentContainer;
+use humhub\modules\external_calendar\models\ExternalCalendar;
 use humhub\modules\calendar\widgets\ContainerConfigMenu;
+use humhub\widgets\bootstrap\Button;
 
-
-/* @var $this yii\web\View */
-/* @var $model \humhub\modules\external_calendar\models\ExternalCalendar */
-/* @var $contentContainer \humhub\modules\content\models\ContentContainer */
-
-$title = $model->isNewRecord
-    ? Yii::t('ExternalCalendarModule.view', 'Add external Calendar')
-    : Yii::t('ExternalCalendarModule.base', 'Edit Calendar  {title}', ['title' => Html::encode($this->title) ])
+/* @var $model ExternalCalendar */
+/* @var $contentContainer ContentContainer */
 ?>
-
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-heading"><?= Yii::t('CalendarModule.config', '<strong>Calendar</strong> module configuration'); ?></div>
+        <div class="panel-heading">
+            <?= Yii::t('CalendarModule.config', '<strong>Calendar</strong> module configuration') ?>
+        </div>
     </div>
 
     <?= ContainerConfigMenu::widget() ?>
 
     <div class="panel-body">
         <div class="clearfix">
-
             <?= Button::back($contentContainer->createUrl('index'), Yii::t('ExternalCalendarModule.base', 'Back to overview'))->sm() ?>
-            <h4>
-                <?= $title ?>
-            </h4>
+            <h4><?= $model->isNewRecord
+                ? Yii::t('ExternalCalendarModule.view', 'Add external Calendar')
+                : Yii::t('ExternalCalendarModule.base', 'Edit Calendar  {title}', [
+                    'title' => Html::encode($model->title),
+                ]) ?></h4>
         </div>
 
         <?= $this->render('_form', [

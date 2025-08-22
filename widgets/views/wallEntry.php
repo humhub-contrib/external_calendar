@@ -1,46 +1,31 @@
 <?php
 
-use cebe\markdown\GithubMarkdown;
+use humhub\components\View;
+use humhub\modules\external_calendar\assets\Assets;
+use humhub\modules\external_calendar\helpers\CalendarUtils;
+use humhub\modules\external_calendar\models\ExternalCalendarEntry;
 use humhub\modules\ui\icon\widgets\Icon;
-use yii\helpers\Html;
 
-/* @var $calendarEntry \humhub\modules\external_calendar\models\ExternalCalendarEntry */
-/* @var $stream boolean */
+/* @var View $this */
+/* @var ExternalCalendarEntry $calendarEntry */
 
 $color = $calendarEntry->calendar->color ?: 'var(--info)';
+$description = CalendarUtils::renderDescription($calendarEntry->description);
 
-$description = $calendarEntry->description;
-
-if ($description) {
-    $config = \HTMLPurifier_Config::createDefault();
-    $description = \yii\helpers\HtmlPurifier::process($calendarEntry->description, $config);
-}
-
-$descriptionParser = new GithubMarkdown();
-$descriptionParser->enableNewlines = true;
+Assets::register($this);
 ?>
-<div class="media event">
-    <div>
-        <div class="clearfix">
-            <h1 style="font-size:14px;font-weight:500">
-                <?= Icon::get('clock-o')->color($color)->size(Icon::SIZE_LG)->fixedWith(true)->style('margin-top:2px') ?> <?= $calendarEntry->getFormattedTime() ?>
-            </h1>
-        </div>
-        <?php if (!empty($calendarEntry->location)) : ?>
-            <p>
-                <?= Icon::get('map-marker ')->color($color)->size(Icon::SIZE_LG)->fixedWith(true)->style('margin-top:2px') ?>
-                <?= $calendarEntry->getLocation(true) ?>
-            </p>
-        <?php endif; ?>
-
-        <?php if (!empty($description) || !empty($calendarEntry->location)) : ?>
-            <div data-ui-show-more
-                 data-read-more-text="<?= Yii::t('ExternalCalendarModule.view', "Read full description...") ?>"
-                 style="overflow:hidden">
-
-                <p><?= $descriptionParser->parse($description) ?></p>
-
-            </div>
-        <?php endif; ?>
-    </div>
+<div class="fs-6 fw-medium text-black mb-2">
+    <?= Icon::get('clock-o')->color($color)->size(Icon::SIZE_LG)->fixedWith() ?> <?= $calendarEntry->getFormattedTime() ?>
 </div>
+<?php if (!empty($calendarEntry->location)) : ?>
+    <p>
+        <?= Icon::get('map-marker ')->color($color)->size(Icon::SIZE_LG)->fixedWith() ?>
+        <?= $calendarEntry->getLocation(true) ?>
+    </p>
+<?php endif ?>
+
+<?php if ($description !== '') : ?>
+    <div data-ui-show-more data-read-more-text="<?= Yii::t('ExternalCalendarModule.view', 'Read full description...') ?>">
+        <?= $description ?>
+    </div>
+<?php endif ?>

@@ -2,13 +2,8 @@
 
 namespace humhub\modules\external_calendar\widgets;
 
-use humhub\modules\content\widgets\DeleteLink;
-use humhub\modules\content\widgets\EditLink;
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
-use humhub\modules\external_calendar\assets\Assets;
 use humhub\modules\external_calendar\models\ExternalCalendarEntry;
-use humhub\modules\external_calendar\permissions\ManageEntry;
-use Yii;
 
 /**
  * @inheritdoc
@@ -18,7 +13,7 @@ class WallEntry extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-    public $editRoute = "/external_calendar/entry/update";
+    public $editRoute = '/external_calendar/entry/update';
 
     /**
      * @inheritdoc
@@ -41,13 +36,8 @@ class WallEntry extends WallStreamModuleEntryWidget
      */
     protected function renderContent()
     {
-        Assets::register($this->getView());
-
-        $entry = $this->model;
-
         return $this->render('wallEntry', [
-            'calendarEntry' => $entry,
-            'contentContainer' => $entry->content->container,
+            'calendarEntry' => $this->model,
         ]);
     }
 

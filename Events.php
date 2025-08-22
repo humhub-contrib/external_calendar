@@ -2,22 +2,20 @@
 
 namespace humhub\modules\external_calendar;
 
+use humhub\helpers\ControllerHelper;
 use humhub\modules\calendar\widgets\CalendarControls;
-use humhub\modules\calendar\widgets\ContainerConfigMenu;
 use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\helpers\ContentContainerHelper;
-use humhub\modules\external_calendar\models\forms\ConfigForm;
-use humhub\modules\external_calendar\permissions\ManageEntry;
-use humhub\modules\external_calendar\widgets\ExportButton;
-use Yii;
-use yii\base\WidgetEvent;
-use yii\helpers\Url;
-use yii\base\BaseObject;
-use humhub\modules\external_calendar\models\ExternalCalendarEntry;
 use humhub\modules\external_calendar\integration\calendar\CalendarExtension;
 use humhub\modules\external_calendar\jobs\SyncHourly;
 use humhub\modules\external_calendar\jobs\SyncDaily;
+use humhub\modules\external_calendar\models\ExternalCalendarEntry;
+use humhub\modules\external_calendar\models\forms\ConfigForm;
+use humhub\modules\external_calendar\permissions\ManageEntry;
 use humhub\modules\external_calendar\widgets\DownloadIcsLink;
+use humhub\modules\external_calendar\widgets\ExportButton;
+use Yii;
+use yii\base\WidgetEvent;
+use yii\base\BaseObject;
 
 class Events extends BaseObject
 {
@@ -78,8 +76,7 @@ class Events extends BaseObject
                     'id' => 'tab-calendar-external',
                     'url' => $container->createUrl('/external_calendar/calendar/index'),
                     'visible' => $container->can(ManageEntry::class),
-                    'isActive' => (Yii::$app->controller->module
-                        && Yii::$app->controller->module->id === 'external_calendar'),
+                    'isActive' => ControllerHelper::isActivePath('external_calendar'),
                 ]);
             }
         } catch (\Throwable $e) {
@@ -118,27 +115,6 @@ class Events extends BaseObject
     }
 
     /**
-     * Defines what to do if admin menu is initialized.
-     *
-     * @param $event
-     */
-    public static function onAdminMenuInit($event)
-    {
-        try {
-            $event->sender->addItem([
-                'label' => "external_calendar",
-                'url' => Url::to(['/external_calendar/admin']),
-                'group' => 'manage',
-                'icon' => '<i class="fa fa-certificate" style="color: #6fdbe8;"></i>',
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'external_calendar' && Yii::$app->controller->id == 'admin'),
-                'sortOrder' => 99999,
-            ]);
-        } catch (\Throwable $e) {
-            Yii::error($e);
-        }
-    }
-
-    /**
      * Defines what to do if hourly cron runs.
      *
      * @param $event
@@ -167,7 +143,6 @@ class Events extends BaseObject
             Yii::error($e);
         }
     }
-
 
     /**
      * Callback to validate module database records.
