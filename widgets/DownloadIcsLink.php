@@ -9,8 +9,8 @@
 namespace humhub\modules\external_calendar\widgets;
 
 use humhub\components\Widget;
-use humhub\libs\Html;
 use humhub\modules\external_calendar\models\ExternalCalendarEntry;
+use humhub\widgets\bootstrap\Link;
 use Yii;
 
 /**
@@ -27,9 +27,14 @@ class DownloadIcsLink extends Widget
     public function run()
     {
         if ($this->calendarEntry === null) {
-            return;
+            return '';
         }
 
-        return Html::a(Yii::t('ExternalCalendarModule.base', 'Download as ICS file'), $this->calendarEntry->content->container->createUrl('/external_calendar/entry/generateics', ['id' => $this->calendarEntry->id]), ['target' => '_blank']);
+        return Link::asLink(
+            Yii::t('ExternalCalendarModule.base', 'Download as ICS file'),
+            $this->calendarEntry->content->container->createUrl('/external_calendar/entry/generateics', [
+                'id' => $this->calendarEntry->id,
+            ]),
+        )->blank();
     }
 }

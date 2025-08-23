@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.0 (Unreleased)
+---------------------
+- Enh #95: Migration to Bootstrap 5 for HumHub 1.18
+
 1.5.2 (June 23, 2025)
 ---------------------
 - Enh #92: Marked export functionality as deprecated - use native Calendar module instead

@@ -2,17 +2,17 @@
 
 namespace humhub\modules\external_calendar\controllers;
 
+use humhub\components\access\ControllerAccess;
+use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\external_calendar\models\ExternalCalendar;
 use humhub\modules\external_calendar\models\ICalSync;
+use humhub\modules\external_calendar\permissions\ManageCalendar;
+use humhub\widgets\modal\ModalClose;
 use Yii;
 use yii\base\InvalidValueException;
 use yii\data\ActiveDataProvider;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
-use humhub\components\access\ControllerAccess;
-use humhub\modules\external_calendar\permissions\ManageCalendar;
-use humhub\modules\content\components\ContentContainerController;
-use humhub\modules\external_calendar\models\ExternalCalendar;
-use humhub\widgets\ModalClose;
 
 /**
  * CalendarController implements the CRUD actions for all external calendars
@@ -41,6 +41,8 @@ class CalendarController extends ContentContainerController
      */
     public function actionIndex()
     {
+        $this->view->setPageTitle(Yii::t('ExternalCalendarModule.view', 'External Calendars'));
+
         $dataProvider = new ActiveDataProvider([
             'query' => ExternalCalendar::find()->contentContainer($this->contentContainer),
         ]);
@@ -62,6 +64,8 @@ class CalendarController extends ContentContainerController
     {
         $model = $this->findModel($id);
 
+        $this->view->setPageTitle($model->title);
+
         return $this->render('view', [
             'model' => $model,
             'contentContainer' => $this->contentContainer,
@@ -81,7 +85,7 @@ class CalendarController extends ContentContainerController
         try {
             $calendarModel = $this->findModel($id);
             $calendarModel->sync();
-            return ModalClose::widget(['success' => Yii::t('ExternalCalendarModule.view', 'Sync successfull!')]);
+            return ModalClose::widget(['success' => Yii::t('ExternalCalendarModule.view', 'Sync successful!')]);
         } catch (InvalidValueException $e) {
             Yii::error($e);
             return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', $e->getMessage())]);
@@ -90,7 +94,7 @@ class CalendarController extends ContentContainerController
             return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', 'Calendar not found!')]);
         } catch (\Exception $e) {
             Yii::error($e);
-            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', 'An unknown error occured while synchronizing your calendar!')]);
+            return ModalClose::widget(['error' => Yii::t('ExternalCalendarModule.view', 'An unknown error occurred while synchronizing your calendar!')]);
         }
     }
 

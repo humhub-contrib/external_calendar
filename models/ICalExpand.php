@@ -2,14 +2,14 @@
 
 namespace humhub\modules\external_calendar\models;
 
-use humhub\modules\external_calendar\helpers\CalendarUtils;
-use Yii;
-use yii\base\Model;
 use DateTime;
 use DateTimeZone;
-use humhub\modules\calendar\interfaces\CalendarItemWrapper;
+use humhub\modules\calendar\interfaces\event\legacy\CalendarEventIFWrapper;
 use humhub\modules\calendar\interfaces\VCalendar;
+use humhub\modules\external_calendar\helpers\CalendarUtils;
 use Sabre\VObject\Component\VEvent;
+use Yii;
+use yii\base\Model;
 
 class ICalExpand extends Model
 {
@@ -18,7 +18,7 @@ class ICalExpand extends Model
      */
     public $event;
 
-    public $saveInstnace = false;
+    public $saveInstance = false;
 
     /**
      * @var \DateTimeZone
@@ -47,7 +47,7 @@ class ICalExpand extends Model
 
     public static function expand(ExternalCalendarEntry $event, DateTime $start, DateTime $end, array &$endResult = [], $save = true)
     {
-        $instance = new static(['event' => $event, 'saveInstnace' => $save]);
+        $instance = new static(['event' => $event, 'saveInstance' => $save]);
         return $instance->expandEvent($start, $end, $endResult);
     }
 
@@ -57,7 +57,7 @@ class ICalExpand extends Model
         $start = new DateTime($recurrenceId, $tz);
         $end = (new DateTime($recurrenceId, $tz))->modify("+1 minute");
 
-        $instance = new static(['event' => $event, 'saveInstnace' => $save]);
+        $instance = new static(['event' => $event, 'saveInstance' => $save]);
         $result = $instance->expandEvent($start, $end);
 
         foreach ($result as $recurrence) {
@@ -95,7 +95,7 @@ class ICalExpand extends Model
     {
         // Note: VObject supports the EXDATE property for exclusions, but not yet the RDATE and EXRULE properties
         // Note: VCalendar expand will translate all dates with time to UTC
-        $vCalendar = (new VCalendar())->add(new CalendarItemWrapper(['options' => $this->event->getFullCalendarArray()]));
+        $vCalendar = (new VCalendar())->add(new CalendarEventIFWrapper(['options' => $this->event->getFullCalendarArray()]));
         $expandedVCalendar = $vCalendar->getInstance()->expand($start, $end, $this->eventTimeZone);
         return $expandedVCalendar->select('VEVENT');
     }
@@ -129,7 +129,7 @@ class ICalExpand extends Model
                         $vEventStart,
                         $vEvent->DTEND->getDateTime(),
                         $this->getRecurrenceId($vEvent),
-                        $this->saveInstnace,
+                        $this->saveInstance,
                     );
                 }
 

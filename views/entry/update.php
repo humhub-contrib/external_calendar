@@ -1,38 +1,20 @@
 <?php
 
-use humhub\widgets\ModalDialog;
-use humhub\modules\ui\form\widgets\ActiveForm;
-use humhub\widgets\ModalButton;
+use humhub\modules\external_calendar\models\ExternalCalendarEntry;
+use humhub\widgets\modal\Modal;
+use humhub\widgets\modal\ModalButton;
 
-/* @var $this yii\web\View */
-/* @var $model \humhub\modules\external_calendar\models\ExternalCalendarEntry */
+/* @var $model ExternalCalendarEntry */
 /* @var $editUrl string */
-/* @var $contentContainer \humhub\modules\content\models\ContentContainer */
-
-$header = Yii::t('ExternalCalendarModule.view', 'Update {modelClass}: ', [
-        'modelClass' => Yii::t('ExternalCalendarModule.base', 'External Calendar Entry')
-    ]) . $model->title;
-$model->calendar->color = empty($model->calendar->color) ? $this->theme->variable('info') : $model->calendar->color;
-
 ?>
-<?php ModalDialog::begin(['header' => $header, 'closable' => false]) ?>
-<?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-
-<div class="modal-body">
-
+<?php $form = Modal::beginFormDialog([
+    'header' => Yii::t('ExternalCalendarModule.view', 'Update {modelClass}: ', [
+            'modelClass' => Yii::t('ExternalCalendarModule.base', 'External Calendar Entry')
+        ]) . $model->title,
+    'form' => ['enableClientValidation' => false],
+    'footer' => ModalButton::cancel() . ModalButton::save()->submit($editUrl),
+]) ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
     <?= $form->field($model, 'location')->textarea(['maxlength' => true]) ?>
-
-</div>
-
-<hr>
-
-<div class="modal-footer">
-    <?= ModalButton::submitModal($editUrl); ?>
-    <?= ModalButton::cancel(); ?>
-</div>
-<?php ActiveForm::end(); ?>
-<?php ModalDialog::end() ?>
+<?php Modal::endFormDialog() ?>

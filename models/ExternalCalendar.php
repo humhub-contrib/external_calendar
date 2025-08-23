@@ -3,7 +3,7 @@
 namespace humhub\modules\external_calendar\models;
 
 use Colors\RandomColor;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -169,7 +169,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
      */
     public function getIcon()
     {
-        return 'fa-calendar';
+        return 'calendar';
     }
 
     /**
@@ -208,7 +208,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
             'url' => Yii::t('ExternalCalendarModule.view', 'Url'),
             'public' => Yii::t('ExternalCalendarModule.view', 'Public'),
             'time_zone' => Yii::t('ExternalCalendarModule.view', 'Timezone'),
-            'color' => Yii::t('ExternalCalendarModule.view', 'Color'),
+            'color' => Yii::t('ExternalCalendarModule.view', 'Title and Color'),
             'version' => Yii::t('ExternalCalendarModule.view', 'iCal Version'),
             'cal_name' => Yii::t('ExternalCalendarModule.view', 'Original Calendar Name'),
             'cal_scale' => Yii::t('ExternalCalendarModule.view', 'Original Calendar Scale'),

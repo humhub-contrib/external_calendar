@@ -98,6 +98,6 @@ class ICS
 
     private function escapeString($str)
     {
-        return preg_replace('/([\,;])/', '\\\$1', $str);
+        return preg_replace('/([\,;])/', '\\\$1', $str ?? '');
     }
 }

@@ -2,13 +2,13 @@
 
 namespace humhub\modules\external_calendar\controllers;
 
+use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\external_calendar\models\ExternalCalendarEntry;
 use humhub\modules\external_calendar\models\ICalExpand;
+use humhub\modules\external_calendar\permissions\ManageEntry;
+use humhub\widgets\modal\ModalClose;
 use Yii;
 use yii\web\HttpException;
-use humhub\widgets\ModalClose;
-use humhub\modules\content\components\ContentContainerController;
-use humhub\modules\external_calendar\permissions\ManageEntry;
-use humhub\modules\external_calendar\models\ExternalCalendarEntry;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -55,16 +55,6 @@ class EntryController extends ContentContainerController
         }
 
         return $this->render('view', ['model' => $model,]);
-    }
-
-    private function renderModal($model, $cal)
-    {
-        return $this->renderAjax('modal', [
-            'model' => $model,
-            'editUrl' => $this->contentContainer->createUrl('/external_calendar/entry/update', ['id' => $model->id, 'cal' => $cal]),
-            'canManageEntries' => $model->content->canEdit(),
-            'contentContainer' => $this->contentContainer,
-        ]);
     }
 
     /**

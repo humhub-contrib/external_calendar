@@ -1,24 +1,28 @@
 <?php
 
+use humhub\components\View;
 use humhub\modules\external_calendar\assets\Assets;
-use humhub\widgets\ModalDialog;
+use humhub\widgets\bootstrap\Tabs;
+use humhub\widgets\modal\Modal;
 
-use humhub\widgets\Tabs;
-
-/* @var $this \humhub\modules\ui\view\components\View */
-
+/* @var $this View */
 
 Assets::register($this);
-
 ?>
-
-<?php ModalDialog::begin(['header' => Yii::t('ExternalCalendarModule.base', '<strong>Calendar</strong> export OLD'), 'size' => 'large']) ?>
+<?php Modal::beginDialog([
+    'header' => Yii::t('ExternalCalendarModule.base', '<strong>Calendar</strong> export OLD'),
+    'size' => Modal::SIZE_LARGE,
+]) ?>
 
     <?= Tabs::widget([
         'viewPath' => '@external_calendar/views/export',
         'items' => [
-            ['label' => Yii::t('ExternalCalendarModule.base', 'My exports'), 'view' => 'tab-overview', 'active' => true]
+            [
+                'label' => Yii::t('ExternalCalendarModule.base', 'My exports'),
+                'view' => 'tab-overview',
+                'active' => true,
+            ]
         ]
-    ]); ?>
+    ]) ?>
 
-<?php ModalDialog::end() ?>
+<?php Modal::endDialog() ?>

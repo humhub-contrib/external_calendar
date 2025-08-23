@@ -46,7 +46,7 @@ return [
   'Sync Calendar' => '',
   'Sync Mode' => '',
   'Sync all events' => '',
-  'Sync successfull!' => '',
+  'Sync successful!' => '',
   'Timezone' => '',
   'Title' => '',
   'Title and Color' => '',
