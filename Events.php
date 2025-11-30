@@ -3,6 +3,7 @@
 namespace humhub\modules\external_calendar;
 
 use humhub\helpers\ControllerHelper;
+use humhub\modules\calendar\helpers\dav\enum\EventProperty;
 use humhub\modules\calendar\widgets\CalendarControls;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\external_calendar\integration\calendar\CalendarExtension;
@@ -16,6 +17,10 @@ use humhub\modules\external_calendar\widgets\ExportButton;
 use Yii;
 use yii\base\WidgetEvent;
 use yii\base\BaseObject;
+use humhub\modules\calendar\interfaces\event\legacy\CalendarEventIFWrapper;
+use humhub\modules\calendar\helpers\dav\event\GetObjectEvent;
+use humhub\modules\calendar\helpers\dav\event\UpdateObjectEvent;
+use humhub\modules\calendar\helpers\dav\event\DeleteObjectEvent;
 
 class Events extends BaseObject
 {
@@ -177,5 +182,57 @@ class Events extends BaseObject
         } catch (\Throwable $e) {
             Yii::error($e);
         }
+    }
+
+    public static function onCaldavGetObject(GetObjectEvent $event)
+    {
+        $object = ExternalCalendarEntry::find()
+            ->readable()
+            ->where(['uid' => $event->objectId])
+            ->one();
+
+        $event->object = new CalendarEventIFWrapper(['options' => $object->getFullCalendarArray()]);
+    }
+
+    public static function onCaldavUpdateObject(UpdateObjectEvent $event)
+    {
+        /** @var ExternalCalendarEntry $object */
+        $object = ExternalCalendarEntry::find()
+            ->readable()
+            ->where(['uid' => $event->object->getUid()])
+            ->one();
+
+        if (!$object) {
+            return;
+        }
+
+        if (!empty($title = $event->properties->get(EventProperty::TITLE))) {
+            $object->title = $title;
+        }
+
+        if (!empty($description = $event->properties->get(EventProperty::DESCRIPTION))) {
+            $object->description = $description;
+        }
+
+        if (!empty($location = $event->properties->get(EventProperty::LOCATION))) {
+            $object->location = $location;
+        }
+
+        $object->save();
+    }
+
+    public static function onCaldavDeleteObject(DeleteObjectEvent $event)
+    {
+        /** @var ExternalCalendarEntry $object */
+        $object = ExternalCalendarEntry::find()
+            ->readable()
+            ->where(['uid' => $event->object->getUid()])
+            ->one();
+
+        if (!$object) {
+            return;
+        }
+
+        $object->content->delete();
     }
 }

@@ -7,6 +7,7 @@ use humhub\modules\external_calendar\Module;
 use humhub\commands\IntegrityController;
 use humhub\modules\content\widgets\WallEntryLinks;
 use humhub\components\Application;
+use humhub\modules\calendar\helpers\dav\SyncService;
 
 return [
     'id' => 'external_calendar',
@@ -19,6 +20,9 @@ return [
         ['class' => Application::class, 'event' => Application::EVENT_BEFORE_REQUEST, 'callback' => [Events::class, 'onBeforeRequest']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'getItemTypes', 'callback' => [Events::class, 'onGetCalendarItemTypes']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'findItems', 'callback' => [Events::class, 'onFindCalendarItems']],
+        ['class' => SyncService::class, 'event' => 'event_get_object', 'callback' => [Events::class, 'onCaldavGetObject']],
+        ['class' => SyncService::class, 'event' => 'event_update_object', 'callback' => [Events::class, 'onCaldavUpdateObject']],
+        ['class' => SyncService::class, 'event' => 'event_delete_object', 'callback' => [Events::class, 'onCaldavDeleteObject']],
         ['class' => CronController::class, 'event' => CronController::EVENT_ON_HOURLY_RUN, 'callback' => [Events::class, 'onCronHourlyRun']],
         ['class' => CronController::class, 'event' => CronController::EVENT_ON_DAILY_RUN, 'callback' => [Events::class, 'onCronDailyRun']],
         ['class' => IntegrityController::class, 'event' => IntegrityController::EVENT_ON_RUN, 'callback' => [Events::class, 'onIntegrityCheck']],

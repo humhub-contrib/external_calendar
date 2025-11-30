@@ -243,6 +243,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
     {
         $start = $this->getStartDateTime();
         $end = $this->getEndDateTime();
+        $lastModified = $this->getLastModifiedDateTime();
 
         if ($this->all_day) {
             $end = $end->modify('+1 second');
@@ -263,6 +264,9 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             'title' => Html::encode($this->getTitle()),
             'editable' => false,
             'allDay' => $this->isAllDay(),
+            'location' => $this->location,
+            'description' => $this->description,
+            'lastModified' => $lastModified,
             'rrule' => $this->rrule,
             'exdate' => $this->exdate,
             'viewUrl' => $viewUrl,
