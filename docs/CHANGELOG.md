@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.1 (Unreleased)
+----------------------
+- Enh #98: Added CalDAV sync support
+
 1.6.0 (August 23, 205)
 ----------------------
 - Enh #95: Migration to Bootstrap 5 for HumHub 1.18
