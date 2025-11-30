@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.6.1 (Unreleased)
-----------------------
+1.6.1 (December 1, 2025)
+------------------------
 - Enh #98: Added CalDAV sync support
 
 1.6.0 (August 23, 205)
