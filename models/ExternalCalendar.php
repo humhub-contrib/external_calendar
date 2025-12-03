@@ -277,7 +277,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
         }
     }
 
-    public function afterMove(ContentContainerActiveRecord $container = null)
+    public function afterMove(?ContentContainerActiveRecord $container = null)
     {
         // TODO: Check if users are also in the new space...
         foreach ($this->entries as $entry) {
