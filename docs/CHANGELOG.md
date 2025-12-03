@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.2 (Unreleased)
+------------------------
+- Fix #99: Fix php deprecation errors
+
 1.6.1 (December 1, 2025)
 ------------------------
 - Enh #98: Added CalDAV sync support
