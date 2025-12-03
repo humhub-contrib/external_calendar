@@ -194,7 +194,7 @@ class ICalSync extends Model
         $this->deleteNonRecurringEvents($existingModelsInRange);
     }
 
-    private function error($message, \Exception $e = null)
+    private function error($message, ?\Exception $e = null)
     {
         $this->errorFlag = true;
         Yii::error($message);
