@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.6.2 (Unreleased)
-------------------------
+1.6.2 (December 12, 2025)
+-------------------------
 - Fix #99: Fix php deprecation errors
 
 1.6.1 (December 1, 2025)
