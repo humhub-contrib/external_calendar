@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.3 (Unreleased)
+-------------------------
+- Enh #101: Add logs for ical sync errors
+
 1.6.2 (December 12, 2025)
 -------------------------
 - Fix #99: Fix php deprecation errors

@@ -97,13 +97,15 @@ class ICalSync extends Model
      */
     private function fetchICal($url)
     {
-        if (empty($url)) {
-            return false;
-        }
-
         try {
+            if (empty($url)) {
+                throw new \InvalidArgumentException('Invalid ICal URL provided.');
+            }
+
             return new ICalFile($url);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            Yii::error($e);
+
             return null;
         }
     }
