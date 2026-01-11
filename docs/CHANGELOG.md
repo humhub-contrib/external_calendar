@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.6.3 (Unreleased)
--------------------------
+1.6.3 (Janaury 11, 2026)
+------------------------
 - Enh #101: Add logs for ical sync errors
 
 1.6.2 (December 12, 2025)
