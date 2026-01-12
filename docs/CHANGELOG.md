@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.4 (Unreleased)
+------------------------
+- Fix #102: Fix initial sync when creating a new external calendar
+
 1.6.3 (Janaury 11, 2026)
 ------------------------
 - Enh #101: Add logs for ical sync errors
