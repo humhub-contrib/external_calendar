@@ -4,6 +4,7 @@ namespace humhub\modules\external_calendar\controllers;
 
 use humhub\components\access\ControllerAccess;
 use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\external_calendar\jobs\SingleSync;
 use humhub\modules\external_calendar\models\ExternalCalendar;
 use humhub\modules\external_calendar\models\ICalSync;
 use humhub\modules\external_calendar\permissions\ManageCalendar;
@@ -113,6 +114,7 @@ class CalendarController extends ContentContainerController
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 (new ICalSync(['calendarModel' => $model, 'skipEvents' => true]))->syncICal();
                 if (!$model->hasErrors()) {
+                    Yii::$app->queue->push(new SingleSync(['id' => $model->id]));
                     $this->view->success(Yii::t('ExternalCalendarModule.view', 'Calendar successfully created!'));
                     return $this->redirect($this->contentContainer->createUrl('view', ['id' => $model->id]));
                 }
