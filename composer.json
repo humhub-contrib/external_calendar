@@ -11,11 +11,25 @@
     "doctrine/collections": "v1.6.8"
   },
   "require-dev": {
-    "phpunit/php-timer": "^5.0.3"
+    "phpunit/php-timer": "^5.0.3",
+    "humhub/module-coding-standards": "dev-main"
   },
   "config": {
     "allow-plugins": {
       "kylekatarnls/update-helper": true
+    },
+    "audit": {
+      "block-insecure": false
     }
+  },
+  "repositories": {
+    "humhub-module-coding-standards": {
+      "type": "vcs",
+      "url": "https://github.com/humhub/module-coding-standards.git"
+    }
+  },
+  "scripts": {
+    "rector": "vendor/bin/rector process --config=vendor/humhub/module-coding-standards/rector.php",
+    "fixer": "vendor/bin/php-cs-fixer fix --config=vendor/humhub/module-coding-standards/php-cs-fixer.php"
   }
 }
