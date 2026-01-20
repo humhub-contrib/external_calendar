@@ -22,7 +22,11 @@ class ICalFileEvent extends Event implements ICalEventIF
 
     public function __get($name)
     {
-        return $this->$name ?? parent::__get($name) ?? null;
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        }
+
+        return parent::__get($name);
     }
 
     public function getUid()
