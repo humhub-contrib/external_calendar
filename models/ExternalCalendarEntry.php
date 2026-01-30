@@ -373,7 +373,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             ->andWhere(['uid' => $this->uid]);
 
         if (is_array($recurrenceIds)) {
-            array_walk($recurrenceIds, function (&$item) {
+            array_walk($recurrenceIds, function (&$item): void {
                 $item = CalendarUtils::cleanRecurrentId($item);
             });
             $query->andWhere(['IN', 'recurrence_id', $recurrenceIds]);

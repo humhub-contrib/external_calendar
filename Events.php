@@ -41,7 +41,7 @@ class Events extends BaseObject
      */
     public static function registerAutoloader()
     {
-        if (class_exists('\ICal\ICal')) {
+        if (class_exists(\ICal\ICal::class)) {
             return;
         }
 

@@ -11,7 +11,7 @@ class ICalEventDummy extends Model implements ICalEventIF
 
     private function getOption($key, $default = null)
     {
-        return isset($this->options[$key]) ? $this->options[$key] : $default;
+        return $this->options[$key] ?? $default;
     }
 
     /**

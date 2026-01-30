@@ -185,7 +185,7 @@ class ICalSync extends Model
         }
 
         // create remaining non recurring events
-        foreach ($icalEventsInRange as $eventKey => $icalEvent) {
+        foreach ($icalEventsInRange as $icalEvent) {
             try {
                 $this->createEventModel($icalEvent);
             } catch (\Exception $e) {
@@ -281,7 +281,7 @@ class ICalSync extends Model
     private function syncRecurringEvent(ExternalCalendarEntry $model, ICalEventIF $icalEvent)
     {
         try {
-            ExternalCalendarEntry::getDb()->transaction(function () use ($model, $icalEvent) {
+            ExternalCalendarEntry::getDb()->transaction(function () use ($model, $icalEvent): void {
                 // First backup some data prior to model sync
                 $currentRRule = $model->rrule;
                 $currentStart = $model->getStartDateTime();

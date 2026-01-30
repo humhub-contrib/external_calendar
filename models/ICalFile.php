@@ -106,7 +106,7 @@ class ICalFile extends ICal implements ICalIF
     public function events()
     {
         $array = $this->cal;
-        $array = isset($array['VEVENT']) ? $array['VEVENT'] : [];
+        $array = $array['VEVENT'] ?? [];
         $events = [];
 
         if (!empty($array)) {

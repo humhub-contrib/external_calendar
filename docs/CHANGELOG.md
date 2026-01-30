@@ -4,6 +4,7 @@ Changelog
 1.6.4 (Unreleased)
 ------------------------
 - Fix #102: Fix initial sync when creating a new external calendar
+- Enh: Automated code refactoring for HumHub 1.18 using Rector
 
 1.6.3 (Janaury 11, 2026)
 ------------------------
