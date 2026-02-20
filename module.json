@@ -6,9 +6,9 @@
     "calendar",
     "external calendar"
   ],
-  "version": "1.6.4",
+  "version": "1.7.0",
   "humhub": {
-    "minVersion": "1.18"
+    "minVersion": "1.19"
   },
   "screenshots": [
     "resources/screen1.jpg",

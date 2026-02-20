@@ -3,8 +3,13 @@
 namespace humhub\modules\external_calendar;
 
 use humhub\helpers\ControllerHelper;
+use humhub\modules\calendar\interfaces\event\legacy\CalendarEventIFWrapper;
+use humhub\modules\calendar\helpers\dav\event\GetObjectEvent;
+use humhub\modules\calendar\helpers\dav\event\UpdateObjectEvent;
+use humhub\modules\calendar\helpers\dav\event\DeleteObjectEvent;
 use humhub\modules\calendar\helpers\dav\enum\EventProperty;
 use humhub\modules\calendar\widgets\CalendarControls;
+use humhub\modules\calendar\widgets\ContainerConfigMenu;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\external_calendar\integration\calendar\CalendarExtension;
 use humhub\modules\external_calendar\jobs\SyncHourly;
@@ -17,10 +22,6 @@ use humhub\modules\external_calendar\widgets\ExportButton;
 use Yii;
 use yii\base\WidgetEvent;
 use yii\base\BaseObject;
-use humhub\modules\calendar\interfaces\event\legacy\CalendarEventIFWrapper;
-use humhub\modules\calendar\helpers\dav\event\GetObjectEvent;
-use humhub\modules\calendar\helpers\dav\event\UpdateObjectEvent;
-use humhub\modules\calendar\helpers\dav\event\DeleteObjectEvent;
 
 class Events extends BaseObject
 {
@@ -73,14 +74,14 @@ class Events extends BaseObject
     public static function onContainerConfigMenuInit($event)
     {
         try {
-            /* @var $container ContentContainerActiveRecord */
-            $container = $event->sender->contentContainer;
-            if ($container && $container->moduleManager->isEnabled('external_calendar')) {
-                $event->sender->addItem([
+            /* @var $menu ContainerConfigMenu */
+            $menu = $event->sender;
+            if ($menu->contentContainer && $menu->contentContainer->moduleManager->isEnabled('external_calendar')) {
+                $menu->addItem([
                     'label' => Yii::t('ExternalCalendarModule.base', 'External Calendars'),
                     'id' => 'tab-calendar-external',
-                    'url' => $container->createUrl('/external_calendar/calendar/index'),
-                    'visible' => $container->can(ManageEntry::class),
+                    'url' => $menu->contentContainer->createUrl('/external_calendar/calendar/index'),
+                    'visible' => $menu->contentContainer->can(ManageEntry::class),
                     'isActive' => ControllerHelper::isActivePath('external_calendar'),
                 ]);
             }

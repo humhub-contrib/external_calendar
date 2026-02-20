@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.0 (Unreleased)
+------------------------
+- Enh #105: Update for HumHub 1.19
+
 1.6.4 (Unreleased)
 ------------------------
 - Fix #102: Fix initial sync when creating a new external calendar
