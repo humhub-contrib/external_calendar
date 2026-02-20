@@ -8,7 +8,8 @@
   ],
   "version": "1.6.4",
   "humhub": {
-    "minVersion": "1.18"
+    "minVersion": "1.18",
+    "maxVersion": "1.18"
   },
   "screenshots": [
     "resources/screen1.jpg",
