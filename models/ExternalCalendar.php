@@ -10,7 +10,6 @@ use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\external_calendar\jobs\UpdateCalendarVisibility;
 use humhub\modules\external_calendar\models\forms\ConfigForm;
 use humhub\modules\external_calendar\permissions\ManageCalendar;
-use humhub\modules\search\interfaces\Searchable;
 use ICal\ICal;
 use Yii;
 use yii\base\InvalidValueException;
@@ -33,7 +32,7 @@ use yii\base\InvalidValueException;
  *
  * @author David Born ([staxDB](https://github.com/staxDB))
  */
-class ExternalCalendar extends ContentActiveRecord implements Searchable
+class ExternalCalendar extends ContentActiveRecord
 {
     public const ITEM_TYPE_KEY = 'external_calendar';
     /**

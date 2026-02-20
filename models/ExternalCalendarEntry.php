@@ -6,7 +6,6 @@ use DateTime;
 use DateTimeZone;
 use humhub\helpers\Html;
 use humhub\modules\content\components\ContentActiveRecord;
-use humhub\modules\content\interfaces\Searchable;
 use humhub\modules\external_calendar\permissions\ManageEntry;
 use humhub\modules\external_calendar\widgets\WallEntry;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
@@ -47,7 +46,7 @@ use yii\db\StaleObjectException as StaleObjectExceptionAlias;
  *
  * @author David Born ([staxDB](https://github.com/staxDB))
  */
-class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
+class ExternalCalendarEntry extends ContentActiveRecord
 {
     /**
      * @inheritdoc
@@ -570,7 +569,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
             filter_var($this->location, FILTER_VALIDATE_URL) !== false
             && strpos($this->location, 'https://') === 0 // restrict to secure URLs (and not HTTP, SSF, FTP, etc.)
         ) {
-            return Link::asLink($this->location, $this->location)->blank();
+            return Link::to($this->location, $this->location)->blank();
         }
         return Html::encode($this->location);
     }
