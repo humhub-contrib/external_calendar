@@ -2,7 +2,7 @@
 
 namespace humhub\modules\external_calendar\assets;
 
-use yii\web\AssetBundle;
+use humhub\components\assets\AssetBundle;
 use yii\web\View;
 
 /**
@@ -16,9 +16,7 @@ class Assets extends AssetBundle
 
     public $jsOptions = ['position' => View::POS_END];
 
-    public $publishOptions = [
-        'forceCopy' => false,
-    ];
+    public $forceCopy = false;
 
     public $js = [
         'js/humhub.external_calendar.js',
