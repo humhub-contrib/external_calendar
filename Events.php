@@ -230,10 +230,6 @@ class Events extends BaseObject
             ->where(['uid' => $event->object->getUid()])
             ->one();
 
-        if (!$object) {
-            return;
-        }
-
-        $object->content->delete();
+        $object?->delete();
     }
 }
