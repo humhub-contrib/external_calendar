@@ -483,7 +483,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
         $this->location = $icalEvent->getLocation();
         $this->last_modified = CalendarUtils::toDBDateFormat($icalEvent->getLastModified());
-        $this->dtstamp = CalendarUtils::toDBDateFormat($icalEvent->getTimeStamp());
+        $this->dtstamp = $this->resolveDtstamp($icalEvent);
         $this->start_datetime = CalendarUtils::toDBDateformat($icalEvent->getStartDateTime());
         $this->end_datetime = CalendarUtils::toDBDateFormat($icalEvent->getEndDateTime());
         $this->exdate = $icalEvent->getExdate();
@@ -500,6 +500,14 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
         }
 
         return $this;
+    }
+
+    private function resolveDtstamp(ICalEventIF $icalEvent): string
+    {
+        return CalendarUtils::toDBDateFormat($icalEvent->getTimeStamp())
+            ?? CalendarUtils::toDBDateFormat($icalEvent->getLastModified())
+            ?? CalendarUtils::toDBDateFormat($icalEvent->getCreated())
+            ?? CalendarUtils::toDBDateFormat($icalEvent->getStartDateTime());
     }
 
     public function createRecurrence($start, $end, $recurrenceId, $save = true)
