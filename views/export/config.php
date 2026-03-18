@@ -10,7 +10,7 @@ use humhub\widgets\modal\Modal;
 Assets::register($this);
 ?>
 <?php Modal::beginDialog([
-    'header' => Yii::t('ExternalCalendarModule.base', '<strong>Calendar</strong> export OLD'),
+    'title' => Yii::t('ExternalCalendarModule.base', '<strong>Calendar</strong> export OLD'),
     'size' => Modal::SIZE_LARGE,
 ]) ?>
 
