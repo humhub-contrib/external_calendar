@@ -91,11 +91,7 @@ class ICalSync extends Model
         return $this;
     }
 
-    /**
-     * @param $url
-     * @return bool|ICalIF|null
-     */
-    private function fetchICal($url)
+    private function fetchICal($url): ?ICalFile
     {
         try {
             if (empty($url)) {
@@ -103,11 +99,13 @@ class ICalSync extends Model
             }
 
             return new ICalFile($url);
+        } catch (\InvalidArgumentException $e) {
+            Yii::warning($e);
         } catch (\Throwable $e) {
             Yii::error($e);
-
-            return null;
         }
+
+        return null;
     }
 
     private function setupSearchRange()
