@@ -5,8 +5,8 @@ Changelog
 ------------------------
 - Enh #105: Update for HumHub 1.19
 
-1.6.4 (Unreleased)
-------------------------
+1.6.4 (March 18, 2026)
+----------------------
 - Fix #102: Fix initial sync when creating a new external calendar
 - Enh: Automated code refactoring for HumHub 1.18 using Rector
 
