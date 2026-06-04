@@ -8,7 +8,7 @@ use humhub\widgets\modal\ModalButton;
 /* @var $editUrl string */
 ?>
 <?php $form = Modal::beginFormDialog([
-    'header' => Yii::t('ExternalCalendarModule.view', 'Update {modelClass}: ', [
+    'title' => Yii::t('ExternalCalendarModule.view', 'Update {modelClass}: ', [
             'modelClass' => Yii::t('ExternalCalendarModule.base', 'External Calendar Entry')
         ]) . $model->title,
     'form' => ['enableClientValidation' => false],
