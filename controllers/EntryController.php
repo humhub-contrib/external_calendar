@@ -44,17 +44,12 @@ class EntryController extends ContentContainerController
      */
     public function actionView($id, $cal = null)
     {
-        return $this->renderEntry($this->getCalendarEntry($id), $cal);
+        return $this->renderEntry($this->getCalendarEntry($id));
     }
 
-    private function renderEntry($model, $cal = null)
+    private function renderEntry($model)
     {
-        // We need the $cal information, since the update redirect in case of fullcalendar view is other than stream view
-        if ($cal) {
-            return $this->renderModal($model, $cal);
-        }
-
-        return $this->render('view', ['model' => $model,]);
+        return $this->render('view', ['model' => $model]);
     }
 
     /**
@@ -71,7 +66,7 @@ class EntryController extends ContentContainerController
         $recurrence = $recurrenceRoot->getRecurrenceInstance($recurrence_id);
 
         if ($recurrence) {
-            return $this->renderEntry($recurrence, $cal);
+            return $this->renderEntry($recurrence);
         }
 
         $recurrence = ICalExpand::expandSingle($recurrenceRoot, $recurrence_id);
@@ -80,7 +75,7 @@ class EntryController extends ContentContainerController
             throw new NotFoundHttpException();
         }
 
-        return $this->renderEntry($recurrence, $cal);
+        return $this->renderEntry($recurrence);
     }
 
     /**
@@ -102,11 +97,7 @@ class EntryController extends ContentContainerController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if (empty($cal)) {
-                return ModalClose::widget(['saved' => true]);
-            }
-
-            return $this->renderModal($model, 1);
+            return ModalClose::widget(['saved' => true]);
         }
 
         return $this->renderAjax('update', [

@@ -233,7 +233,7 @@ class ExternalCalendar extends ContentActiveRecord implements Searchable
     public function beforeDelete()
     {
         foreach (ExternalCalendarEntry::find()->where(['calendar_id' => $this->id])->each() as $item) {
-            $item->delete();
+            $item->hardDelete();
         }
 
         return parent::beforeDelete();

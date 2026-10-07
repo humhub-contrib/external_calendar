@@ -304,7 +304,7 @@ class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
 
     public function getLastModifiedDateTime()
     {
-        return new DateTime($this->last_modified, CalendarUtils::getSystemTimeZone());
+        return new DateTime($this->last_modified ?? 'now', CalendarUtils::getSystemTimeZone());
     }
 
     public function getFormattedTime($format = 'long')
