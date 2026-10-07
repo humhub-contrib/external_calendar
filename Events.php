@@ -14,6 +14,7 @@ use humhub\modules\external_calendar\models\forms\ConfigForm;
 use humhub\modules\external_calendar\permissions\ManageEntry;
 use humhub\modules\external_calendar\widgets\DownloadIcsLink;
 use humhub\modules\external_calendar\widgets\ExportButton;
+use Sabre\DAV\Exception\Forbidden;
 use Yii;
 use yii\base\WidgetEvent;
 use yii\base\BaseObject;
@@ -191,6 +192,10 @@ class Events extends BaseObject
             ->where(['uid' => $event->objectId])
             ->one();
 
+        if (!$object) {
+            return;
+        }
+
         $event->object = new CalendarEventIFWrapper(['options' => $object->getFullCalendarArray()]);
     }
 
@@ -204,6 +209,10 @@ class Events extends BaseObject
 
         if (!$object) {
             return;
+        }
+
+        if (!$object->content->canEdit()) {
+            throw new Forbidden();
         }
 
         if (!empty($title = $event->properties->get(EventProperty::TITLE))) {
@@ -231,6 +240,10 @@ class Events extends BaseObject
 
         if (!$object) {
             return;
+        }
+
+        if (!$object->content->canEdit()) {
+            throw new Forbidden();
         }
 
         $object->content->delete();

@@ -348,6 +348,7 @@ class ICalSync extends Model
         $eventModel = ExternalCalendarEntry::find()
             ->joinWith('content')
             ->andWhere(['contentcontainer_id' => $this->calendarModel->content->container->contentcontainer_id])
+            ->andWhere(['external_calendar_entry.calendar_id' => $this->calendarModel->id])
             ->andWhere(['uid' => $icalEvent->getUid()])
             ->andWhere(['OR',
                 ['rrule' => $icalEvent->getRrule()],
