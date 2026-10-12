@@ -30,7 +30,7 @@ class DownloadIcsLink extends Widget
             return '';
         }
 
-        return Link::asLink(
+        return Link::to(
             Yii::t('ExternalCalendarModule.base', 'Download as ICS file'),
             $this->calendarEntry->content->container->createUrl('/external_calendar/entry/generateics', [
                 'id' => $this->calendarEntry->id,

@@ -39,7 +39,7 @@ $dataProvider = new ActiveDataProvider([
                         'rows' => 3,
                     ]) .
                     '<p class="text-body-secondary float-end">' .
-                        Link::asLink(Yii::t('ExternalCalendarModule.base', 'Copy to clipboard'))
+                        Link::to(Yii::t('ExternalCalendarModule.base', 'Copy to clipboard'))
                             ->action('copyToClipboard', null, '#' . $id)
                             ->icon('clipboard')
                             ->style('color:#777') .

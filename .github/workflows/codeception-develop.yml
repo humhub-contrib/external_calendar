@@ -13,3 +13,4 @@ jobs:
     with:
       module-id: external_calendar
       additional-module-id: calendar
+      additional-module-branch: develop
