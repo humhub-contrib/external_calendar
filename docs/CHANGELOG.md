@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.7.1 (Unreleased)
-------------------
+1.7.1 (October 13, 2026)
+------------------------
 - Fix #110: Entries synced into wrong calendars and kept after deletion; Calendar delete requires POST; CalDAV permission checks; Legacy export and entry view errors
 
 1.7.0 (June 5, 2026)
