@@ -40,17 +40,6 @@ class Module extends ContentContainerModule
         ];
     }
 
-    public function enable()
-    {
-        // check if calendar module is enabled
-        if (!Yii::$app->hasModule('calendar') && !isset(Yii::$app->modules['calendar'])) {
-            Yii::$app->getView()->warn(Yii::t('ExternalCalendarModule.base', 'Module cannot be activated. Please install and activate the calendar module first.'));
-            return false;
-        }
-
-        return parent::enable();
-    }
-
     /**
      * @inheritdoc
      */
