@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.2 (Unreleased)
+------------------
+- Chg: The dependency on the Calendar module is now declared in `module.json` (`humhub.modules`) and checked by the core, instead of `requirements.php` and a custom check in `Module::enable()` (core: [humhub/humhub#8622](https://github.com/humhub/humhub/pull/8622)); the minimal HumHub version is now 1.19.1
+
 1.7.1 (October 13, 2026)
 ------------------------
 - Fix #110: Entries synced into wrong calendars and kept after deletion; Calendar delete requires POST; CalDAV permission checks; Legacy export and entry view errors
