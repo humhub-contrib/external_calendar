@@ -9,6 +9,7 @@
   "version": "1.7.2",
   "humhub": {
     "minVersion": "1.19.1",
+    "maxVersion": "1.19",
     "modules": {
       "calendar": {}
     }
