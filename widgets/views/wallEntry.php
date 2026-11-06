@@ -9,7 +9,7 @@ use humhub\modules\ui\icon\widgets\Icon;
 /* @var View $this */
 /* @var ExternalCalendarEntry $calendarEntry */
 
-$color = $calendarEntry->calendar->color ?: 'var(--info)';
+$color = $calendarEntry->calendar->color ?: 'var(--bs-info)';
 $description = CalendarUtils::renderDescription($calendarEntry->description);
 
 Assets::register($this);

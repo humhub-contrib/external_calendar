@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.0 (Unreleased)
+------------------
+- Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)
+
 1.7.2 (Unreleased)
 ------------------
 - Chg: The dependency on the Calendar module is now declared in `module.json` (`humhub.modules`) and checked by the core, instead of `requirements.php` and a custom check in `Module::enable()` (core: [humhub/humhub#8622](https://github.com/humhub/humhub/pull/8622)); the minimal HumHub version is now 1.19.1

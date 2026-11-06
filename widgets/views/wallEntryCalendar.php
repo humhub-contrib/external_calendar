@@ -7,7 +7,7 @@ use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $calendar ExternalCalendar */
 
-$color = $calendar->color ?: 'var(--info)';
+$color = $calendar->color ?: 'var(--bs-info)';
 $description = CalendarUtils::renderDescription($calendar->description);
 ?>
 <div class="ps-2" style="border-left: 3px solid <?= Html::encode($color) ?>">
