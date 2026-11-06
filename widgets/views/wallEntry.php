@@ -14,7 +14,7 @@ $description = CalendarUtils::renderDescription($calendarEntry->description);
 
 Assets::register($this);
 ?>
-<div class="fs-6 fw-medium text-black mb-2">
+<div class="fs-6 fw-medium text-body-emphasis mb-2">
     <?= Icon::get('clock-o')->color($color)->size(Icon::SIZE_LG)->fixedWith() ?> <?= $calendarEntry->getFormattedTime() ?>
 </div>
 <?php if (!empty($calendarEntry->location)) : ?>

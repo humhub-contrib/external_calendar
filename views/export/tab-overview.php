@@ -35,14 +35,14 @@ $dataProvider = new ActiveDataProvider([
                     return Html::textarea(null, $model->getExportUrl(), [
                         'id' => $id,
                         'disabled' => true,
-                        'class' => 'form-control bg-white',
+                        'class' => 'form-control bg-body',
                         'rows' => 3,
                     ]) .
                     '<p class="text-body-secondary float-end">' .
                         Link::to(Yii::t('ExternalCalendarModule.base', 'Copy to clipboard'))
                             ->action('copyToClipboard', null, '#' . $id)
                             ->icon('clipboard')
-                            ->style('color:#777') .
+                            ->style('color:var(--bs-secondary-color)') .
                     '</p>';
                 }
             ],
