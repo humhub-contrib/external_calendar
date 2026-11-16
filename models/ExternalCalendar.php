@@ -2,8 +2,8 @@
 
 namespace humhub\modules\external_calendar\models;
 
-use Colors\RandomColor;
 use humhub\helpers\Html;
+use humhub\helpers\ScssHelper;
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -107,7 +107,7 @@ class ExternalCalendar extends ContentActiveRecord
         parent::init();
 
         if (!$this->color) {
-            $this->color = RandomColor::one(['luminosity' => 'light']);
+            $this->color = ScssHelper::getRandomColor();
         }
 
         if ($this->event_mode === null) {

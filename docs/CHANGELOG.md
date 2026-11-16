@@ -3,6 +3,7 @@ Changelog
 
 1.8.0 (Unreleased)
 ------------------
+- Enh: A new calendar gets a colour white text is readable on (also in its badge), from the core instead of a light one from `mistic100/randomcolor` (humhub/humhub#8757)
 - Enh: Dark mode: hard-coded greys and light backgrounds became colour tokens of the core (humhub/humhub#8710)
 - Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)
 
