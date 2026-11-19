@@ -272,7 +272,7 @@ class ExternalCalendarEntry extends ContentActiveRecord
             'viewMode' => 'redirect',
             'openUrl' => $openUrl,
             'badge' =>  Badge::none($this->getContentName())
-                ->icon('calendar-o')
+                ->icon('calendar')
                 ->cssBgColor($this->calendar->color)
                 ->right(),
         ];

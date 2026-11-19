@@ -3,7 +3,7 @@
 use humhub\helpers\Html;
 use humhub\modules\external_calendar\helpers\CalendarUtils;
 use humhub\modules\external_calendar\models\ExternalCalendar;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 
 /* @var $calendar ExternalCalendar */
 

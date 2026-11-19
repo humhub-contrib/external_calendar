@@ -382,7 +382,7 @@ class ExternalCalendar extends ContentActiveRecord
         return [
             'title' => Html::encode($this->title),
             'color' => Html::encode($this->color),
-            'icon' => 'fa-calendar-o',
+            'icon' => 'ti-calendar',
             'format' => 'Y-m-d H:i:s',
         ];
     }

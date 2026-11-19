@@ -6,6 +6,7 @@ Changelog
 - Enh: A new calendar gets a colour white text is readable on (also in its badge), from the core instead of a light one from `mistic100/randomcolor` (humhub/humhub#8757)
 - Enh: Dark mode: hard-coded greys and light backgrounds became colour tokens of the core (humhub/humhub#8710)
 - Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)
+- Enh: Deprecated `ui`/`stream` classes and Font Awesome icons replaced by the 1.20 ones and Tabler icons
 
 1.7.2 (Unreleased)
 ------------------

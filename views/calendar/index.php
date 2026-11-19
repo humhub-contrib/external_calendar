@@ -6,10 +6,10 @@ use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\external_calendar\models\ExternalCalendar;
 use humhub\modules\space\models\Space;
 use humhub\modules\calendar\widgets\ContainerConfigMenu;
-use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\bootstrap\Button;
 use humhub\widgets\bootstrap\Link;
 use humhub\widgets\GridView;
+use humhub\widgets\Icon;
 use yii\data\ActiveDataProvider;
 use yii\grid\ActionColumn;
 

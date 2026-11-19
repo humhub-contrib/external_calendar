@@ -39,9 +39,9 @@ Assets::register($this);
         <div class="btn-group-sm">
             <?= Button::primary(Yii::t('ExternalCalendarModule.base', 'Edit'))
                 ->link($contentContainer->createUrl('edit', ['id' => $model->id]))
-                ->icon('pencil-square-o') ?>
+                ->icon('pencil') ?>
             <?= Button::danger(Yii::t('ExternalCalendarModule.base', 'Delete'))
-                ->icon('trash-o')
+                ->icon('trash')
                 ->action('external_calendar.removeCalendar', $contentContainer->createUrl('delete', ['id' => $model->id]))
                 ->id('modal_delete_task_' . $model->id)
                 ->confirm(
